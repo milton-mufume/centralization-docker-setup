@@ -1,0 +1,121 @@
+version: "3.3"
+
+services:
+  mysql-central-fgh:
+    image: mysql:5.6
+    container_name: mysql-central-fgh
+    env_file:
+      - db.env
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./central-my.cnf:/etc/mysql/my.cnf
+      - ./openmrs.sql:/docker-entrypoint-initdb.d/openmrs.sql
+      - ./openmrs_central_config.sql:/docker-entrypoint-initdb.d/openmrs_config.sql
+
+  mysql-remote-fgh:
+    image: mysql:5.6
+    container_name: mysql-remote-fgh
+    env_file:
+      - db.env
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./remote-my.cnf:/etc/mysql/my.cnf
+      - ./openmrs.sql:/docker-entrypoint-initdb.d/openmrs.sql
+      - ./openmrs_remote_config.sql:/docker-entrypoint-initdb.d/openmrs_config.sql
+
+  artemis-fgh:
+    image: cnocorch/activemq-artemis
+    container_name: artemis-fgh
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    volumes:
+      - ./artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
+      - ./artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
+
+  openmrs-central-fgh:
+    image: tomcat:7.0.109-jdk8-openjdk-slim
+    container_name: openmrs-central-fgh
+    environment:
+      TZ: "America/Chicago"
+    depends_on:
+      - mysql-central-fgh
+      - artemis-fgh
+      - opencr
+    volumes:
+      - ./openmrs.war:/usr/local/tomcat/webapps/openmrs.war
+      - ./openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
+      - ./modules:/root/.OpenMRS/modules
+      - ./openmrs.p12:/root/.OpenMRS/mpi/config/openmrs.p12
+    ports:
+      - "8081:8080"
+
+  openmrs-remote-fgh:
+    image: tomcat:7.0.109-jdk8-openjdk-slim
+    container_name: openmrs-remote-fgh
+    depends_on:
+      - mysql-remote-fgh
+      - artemis-fgh
+    volumes:
+      - ./openmrs.war:/usr/local/tomcat/webapps/openmrs.war
+      - ./openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
+      - ./modules:/root/.OpenMRS/modules
+    ports:
+      - "8082:8080"
+
+
+  # ===== OpenCR components ======
+  mysql-opencr:
+    image: library/mysql:5.7.34
+    container_name: mysql-opencr
+    env_file:
+      - ./opencr/db.env
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./opencr/my.cnf:/etc/mysql/my.cnf
+
+  hapi-fhir:
+    image: hapiproject/hapi:v5.4.1
+    container_name: hapi-fhir
+    depends_on:
+      - mysql-opencr
+    ports:
+      - "8085:8080"
+    environment:
+      spring.config.location: 'file:///user/share/hapi-fhir/application.yaml'
+    volumes:
+      - ./opencr/application.yaml:/user/share/hapi-fhir/application.yaml
+
+  es:
+    image: intrahealth/elasticsearch:latest
+    container_name: es
+    environment:
+      - node.name=es01
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+
+  opencr:
+    container_name: opencr
+    image: intrahealth/opencr
+    ports:
+      - "3000:3000"
+    depends_on:
+      - hapi-fhir
+      - es
+    restart: always
+    environment:
+      - HAPI_FHIR_URL=http://hapi-fhir:8080/fhir/metadata
+    volumes:
+      - ./opencr/config_docker.json:/src/server/config/config_docker.json
+      - ./opencr/custom/app.js:/src/server/lib/app.js
+      - ./opencr/custom/fhir.js:/src/server/lib/routes/fhir.js
