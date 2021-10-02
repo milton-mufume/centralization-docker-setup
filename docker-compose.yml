@@ -1,67 +1,71 @@
 version: "3.3"
 
 services:
-  mysql-central-fgh:
+  mysql-central:
     image: mysql:5.6
-    container_name: mysql-central-fgh
+    container_name: mysql-central
     env_file:
-      - db.env
+      - ./openmrs-common/db.env
     ports:
       - "3307:3306"
     volumes:
-      - ./central-my.cnf:/etc/mysql/my.cnf
-      - ./openmrs.sql:/docker-entrypoint-initdb.d/openmrs.sql
-      - ./openmrs_central_config.sql:/docker-entrypoint-initdb.d/openmrs_config.sql
+      - ./openmrs-central/my.cnf:/etc/mysql/my.cnf
+      - ./openmrs-common/openmrs.sql:/docker-entrypoint-initdb.d/openmrs.sql
+      - ./openmrs-common/config.sql:/docker-entrypoint-initdb.d/openmrs_config.sql
+      - ./openmrs-central/config.sql:/docker-entrypoint-initdb.d/openmrs_config_central.sql
 
-  mysql-remote-fgh:
+  mysql-remote:
     image: mysql:5.6
-    container_name: mysql-remote-fgh
+    container_name: mysql-remote
     env_file:
-      - db.env
+      - ./openmrs-common/db.env
     ports:
       - "3308:3306"
     volumes:
-      - ./remote-my.cnf:/etc/mysql/my.cnf
-      - ./openmrs.sql:/docker-entrypoint-initdb.d/openmrs.sql
-      - ./openmrs_remote_config.sql:/docker-entrypoint-initdb.d/openmrs_config.sql
+      - ./openmrs-remote/my.cnf:/etc/mysql/my.cnf
+      - ./openmrs-common/openmrs.sql:/docker-entrypoint-initdb.d/openmrs.sql
+      - ./openmrs-common/config.sql:/docker-entrypoint-initdb.d/openmrs_config.sql
+      - ./openmrs-remote/config.sql:/docker-entrypoint-initdb.d/openmrs_config_remote.sql
 
-  artemis-fgh:
+  artemis:
     image: cnocorch/activemq-artemis
-    container_name: artemis-fgh
+    container_name: artemis
     ports:
       - "61616:61616"
       - "8161:8161"
     volumes:
-      - ./artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
-      - ./artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
+      - ./artemis/artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
+      - ./artemis/artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
 
-  openmrs-central-fgh:
+  openmrs-central:
     image: tomcat:7.0.109-jdk8-openjdk-slim
-    container_name: openmrs-central-fgh
-    environment:
-      TZ: "America/Chicago"
+    container_name: openmrs-central
     depends_on:
-      - mysql-central-fgh
-      - artemis-fgh
+      - mysql-central
+      - artemis
       - opencr
     volumes:
-      - ./openmrs.war:/usr/local/tomcat/webapps/openmrs.war
-      - ./openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
-      - ./modules:/root/.OpenMRS/modules
-      - ./openmrs.p12:/root/.OpenMRS/mpi/config/openmrs.p12
+      - ./openmrs-common/openmrs.war:/usr/local/tomcat/webapps/openmrs.war
+      - ./openmrs-common/modules:/root/.OpenMRS/modules
+      - ./openmrs-central/openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
+      - ./openmrs-central/openmrs.p12:/root/.OpenMRS/mpi/config/openmrs.p12
+      - ./openmrs-central/modules/debezium-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/debezium.omod
+      - ./openmrs-central/modules/mpi-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/mpi.omod
     ports:
       - "8081:8080"
 
-  openmrs-remote-fgh:
+  openmrs-remote:
     image: tomcat:7.0.109-jdk8-openjdk-slim
-    container_name: openmrs-remote-fgh
+    container_name: openmrs-remote
+    environment:
+      TZ: "America/Chicago"
     depends_on:
-      - mysql-remote-fgh
-      - artemis-fgh
+      - mysql-remote
+      - artemis
     volumes:
-      - ./openmrs.war:/usr/local/tomcat/webapps/openmrs.war
-      - ./openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
-      - ./modules:/root/.OpenMRS/modules
+      - ./openmrs-common/openmrs.war:/usr/local/tomcat/webapps/openmrs.war
+      - ./openmrs-common/modules:/root/.OpenMRS/modules
+      - ./openmrs-remote/openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
     ports:
       - "8082:8080"
 

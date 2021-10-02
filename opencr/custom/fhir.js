@@ -14,7 +14,7 @@ router.get('/:resource?/:id?', (req, res) => {
     pixmRequest({
       req
     }, (resourceData, statusCode) => {
-      logger.error(JSON.stringify(resourceData,0,2));
+      logger.debug(JSON.stringify(resourceData,0,2));
       res.status(statusCode).send(resourceData);
     });
   } else {
@@ -122,7 +122,7 @@ function pixmRequest({
         }
         parameters.parameter.push({
           name: 'targetId',
-          valueReference: entry.resource.fullUrl
+          valueReference: entry.fullUrl
         });
         for (const identifier of entry.resource.identifier) {
           if (targetSystem) {
@@ -221,7 +221,7 @@ router.post('/', (req, res) => {
     }
   }, (err, results) => {
     let code;
-    if(results.patients.code > results.otherResources.code) {
+    if(results.patients.code > results.otherResources.code || !results.otherResources.code) {
       code = results.patients.code;
     } else {
       code = results.otherResources.code;

@@ -41,7 +41,7 @@
   },
   "clients": [
     {
-      "id": "localhost",
+      "id": "openmrs",
       "displayName": "OpenMRS Central"
     }
   ],
@@ -55,7 +55,7 @@
     },
     "nationalid": {
       "uri": "http://clientregistry.org/nationalid",
-      "displayName": "National ID"
+      "displayName": "NID"
     },
     "oldIdNumber": {
       "uri": "urn:uuid:8d79403a-c2cc-11de-8d13-0010c6dffd0f",
