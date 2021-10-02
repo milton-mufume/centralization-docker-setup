@@ -1,76 +1,8 @@
 version: "3.3"
 
 services:
-  mysql-central:
-    image: mysql:5.6
-    container_name: mysql-central
-    env_file:
-      - ./openmrs-common/db.env
-    ports:
-      - "3307:3306"
-    volumes:
-      - ./openmrs-central/my.cnf:/etc/mysql/my.cnf
-      - ./openmrs-common/openmrs.sql:/docker-entrypoint-initdb.d/openmrs.sql
-      - ./openmrs-common/config.sql:/docker-entrypoint-initdb.d/openmrs_config.sql
-      - ./openmrs-central/config.sql:/docker-entrypoint-initdb.d/openmrs_config_central.sql
-
-  mysql-remote:
-    image: mysql:5.6
-    container_name: mysql-remote
-    env_file:
-      - ./openmrs-common/db.env
-    ports:
-      - "3308:3306"
-    volumes:
-      - ./openmrs-remote/my.cnf:/etc/mysql/my.cnf
-      - ./openmrs-common/openmrs.sql:/docker-entrypoint-initdb.d/openmrs.sql
-      - ./openmrs-common/config.sql:/docker-entrypoint-initdb.d/openmrs_config.sql
-      - ./openmrs-remote/config.sql:/docker-entrypoint-initdb.d/openmrs_config_remote.sql
-
-  artemis:
-    image: cnocorch/activemq-artemis
-    container_name: artemis
-    ports:
-      - "61616:61616"
-      - "8161:8161"
-    volumes:
-      - ./artemis/artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
-      - ./artemis/artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
-
-  openmrs-central:
-    image: tomcat:7.0.109-jdk8-openjdk-slim
-    container_name: openmrs-central
-    depends_on:
-      - mysql-central
-      - artemis
-      - opencr
-    volumes:
-      - ./openmrs-common/openmrs.war:/usr/local/tomcat/webapps/openmrs.war
-      - ./openmrs-common/modules:/root/.OpenMRS/modules
-      - ./openmrs-central/openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
-      - ./openmrs-central/openmrs.p12:/root/.OpenMRS/mpi/config/openmrs.p12
-      - ./openmrs-central/modules/debezium-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/debezium.omod
-      - ./openmrs-central/modules/mpi-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/mpi.omod
-    ports:
-      - "8081:8080"
-
-  openmrs-remote:
-    image: tomcat:7.0.109-jdk8-openjdk-slim
-    container_name: openmrs-remote
-    environment:
-      TZ: "America/Chicago"
-    depends_on:
-      - mysql-remote
-      - artemis
-    volumes:
-      - ./openmrs-common/openmrs.war:/usr/local/tomcat/webapps/openmrs.war
-      - ./openmrs-common/modules:/root/.OpenMRS/modules
-      - ./openmrs-remote/openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
-    ports:
-      - "8082:8080"
-
-
-  # ===== OpenCR components ======
+  
+  # ===== Start OpenCR ======
   mysql-opencr:
     image: library/mysql:5.7.34
     container_name: mysql-opencr
@@ -123,3 +55,75 @@ services:
       - ./opencr/config_docker.json:/src/server/config/config_docker.json
       - ./opencr/custom/app.js:/src/server/lib/app.js
       - ./opencr/custom/fhir.js:/src/server/lib/routes/fhir.js
+
+  # ===== End OpenCR ======
+
+  mysql-central:
+    image: mysql:5.6
+    container_name: mysql-central
+    env_file:
+      - ./openmrs-common/db.env
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./openmrs-central/my.cnf:/etc/mysql/my.cnf
+      - ./openmrs-common/openmrs.sql:/docker-entrypoint-initdb.d/openmrs.sql
+      - ./openmrs-common/config.sql:/docker-entrypoint-initdb.d/openmrs_config.sql
+      - ./openmrs-central/config.sql:/docker-entrypoint-initdb.d/openmrs_config_central.sql
+
+  mysql-remote:
+    image: mysql:5.6
+    container_name: mysql-remote
+    env_file:
+      - ./openmrs-common/db.env
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./openmrs-remote/my.cnf:/etc/mysql/my.cnf
+      - ./openmrs-common/openmrs.sql:/docker-entrypoint-initdb.d/openmrs.sql
+      - ./openmrs-common/config.sql:/docker-entrypoint-initdb.d/openmrs_config.sql
+      - ./openmrs-remote/config.sql:/docker-entrypoint-initdb.d/openmrs_config_remote.sql
+
+  openmrs-central:
+    image: tomcat:7.0.109-jdk8-openjdk-slim
+    container_name: openmrs-central
+    depends_on:
+      - mysql-central
+      - artemis
+      - opencr
+    volumes:
+      - ./openmrs-central/setenv.sh:/usr/local/tomcat/bin/setenv.sh
+      - ./openmrs-common/openmrs.war:/usr/local/tomcat/webapps/openmrs.war
+      - ./openmrs-common/modules:/root/.OpenMRS/modules
+      - ./openmrs-central/openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
+      - ./openmrs-central/openmrs.p12:/root/.OpenMRS/mpi/config/openmrs.p12
+      - ./openmrs-central/modules/debezium-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/debezium.omod
+      - ./openmrs-central/modules/mpi-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/mpi.omod
+    ports:
+      - "8081:8080"
+
+  openmrs-remote:
+    image: tomcat:7.0.109-jdk8-openjdk-slim
+    container_name: openmrs-remote
+    environment:
+      TZ: "America/Chicago"
+    depends_on:
+      - mysql-remote
+      - artemis
+    volumes:
+      - ./openmrs-common/openmrs.war:/usr/local/tomcat/webapps/openmrs.war
+      - ./openmrs-common/modules:/root/.OpenMRS/modules
+      - ./openmrs-remote/openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
+    ports:
+      - "8082:8080"
+
+# ===== Start DB sync ======
+  artemis:
+    image: cnocorch/activemq-artemis
+    container_name: artemis
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    volumes:
+      - ./artemis/artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
+      - ./artemis/artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
