@@ -1,7 +1,7 @@
 version: "3.3"
 
 services:
-  
+
   # ===== Start OpenCR ======
   mysql-opencr:
     image: library/mysql:5.7.34
@@ -127,3 +127,35 @@ services:
     volumes:
       - ./artemis/artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
       - ./artemis/artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
+
+  dbsync-central:
+    image: adoptopenjdk/openjdk8:alpine-slim
+    container_name: dbsync-central
+    depends_on:
+      - mysql-central
+      - artemis
+    ports:
+      - "8083:8081"
+    volumes:
+      - ./dbsync-common/openmrs-eip-app-1.0-SNAPSHOT.jar:/user/local/dbsync/openmrs-eip-app.jar
+      - ./dbsync-central/application.properties:/user/local/dbsync/application.properties
+      - ./dbsync-central/users.properties:/user/local/dbsync/dbsync-users.properties
+      - ./dbsync-central/run.sh:/user/local/dbsync/run.sh
+    working_dir: /user/local/dbsync
+    entrypoint: [ "sh", "run.sh" ]
+
+  dbsync-remote:
+    image: adoptopenjdk/openjdk8:alpine-slim
+    container_name: dbsync-remote
+    depends_on:
+      - mysql-remote
+      - artemis
+    ports:
+      - "8084:8081"
+    volumes:
+      - ./dbsync-common/openmrs-eip-app-1.0-SNAPSHOT.jar:/user/local/dbsync/openmrs-eip-app.jar
+      - ./dbsync-remote/application.properties:application.properties
+      - ./dbsync-remote/users.properties:/user/local/dbsync/dbsync-users.properties
+      - ./dbsync-remote/run.sh:/user/local/dbsync/run.sh
+    working_dir: /user/local/dbsync
+    entrypoint: [ "sh", "run.sh" ]
