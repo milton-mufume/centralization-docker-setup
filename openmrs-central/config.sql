@@ -8,7 +8,6 @@ VALUES ('debezium.engine.enabled', 'true', 'ace8f66d-98b8-4829-a5af-d063376cd5c1
        ('mpi.keystore.path', '/root/.OpenMRS/mpi/config/openmrs.p12', '2be8f66d-98b8-4829-a5af-d063376cd5c1'),
        ('mpi.keystore.password', 'changeit', '3be8f66d-98b8-4829-a5af-d063376cd5c1'),
        ('mpi.keystore.type', 'PKCS12', '4be8f66d-98b8-4829-a5af-d063376cd5c1'),
-       ('mpi.sourceId.uri', 'http://fgh.org/openmrs/uuid', '5be8f66d-98b8-4829-a5af-d063376cd5c1'),
-       ('mpi.nid.identifierType.uuid', '15a3fd64-1d5f-11e0-b929-000c29ad1d08', '6be8f66d-98b8-4829-a5af-d063376cd5c1');
+       ('mpi.sourceId.uri', 'http://fgh.org/openmrs/uuid', '5be8f66d-98b8-4829-a5af-d063376cd5c1');
 
 UPDATE global_property SET property_value = 'org.openmrs.api:info,org.openmrs.module.debezium:debug,org.openmrs.module.fgh.mpi:debug,io.debezium:info' WHERE property = 'log.level';

@@ -1,8 +1,8 @@
 #!/bin/sh
 
-#apk update
-#apk upgrade
-#apk add bash
+apk update
+apk upgrade
+apk add bash
 
 echo Starting DB sync Receiver...
 
