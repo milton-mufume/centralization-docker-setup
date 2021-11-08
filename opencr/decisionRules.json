@@ -8,24 +8,41 @@
             },
             "matchingType": "deterministic",
             "fields": {
-                "nationalid": {
-                    "algorithm": "exact",
-                    "fhirpath": "identifier.where(system='http://clientregistry.org/nationalid').value",
-                    "espath": "nid",
-                    "null_handling": "conservative",
-                    "null_handling_both": "conservative"
-                }
-            },
-            "potentialMatchThreshold": 0,
-            "autoMatchThreshold": 1,
-            "filters": {
                 "gender": {
+                    "algorithm": "exact",
                     "fhirpath": "gender",
-                    "espath": "gender"
+                    "espath": "gender",
+                    "nullHandling": "conservative",
+                    "nullHandlingBothFields": "greedy"
                 },
                 "birthDate": {
+                    "algorithm": "exact",
                     "fhirpath": "birthDate",
-                    "espath": "birthDate"
+                    "espath": "birthDate",
+                    "nullHandling": "conservative",
+                    "nullHandlingBothFields": "greedy"
+                },
+                "given": {
+                    "algorithm": "exact",
+                    "fhirpath": "name.where(use='official').given",
+                    "espath": "given",
+                    "nullHandling": "conservative",
+                    "nullHandlingBothFields": "greedy"
+                },
+                "family": {
+                    "algorithm": "exact",
+                    "fhirpath": "name.where(use='official').family",
+                    "espath": "family",
+                    "nullHandling": "conservative",
+                    "nullHandlingBothFields": "greedy"
+                }
+            },
+            "potentialMatchThreshold": 3,
+            "autoMatchThreshold": 4,
+            "filters": {
+                "nid": {
+                    "fhirpath": "identifier.where(system='urn:uuid:15a3fd64-1d5f-11e0-b929-000c29ad1d08').value",
+                    "espath": "nid"
                 }
             }
         }

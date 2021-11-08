@@ -53,9 +53,11 @@ services:
       - HAPI_FHIR_URL=http://hapi-fhir:8080/fhir/metadata
     volumes:
       - ./opencr/config_docker.json:/src/server/config/config_docker.json
+      - ./opencr/decisionRules.json:/src/server/config/decisionRules.json
+      - ./opencr/PatientRelationship.json:/src/resources/Relationships/PatientRelationship.json
       - ./opencr/custom/app.js:/src/server/lib/app.js
       - ./opencr/custom/fhir.js:/src/server/lib/routes/fhir.js
-      - ./start_opencr.sh:/src/server/run.sh
+      - ./opencr/run.sh:/src/server/run.sh
     entrypoint: [ "sh", "run.sh" ]
 
   # ===== End OpenCR ======
@@ -72,6 +74,8 @@ services:
       - ./openmrs-common/openmrs.sql:/docker-entrypoint-initdb.d/openmrs.sql
       - ./openmrs-common/config.sql:/docker-entrypoint-initdb.d/openmrs_config.sql
       - ./openmrs-central/config.sql:/docker-entrypoint-initdb.d/openmrs_config_central.sql
+      - ./dbsync-common/mgt_db.sql:/docker-entrypoint-initdb.d/mgt_db.sql
+      - ./dbsync-central/mgt_db_config.sql:/docker-entrypoint-initdb.d/mgt_db_config.sql
 
   mysql-remote:
     image: mysql:5.6
@@ -85,6 +89,7 @@ services:
       - ./openmrs-common/openmrs.sql:/docker-entrypoint-initdb.d/openmrs.sql
       - ./openmrs-common/config.sql:/docker-entrypoint-initdb.d/openmrs_config.sql
       - ./openmrs-remote/config.sql:/docker-entrypoint-initdb.d/openmrs_config_remote.sql
+      - ./dbsync-common/mgt_db.sql:/docker-entrypoint-initdb.d/mgt_db.sql
 
   openmrs-central:
     image: tomcat:7.0.109-jdk8-openjdk-slim
@@ -144,8 +149,8 @@ services:
       - ./dbsync-central/routes:/user/local/dbsync/routes
       - ./dbsync-central/application.properties:/user/local/dbsync/application.properties
       - ./dbsync-central/users.properties:/user/local/dbsync/dbsync-users.properties
+      #- ./dbsync-common/init.sh:/user/local/dbsync/init.sh
       - ./dbsync-central/run.sh:/user/local/dbsync/run.sh
-      - ./dbsync-central/mgt_db_config.sql:/user/local/dbsync/mgt_db_config.sql
     working_dir: /user/local/dbsync
     entrypoint: [ "sh", "run.sh" ]
 
