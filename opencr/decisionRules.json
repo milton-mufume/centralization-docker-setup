@@ -37,7 +37,7 @@
                     "nullHandlingBothFields": "greedy"
                 }
             },
-            "potentialMatchThreshold": 3,
+            "potentialMatchThreshold": 0,
             "autoMatchThreshold": 4,
             "filters": {
                 "nid": {

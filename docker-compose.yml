@@ -100,14 +100,17 @@ services:
       - opencr
     volumes:
       - ./openmrs-central/setenv.sh:/usr/local/tomcat/bin/setenv.sh
-      - ./openmrs-common/openmrs.war:/usr/local/tomcat/webapps/openmrs.war
-      - ./openmrs-common/modules:/root/.OpenMRS/modules
+      - ./openmrs-common/run.sh:/user/local/tomcat/bin/run_openmrs.sh
       - ./openmrs-central/openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
       - ./openmrs-central/openmrs.p12:/root/.OpenMRS/mpi/config/openmrs.p12
+      - ./openmrs-common/modules/legacyui-1.8.2.omod:/root/.OpenMRS/modules/legacyui.omod
+      - ./openmrs-common/modules/owa-1.12.0.omod:/root/.OpenMRS/modules/owa.omod
+      - ./openmrs-common/modules/webservices.rest-2.30.0.omod:/root/.OpenMRS/modules/webservices.rest.omod
       - ./openmrs-central/modules/debezium-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/debezium.omod
       - ./openmrs-central/modules/mpi-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/mpi.omod
     ports:
       - "8081:8080"
+    entrypoint: [ "sh", "/user/local/tomcat/bin/run_openmrs.sh" ]
 
   openmrs-remote:
     image: tomcat:7.0.109-jdk8-openjdk-slim
@@ -118,11 +121,14 @@ services:
       - mysql-remote
       - artemis
     volumes:
-      - ./openmrs-common/openmrs.war:/usr/local/tomcat/webapps/openmrs.war
-      - ./openmrs-common/modules:/root/.OpenMRS/modules
+      - ./openmrs-common/run.sh:/user/local/tomcat/bin/run_openmrs.sh
+      - ./openmrs-common/modules/legacyui-1.8.2.omod:/root/.OpenMRS/modules/legacyui.omod
+      - ./openmrs-common/modules/owa-1.12.0.omod:/root/.OpenMRS/modules/owa.omod
+      - ./openmrs-common/modules/webservices.rest-2.30.0.omod:/root/.OpenMRS/modules/webservices.rest.omod
       - ./openmrs-remote/openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
     ports:
       - "8082:8080"
+    entrypoint: [ "sh", "/user/local/tomcat/bin/run_openmrs.sh" ]
 
 # ===== Start DB sync ======
   artemis:
@@ -145,11 +151,10 @@ services:
     ports:
       - "8083:8081"
     volumes:
-      - ./dbsync-common/openmrs-eip-app-1.0-SNAPSHOT.jar:/user/local/dbsync/openmrs-eip-app.jar
       - ./dbsync-central/routes:/user/local/dbsync/routes
       - ./dbsync-central/application.properties:/user/local/dbsync/application.properties
       - ./dbsync-central/users.properties:/user/local/dbsync/dbsync-users.properties
-      - ./dbsync-common/init.sh:/user/local/dbsync/init.sh
+      - ./dbsync-common/init.sh:/user/local/dbsync/init_eip.sh
       - ./dbsync-central/run.sh:/user/local/dbsync/run.sh
     working_dir: /user/local/dbsync
     entrypoint: [ "sh", "run.sh" ]
@@ -163,10 +168,10 @@ services:
     ports:
       - "8084:8081"
     volumes:
-      - ./dbsync-common/openmrs-eip-app-1.0-SNAPSHOT.jar:/user/local/dbsync/openmrs-eip-app.jar
       - ./dbsync-remote/routes:/user/local/dbsync/routes
       - ./dbsync-remote/application.properties:/user/local/dbsync/application.properties
       - ./dbsync-remote/users.properties:/user/local/dbsync/dbsync-users.properties
+      - ./dbsync-common/init.sh:/user/local/dbsync/init_eip.sh
       - ./dbsync-remote/run.sh:/user/local/dbsync/run.sh
     working_dir: /user/local/dbsync
     entrypoint: [ "sh", "run.sh" ]

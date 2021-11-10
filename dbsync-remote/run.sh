@@ -4,7 +4,7 @@ apk update
 apk upgrade
 apk add bash
 
-./init.sh
+./init_eip.sh
 
 echo Starting DB sync Sender...
 
