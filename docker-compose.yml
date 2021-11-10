@@ -149,7 +149,7 @@ services:
       - ./dbsync-central/routes:/user/local/dbsync/routes
       - ./dbsync-central/application.properties:/user/local/dbsync/application.properties
       - ./dbsync-central/users.properties:/user/local/dbsync/dbsync-users.properties
-      #- ./dbsync-common/init.sh:/user/local/dbsync/init.sh
+      - ./dbsync-common/init.sh:/user/local/dbsync/init.sh
       - ./dbsync-central/run.sh:/user/local/dbsync/run.sh
     working_dir: /user/local/dbsync
     entrypoint: [ "sh", "run.sh" ]

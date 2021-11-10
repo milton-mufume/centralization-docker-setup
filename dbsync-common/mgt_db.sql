@@ -1,0 +1,1 @@
+CREATE DATABASE IF NOT EXISTS `openmrs_eip_mgt` CHARACTER SET utf8;
