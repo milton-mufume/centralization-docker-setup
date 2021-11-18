@@ -45,6 +45,48 @@
                     "espath": "nid"
                 }
             }
+        },
+        {
+            "supported_algorithms": {
+                "elasticsearch": [
+                    "https://github.com/intrahealth/similarity-scoring"
+                ]
+            },
+            "matchingType": "deterministic",
+            "fields": {
+                "nid": {
+                    "algorithm": "exact",
+                    "fhirpath": "identifier.where(system='urn:uuid:15a3fd64-1d5f-11e0-b929-000c29ad1d08').value",
+                    "espath": "nid",
+                    "nullHandling": "conservative"
+                },
+                "given": {
+                    "algorithm": "exact",
+                    "fhirpath": "name.where(use='official').given",
+                    "espath": "given",
+                    "nullHandling": "conservative",
+                    "nullHandlingBothFields": "greedy"
+                },
+                "family": {
+                    "algorithm": "exact",
+                    "fhirpath": "name.where(use='official').family",
+                    "espath": "family",
+                    "nullHandling": "conservative",
+                    "nullHandlingBothFields": "greedy"
+                }
+            },
+            "potentialMatchThreshold": 1,
+            "autoMatchThreshold": 3,
+            "filters": {
+                "gender": {
+                    "fhirpath": "gender",
+                    "espath": "gender"
+                },
+                "birthDate": {
+                    "fhirpath": "birthDate",
+                    "espath": "birthDate"
+                }
+            }
         }
     ]
 }
