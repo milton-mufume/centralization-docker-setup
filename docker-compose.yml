@@ -4,7 +4,7 @@ services:
 
   # ===== Start OpenCR ======
   mysql-opencr:
-    image: library/mysql:5.7.34
+    image: mysql:5.7.34
     container_name: mysql-opencr
     env_file:
       - ./opencr/db.env

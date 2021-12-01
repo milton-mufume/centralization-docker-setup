@@ -1,0 +1,68 @@
+version: "3.3"
+
+services:
+
+  # ===== Start OpenCR ======
+  mysql-opencr:
+    image: mysql:5.7.34
+    container_name: mysql-opencr
+    env_file:
+      - ./db.env
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./my.cnf:/etc/mysql/my.cnf
+
+  hapi-fhir:
+    image: hapiproject/hapi:v5.4.1
+    container_name: hapi-fhir
+    depends_on:
+      - mysql-opencr
+    ports:
+      - "8085:8080"
+    environment:
+      spring.config.location: 'file:///user/share/hapi-fhir/application.yaml'
+    volumes:
+      - ./application.yaml:/user/share/hapi-fhir/application.yaml
+
+  es:
+    image: intrahealth/elasticsearch:latest
+    container_name: es
+    environment:
+      - node.name=es01
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+
+  opencr:
+    container_name: opencr
+    image: intrahealth/opencr
+    ports:
+      - "3000:3000"
+    depends_on:
+      - hapi-fhir
+      - es
+    restart: always
+    environment:
+      - NODE_ENV=productio
+      - HAPI_FHIR_URL=http://hapi-fhir:8080/fhir/metadata
+    volumes:
+      - ./config_docker.json:/src/server/config/config_docker.json
+      - ./decisionRules.json:/src/server/config/decisionRules.json
+      - ./PatientRelationship.json:/src/resources/Relationships/PatientRelationship.json
+      - ./custom/app.js:/src/server/lib/app.js
+      - ./custom/fhir.js:/src/server/lib/routes/fhir.js
+      - ./run.sh:/src/server/run.sh
+    entrypoint: [ "sh", "run.sh" ]
+
+volumes:
+  data01:
+    driver: local
