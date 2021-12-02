@@ -2,14 +2,13 @@ version: "3.3"
 
 services:
 
-  # ===== Start OpenCR ======
   mysql-opencr:
     image: mysql:5.7.34
     container_name: mysql-opencr
     env_file:
       - ./db.env
     ports:
-      - "3309:3306"
+      - "3306:3306"
     volumes:
       - ./my.cnf:/etc/mysql/my.cnf
 
@@ -19,7 +18,7 @@ services:
     depends_on:
       - mysql-opencr
     ports:
-      - "8085:8080"
+      - "8080:8080"
     environment:
       spring.config.location: 'file:///user/share/hapi-fhir/application.yaml'
     volumes:
@@ -52,10 +51,10 @@ services:
       - es
     restart: always
     environment:
-      - NODE_ENV=productio
+      - NODE_ENV=production
       - HAPI_FHIR_URL=http://hapi-fhir:8080/fhir/metadata
     volumes:
-      - ./config_docker.json:/src/server/config/config_docker.json
+      - ./config_production.json:/src/server/config/config_production.json
       - ./decisionRules.json:/src/server/config/decisionRules.json
       - ./PatientRelationship.json:/src/resources/Relationships/PatientRelationship.json
       - ./custom/app.js:/src/server/lib/app.js
