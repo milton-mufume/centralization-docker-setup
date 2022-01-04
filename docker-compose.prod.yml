@@ -1,0 +1,158 @@
+version: "3.3"
+
+services:
+
+  mysql-opencr:
+    image: mysql:5.7.34
+    container_name: mysql-opencr
+    env_file:
+      - ./opencr/db.env
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./opencr/my.cnf:/etc/mysql/my.cnf
+      - opencrDbData:/var/lib/mysql
+    restart: unless-stopped
+
+  hapi-fhir:
+    image: hapiproject/hapi:v5.4.1
+    container_name: hapi-fhir
+    depends_on:
+      - mysql-opencr
+    ports:
+      - "8181:8080"
+    environment:
+      spring.config.location: 'file:///user/share/hapi-fhir/application.yaml'
+    volumes:
+      - ./opencr/application.yaml:/user/share/hapi-fhir/application.yaml
+    restart: unless-stopped
+
+  es:
+    image: intrahealth/elasticsearch:latest
+    container_name: es
+    environment:
+      - node.name=es01
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esData:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    restart: unless-stopped
+
+  opencr:
+    container_name: opencr
+    image: intrahealth/opencr
+    ports:
+            #- "8000:3000"
+      - "8000:3000"
+    depends_on:
+      - hapi-fhir
+      - es
+    environment:
+      - NODE_ENV=production
+      - HAPI_FHIR_URL=http://hapi-fhir:8080/fhir/metadata
+    volumes:
+      - ./opencr/config_production.json:/src/server/config/config_production.json
+      - ./opencr/decisionRules.json:/src/server/config/decisionRules.json
+      - ./opencr/PatientRelationship.json:/src/resources/Relationships/PatientRelationship.json
+      - ./opencr/custom/app.js:/src/server/lib/app.js
+      - ./opencr/custom/fhir.js:/src/server/lib/routes/fhir.js
+      - ./opencr/run.sh:/src/server/run.sh
+      - ./opencr/admin.OCRUser.prod.json:/src/resources/ResourcesData/admin.OCRUser.json
+    entrypoint: [ "sh", "run.sh" ]
+    restart: unless-stopped
+
+  mysql-central:
+    image: mysql:5.6
+    container_name: mysql-central
+    env_file:
+      - ./openmrs-central/prod.db.env
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./openmrs-central/prod.my.cnf:/etc/mysql/my.cnf
+      - openmrsDbData:/var/lib/mysql
+    restart: unless-stopped
+
+  openmrs-central:
+    image: tomcat:7.0.109-jdk8-openjdk-slim
+    container_name: openmrs-central
+    depends_on:
+      - mysql-central
+    volumes:
+      - ./openmrs-central/setenv.sh:/usr/local/tomcat/bin/setenv.sh
+      - ./openmrs-central/run.prod.sh:/usr/local/tomcat/bin/run_openmrs.sh
+      - ./openmrs-central/init.prod.sh:/usr/local/tomcat/bin/init.sh
+      - ./openmrs-central/install_opencr_cert.exp:/usr/local/tomcat/bin/install_opencr_cert.exp
+      - ./openmrs-central/prod-openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
+      - ./openmrs-central/openmrs.p12:/root/.OpenMRS/mpi/config/openmrs.p12
+      - ./openmrs-common/modules/legacyui-1.8.2.omod:/root/.OpenMRS/modules/legacyui.omod
+      - ./openmrs-common/modules/owa-1.12.0.omod:/root/.OpenMRS/modules/owa.omod
+      - ./openmrs-common/modules/webservices.rest-2.30.0.omod:/root/.OpenMRS/modules/webservices.rest.omod
+      - ./openmrs-central/modules/debezium-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/debezium.omod
+      - ./openmrs-central/modules/mpi-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/mpi.omod
+      - ./shared/openmrs/tomcat/webapps:/usr/local/tomcat/webapps/  
+      - ./shared/debezium:/root/.OpenMRS/config/debezium
+    ports:
+      - "8080:8080"
+    entrypoint: [ "sh", "/usr/local/tomcat/bin/run_openmrs.sh" ]
+    restart: unless-stopped
+
+  artemis:
+    image: cnocorch/activemq-artemis
+    container_name: artemis
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    volumes:
+      - ./artemis/artemis-roles.prod.properties:/var/lib/artemis/etc/artemis-roles.properties
+      - ./artemis/artemis-users.prod.properties:/var/lib/artemis/etc/artemis-users.properties
+      - artemisData:/var/lib/artemis
+    restart: unless-stopped
+
+  dbsync-central:
+    image: adoptopenjdk/openjdk8:alpine-slim
+    container_name: dbsync-central
+    env_file:
+      - ./dbsync-central/dbsync.env   
+    environment:
+      - home_dir=/home/eip
+      - shared_dir=/home/eip/shared
+    depends_on:
+      - mysql-central
+      - openmrs-central
+      - artemis
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./dbsync-central/application.prod.properties:/home/eip/application.properties
+      - ./dbsync-central/users.prod.properties:/home/eip/dbsync-users.properties
+      - ./dbsync-central/init.prod.sh:/home/eip/init_eip.sh
+      - ./dbsync-central/run.prod.sh:/home/eip/run.sh
+      - ./dbsync-central/logback-spring.xml:/home/eip/logback-spring.xml
+      - ./shared:/home/eip/shared
+      - dbsyncM2Store:/root/.m2
+    working_dir: /home/eip
+    entrypoint: [ "sh", "run.sh" ]
+    restart: unless-stopped
+
+
+volumes:
+  opencrDbData:
+    driver: local
+  esData:
+    driver: local
+  openmrsDbData:
+    external: true 
+  dbSyncData:
+    driver: local
+  artemisData:
+    driver: local
+  dbsyncM2Store:
+    driver: local

@@ -1,0 +1,7 @@
+dbsync-central/dbsync.env
+artemis/artemis-roles.prod.properties
+artemis/artemis-users.prod.properties
+dbsync-central/users.prod.properties
+shared/*
+opencr/admin.OCRUser.prod.json
+opencr/config_production.json
