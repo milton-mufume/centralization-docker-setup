@@ -52,7 +52,7 @@
       "uri": [
         "http://openmrs.org/uuid"
       ],
-      "displayName": "OpenMRS UUID"
+      "displayName": "OpenMRS Patient UUID"
     },
     "nationalid": {
       "uri": "http://clientregistry.org/nationalid",

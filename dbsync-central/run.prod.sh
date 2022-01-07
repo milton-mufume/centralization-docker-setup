@@ -1,16 +1,14 @@
 #!/bin/sh
+HOME_DIR="/home/eip"
+SCRIPTS_DIR="$HOME_DIR/scripts"
+INSTALL_FINISHED_REPORT_FILE="$HOME_DIR/install_finished_report_file"
 
-apk update
-apk upgrade
-apk add bash
+if [ -f "$INSTALL_FINISHED_REPORT_FILE" ]; then
+        echo "INSTALLATION ALREADY FINISHED"
+else
+  ./init.sh
+fi
 
-./init_eip.sh
+$SCRIPTS_DIR/eip_startup.sh
 
-cp -a $shared_dir/openmrs-eip/distribution/receiver/routes .
-
-echo Starting DB sync Receiver...
-
-java -jar -Dspring.profiles.active=receiver openmrs-eip-app.jar
-
-#TMP CODE BELLOW
 crond -f -l 8

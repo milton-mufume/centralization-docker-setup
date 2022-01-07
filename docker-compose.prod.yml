@@ -49,8 +49,7 @@ services:
     container_name: opencr
     image: intrahealth/opencr
     ports:
-            #- "8000:3000"
-      - "8000:3000"
+      - "3000:3000"
     depends_on:
       - hapi-fhir
       - es
@@ -58,13 +57,13 @@ services:
       - NODE_ENV=production
       - HAPI_FHIR_URL=http://hapi-fhir:8080/fhir/metadata
     volumes:
-      - ./opencr/config_production.json:/src/server/config/config_production.json
+      - $docker_containers_shared_dir/conf/opencr/config_production.json:/src/server/config/config_production.json
+      - $docker_containers_shared_dir/conf/opencr/admin.OCRUser.json:/src/resources/ResourcesData/admin.OCRUser.json
       - ./opencr/decisionRules.json:/src/server/config/decisionRules.json
       - ./opencr/PatientRelationship.json:/src/resources/Relationships/PatientRelationship.json
       - ./opencr/custom/app.js:/src/server/lib/app.js
       - ./opencr/custom/fhir.js:/src/server/lib/routes/fhir.js
       - ./opencr/run.sh:/src/server/run.sh
-      - ./opencr/admin.OCRUser.prod.json:/src/resources/ResourcesData/admin.OCRUser.json
     entrypoint: [ "sh", "run.sh" ]
     restart: unless-stopped
 
@@ -72,7 +71,7 @@ services:
     image: mysql:5.6
     container_name: mysql-central
     env_file:
-      - ./openmrs-central/prod.db.env
+      - $docker_containers_shared_dir/conf/openmrs/db.env
     ports:
       - "3307:3306"
     volumes:
@@ -90,15 +89,15 @@ services:
       - ./openmrs-central/run.prod.sh:/usr/local/tomcat/bin/run_openmrs.sh
       - ./openmrs-central/init.prod.sh:/usr/local/tomcat/bin/init.sh
       - ./openmrs-central/install_opencr_cert.exp:/usr/local/tomcat/bin/install_opencr_cert.exp
-      - ./openmrs-central/prod-openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
+      - $docker_containers_shared_dir/conf/openmrs/openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
       - ./openmrs-central/openmrs.p12:/root/.OpenMRS/mpi/config/openmrs.p12
       - ./openmrs-common/modules/legacyui-1.8.2.omod:/root/.OpenMRS/modules/legacyui.omod
       - ./openmrs-common/modules/owa-1.12.0.omod:/root/.OpenMRS/modules/owa.omod
       - ./openmrs-common/modules/webservices.rest-2.30.0.omod:/root/.OpenMRS/modules/webservices.rest.omod
       - ./openmrs-central/modules/debezium-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/debezium.omod
       - ./openmrs-central/modules/mpi-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/mpi.omod
-      - ./shared/openmrs/tomcat/webapps:/usr/local/tomcat/webapps/  
-      - ./shared/debezium:/root/.OpenMRS/config/debezium
+      - $docker_containers_shared_dir/openmrs/tomcat/webapps:/usr/local/tomcat/webapps/  
+      - $docker_containers_shared_dir/debezium:/root/.OpenMRS/config/debezium
     ports:
       - "8080:8080"
     entrypoint: [ "sh", "/usr/local/tomcat/bin/run_openmrs.sh" ]
@@ -111,8 +110,8 @@ services:
       - "61616:61616"
       - "8161:8161"
     volumes:
-      - ./artemis/artemis-roles.prod.properties:/var/lib/artemis/etc/artemis-roles.properties
-      - ./artemis/artemis-users.prod.properties:/var/lib/artemis/etc/artemis-users.properties
+      - $docker_containers_shared_dir/conf/artemis/artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
+      - $docker_containers_shared_dir/conf/artemis/artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
       - artemisData:/var/lib/artemis
     restart: unless-stopped
 
@@ -120,7 +119,7 @@ services:
     image: adoptopenjdk/openjdk8:alpine-slim
     container_name: dbsync-central
     env_file:
-      - ./dbsync-central/dbsync.env   
+      - $docker_containers_shared_dir/conf/eip/dbsync.env   
     environment:
       - home_dir=/home/eip
       - shared_dir=/home/eip/shared
@@ -131,13 +130,11 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - ./dbsync-central/application.prod.properties:/home/eip/application.properties
-      - ./dbsync-central/users.prod.properties:/home/eip/dbsync-users.properties
-      - ./dbsync-central/init.prod.sh:/home/eip/init_eip.sh
+      - $docker_containers_shared_dir/conf/eip/dbsync-users.properties:/home/eip/dbsync-users.properties
+      - $docker_containers_shared_dir:/home/eip/shared
       - ./dbsync-central/run.prod.sh:/home/eip/run.sh
-      - ./dbsync-central/logback-spring.xml:/home/eip/logback-spring.xml
-      - ./shared:/home/eip/shared
-      - dbsyncM2Store:/root/.m2
+      - ./dbsync-central/init.prod.sh:/home/eip/init.sh
+      - ./:/home/centralization-docker-setup/:ro
     working_dir: /home/eip
     entrypoint: [ "sh", "run.sh" ]
     restart: unless-stopped
@@ -153,6 +150,4 @@ volumes:
   dbSyncData:
     driver: local
   artemisData:
-    driver: local
-  dbsyncM2Store:
     driver: local

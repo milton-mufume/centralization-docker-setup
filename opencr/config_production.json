@@ -52,7 +52,7 @@
       "uri": [
         "http://openmrs.org/uuid"
       ],
-      "displayName": "OpenMRS UUID"
+      "displayName": "OpenMRS Patient UUID"
     },
     "nationalid": {
       "uri": "http://clientregistry.org/nationalid",
@@ -71,6 +71,6 @@
     }
   },
   "sync": {
-    "lastFHIR2ESSync": "2022-01-04T07:26:29"
+    "lastFHIR2ESSync": "2022-01-07T09:03:11"
   }
 }

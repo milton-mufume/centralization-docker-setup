@@ -1,29 +1,42 @@
+
 #!/bin/sh
+# This scrip is intended to check for updates for eip application and apply them when avaliable
+#
+#ENV
+HOME_DIR=$home_dir
+SETUP_MAIN_PROJECT_DIR="/home/centralization-docker-setup"
+EIP_SETUP_BASE_DIR="$SETUP_MAIN_PROJECT_DIR/dbsync-central"
+EIP_SETUP_STUFF_DIR="$EIP_SETUP_BASE_DIR/release_stuff"
+SCRIPTS_DIR="$HOME_DIR/scripts"
+SETUP_SCRIPTS_DIR="$EIP_SETUP_STUFF_DIR/scripts"
+INSTALL_FINISHED_REPORT_FILE="$HOME_DIR/install_finished_report_file"
 
-apk update
-apk upgrade
-apk add bash
-apk add git
-apk add maven
+timestamp=`date +%Y-%m-%d_%H-%M-%S`
 
+echo "STARTING EIP INSTALLATION PROCESS AT $timespamp"
 
-#RETRIEVE EXISTING BUILD
-if test -f "$shared_dir/openmrs-eip/app/target/openmrs-eip-app-1.0-SNAPSHOT.jar"; then
-	cp $shared_dir/openmrs-eip/app/target/openmrs-eip-app-1.0-SNAPSHOT.jar $home_dir/openmrs-eip-app.jar
-fi
+cd $HOME_DIR
 
+source $SETUP_SCRIPTS_DIR/release_info.sh
 
-if test ! -f "$home_dir/openmrs-eip-app.jar"; then
-	if test ! -d "$shared_dir/openmrs-eip"; then
-		cd $shared_dir
-		git clone https://github.com/FriendsInGlobalHealth/openmrs-eip.git
-	fi
+REMOTE_RELEASE_NAME=$RELEASE_NAME
+REMOTE_RELEASE_DATE=$RELEASE_DATE
 
-	cd $shared_dir/openmrs-eip
-	git pull oring master
+echo "FOUND RELEASE {NAME: $REMOTE_RELEASE_NAME, DATE: $REMOTE_RELEASE_DATE} "
 
-	mvn clean install -Ppt -DskipTests
-	cp app/target/openmrs-eip-app-1.0-SNAPSHOT.jar $home_dir/openmrs-eip-app.jar
+echo "PERFORMING INSTALLATION STEPS..."
 
-	cd $home_dir 
-fi
+echo "COPPING EIP APP FILES"
+
+cp -R $EIP_SETUP_STUFF_DIR/* $HOME_DIR/
+
+echo "COPYING DOCKER PROJECT TO EIP DIR"
+cp -R $SETUP_MAIN_PROJECT_DIR $HOME_DIR
+
+echo "ALL FILES WERE COPIED"
+
+$SCRIPTS_DIR/apk_install.sh
+$SCRIPTS_DIR/install_crons.sh
+
+timestamp=`date +%Y-%m-%d_%H-%M-%S`
+echo "Installation finished at $timestamp" >> $INSTALL_FINISHED_REPORT_FILE
