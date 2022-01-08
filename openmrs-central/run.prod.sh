@@ -2,6 +2,8 @@
 
 apt-get update
 apt-get install -y curl
+apt-get install -y vim 
+apt-get install -y nano 
 apt-get install -y expect
 
 if test ! -f "/usr/local/tomcat/webapps/openmrs.war"; then

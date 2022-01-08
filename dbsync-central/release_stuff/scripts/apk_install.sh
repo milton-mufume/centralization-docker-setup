@@ -24,6 +24,12 @@ echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_
 echo "Installing Git"  | tee -a $LOG_DIR/apk_install.log
 apk add git
 echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_install.log
+echo "Installing VIM"  | tee -a $LOG_DIR/apk_install.log
+apk add vim
+echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_install.log
+echo "Installing NANO"  | tee -a $LOG_DIR/apk_install.log
+apk add nano
+echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_install.log
 #echo "Installing Maven"  | tee -a $LOG_DIR/apk_install.log
 #apk add maven
 #echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_install.log
