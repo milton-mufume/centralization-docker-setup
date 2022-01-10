@@ -7,12 +7,12 @@ set timeout -1
 
 puts "GENERATING OPENCR CERT KEY"
 
-spawn echo "Q" | openssl s_client -connect opencr:3000 | openssl x509 > opencr.cert
+spawn echo "Q" | openssl s_client -connect opencr:3000 | openssl x509 > /usr/local/tomcat/opencr.cert
 
 puts "OPENCR CERT KEY GENERATED"
 puts "REGISTERING OPENCER CERTIFICATE TO TRUSTED CERTIFICATES"
 
-spawn keytool -import -trustcacerts -file opencr.cert -alias opencr -keystore /usr/local/openjdk-8/jre/lib/security/cacerts 
+spawn keytool -import -trustcacerts -file /usr/local/tomcat/opencr.cert -alias opencr -keystore /usr/local/openjdk-8/jre/lib/security/cacerts 
 
 	expect "Enter keystore password: "
 	send -- "changeit\n"

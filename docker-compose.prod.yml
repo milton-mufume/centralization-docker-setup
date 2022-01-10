@@ -49,7 +49,7 @@ services:
     container_name: opencr
     image: intrahealth/opencr
     ports:
-      - "3000:3000"
+      - "53000:3000"
     depends_on:
       - hapi-fhir
       - es
@@ -71,7 +71,7 @@ services:
     image: mysql:5.6
     container_name: mysql-central
     env_file:
-      - $docker_containers_shared_dir/conf/openmrs/db.env
+      - $docker_containers_shared_dir/conf/openmrs/central/db.env
     ports:
       - "3307:3306"
     volumes:
@@ -89,8 +89,8 @@ services:
       - ./openmrs-central/run.prod.sh:/usr/local/tomcat/bin/run_openmrs.sh
       - ./openmrs-central/init.prod.sh:/usr/local/tomcat/bin/init.sh
       - ./openmrs-central/install_opencr_cert.exp:/usr/local/tomcat/bin/install_opencr_cert.exp
-      - $docker_containers_shared_dir/conf/openmrs/openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
-      - $docker_containers_shared_dir/conf/openmrs/openmrs.p12:/root/.OpenMRS/mpi/config/openmrs.p12
+      - $docker_containers_shared_dir/conf/openmrs/central/openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
+      - $docker_containers_shared_dir/conf/openmrs/central/openmrs.p12:/root/.OpenMRS/mpi/config/openmrs.p12
       - $docker_containers_shared_dir/openmrs/tomcat/webapps:/usr/local/tomcat/webapps/  
       - $docker_containers_shared_dir/debezium:/root/.OpenMRS/config/debezium
       - ./openmrs-common/modules/legacyui-1.8.2.omod:/root/.OpenMRS/modules/legacyui.omod
@@ -99,7 +99,7 @@ services:
       - ./openmrs-central/modules/debezium-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/debezium.omod
       - ./openmrs-central/modules/mpi-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/mpi.omod
     ports:
-      - "8080:8080"
+      - "58080:8080"
     entrypoint: [ "sh", "/usr/local/tomcat/bin/run_openmrs.sh" ]
     restart: unless-stopped
 
@@ -107,8 +107,8 @@ services:
     image: cnocorch/activemq-artemis
     container_name: artemis
     ports:
-      - "61616:61616"
-      - "8161:8161"
+      - "51616:61616"
+      - "58161:8161"
     volumes:
       - $docker_containers_shared_dir/conf/artemis/artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
       - $docker_containers_shared_dir/conf/artemis/artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
@@ -128,7 +128,7 @@ services:
       - openmrs-central
       - artemis
     ports:
-      - "8081:8081"
+      - "58081:8081"
     volumes:
       - $docker_containers_shared_dir/conf/eip/dbsync-users.properties:/home/eip/dbsync-users.properties
       - $docker_containers_shared_dir:/home/eip/shared
