@@ -8,6 +8,12 @@
             },
             "matchingType": "deterministic",
             "fields": {
+                "nid": {
+                    "algorithm": "exact",
+                    "fhirpath": "identifier.where(system='urn:uuid:15a3fd64-1d5f-11e0-b929-000c29ad1d08').value",
+                    "espath": "nid",
+                    "nullHandling": "conservative"
+                },
                 "gender": {
                     "algorithm": "exact",
                     "fhirpath": "gender",
@@ -37,8 +43,8 @@
                     "nullHandlingBothFields": "greedy"
                 }
             },
-            "potentialMatchThreshold": 0,
-            "autoMatchThreshold": 4,
+            "potentialMatchThreshold": 2,
+            "autoMatchThreshold": 5,
             "filters": {
                 "nid": {
                     "fhirpath": "identifier.where(system='urn:uuid:15a3fd64-1d5f-11e0-b929-000c29ad1d08').value",
