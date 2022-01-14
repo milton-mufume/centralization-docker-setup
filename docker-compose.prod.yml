@@ -64,19 +64,25 @@ services:
       - ./opencr/custom/app.js:/src/server/lib/app.js
       - ./opencr/custom/fhir.js:/src/server/lib/routes/fhir.js
       - ./opencr/run.sh:/src/server/run.sh
+      - /etc/localtime:/etc/localtime
     entrypoint: [ "sh", "run.sh" ]
     restart: unless-stopped
 
   mysql-central:
     image: mysql:5.6
     container_name: mysql-central
+    command: /home/scripts/init.sh
     env_file:
       - $docker_containers_shared_dir/conf/openmrs/central/db.env
     ports:
-      - "3307:3306"
+      - "53307:3306"
     volumes:
       - ./openmrs-central/prod.my.cnf:/etc/mysql/my.cnf
+      - ./openmrs-central/db/scripts:/home/scripts
+      - ./openmrs-central/db/crons:/home/crons
+      - $docker_containers_shared_dir/shared/bkps/db:/home/shared/bkps/db
       - openmrsDbData:/var/lib/mysql
+      - /etc/localtime:/etc/localtime
     restart: unless-stopped
 
   openmrs-central:
@@ -89,6 +95,7 @@ services:
       - ./openmrs-central/run.prod.sh:/usr/local/tomcat/bin/run_openmrs.sh
       - ./openmrs-central/init.prod.sh:/usr/local/tomcat/bin/init.sh
       - ./openmrs-central/install_opencr_cert.exp:/usr/local/tomcat/bin/install_opencr_cert.exp
+      - /etc/localtime:/etc/localtime
       - $docker_containers_shared_dir/conf/openmrs/central/openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
       - $docker_containers_shared_dir/conf/openmrs/central/openmrs.p12:/root/.OpenMRS/mpi/config/openmrs.p12
       - $docker_containers_shared_dir/openmrs/tomcat/webapps:/usr/local/tomcat/webapps/  
@@ -113,6 +120,7 @@ services:
       - $docker_containers_shared_dir/conf/artemis/artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
       - $docker_containers_shared_dir/conf/artemis/artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
       - artemisData:/var/lib/artemis
+      - /etc/localtime:/etc/localtime
     restart: unless-stopped
 
   dbsync-central:
@@ -135,6 +143,7 @@ services:
       - ./dbsync-central/run.prod.sh:/home/eip/run.sh
       - ./dbsync-central/init.prod.sh:/home/eip/init.sh
       - ./:/home/centralization-docker-setup/:ro
+      - /etc/localtime:/etc/localtime
     working_dir: /home/eip
     entrypoint: [ "sh", "run.sh" ]
     restart: unless-stopped
@@ -147,7 +156,5 @@ volumes:
     driver: local
   openmrsDbData:
     external: true 
-  dbSyncData:
-    driver: local
   artemisData:
     driver: local
