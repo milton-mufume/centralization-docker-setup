@@ -80,7 +80,7 @@ services:
       - ./openmrs-central/prod.my.cnf:/etc/mysql/my.cnf
       - ./openmrs-central/db/scripts:/home/scripts
       - ./openmrs-central/db/crons:/home/crons
-      - $docker_containers_shared_dir/shared/bkps/db:/home/shared/bkps/db
+      - $docker_containers_shared_dir/bkps/db:/home/shared/bkps/db
       - openmrsDbData:/var/lib/mysql
       - /etc/localtime:/etc/localtime
     restart: unless-stopped
