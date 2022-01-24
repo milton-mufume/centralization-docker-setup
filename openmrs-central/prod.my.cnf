@@ -5,6 +5,7 @@ innodb_log_buffer_size=256M
 innodb_log_file_size=1G
 innodb_write_io_threads=16
 innodb_flush_log_at_trx_commit=0
+innodb_lock_wait_timeout=10000
 max_allowed_packet=512M
 character-set-server=utf8
 character-set-client-handshake=FALSE

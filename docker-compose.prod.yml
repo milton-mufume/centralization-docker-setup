@@ -88,23 +88,23 @@ services:
   openmrs-central:
     image: tomcat:7.0.109-jdk8-openjdk-slim
     container_name: openmrs-central
-    depends_on:
-      - mysql-central
+    #depends_on:
+    #- mysql-central
     volumes:
       - ./openmrs-central/setenv.sh:/usr/local/tomcat/bin/setenv.sh
       - ./openmrs-central/run.prod.sh:/usr/local/tomcat/bin/run_openmrs.sh
       - ./openmrs-central/init.prod.sh:/usr/local/tomcat/bin/init.sh
       - ./openmrs-central/install_opencr_cert.exp:/usr/local/tomcat/bin/install_opencr_cert.exp
       - /etc/localtime:/etc/localtime
-      - $docker_containers_shared_dir/conf/openmrs/central/openmrs-runtime.properties:/root/.OpenMRS/openmrs-runtime.properties
-      - $docker_containers_shared_dir/conf/openmrs/central/openmrs.p12:/root/.OpenMRS/mpi/config/openmrs.p12
+      - $docker_containers_shared_dir/conf/openmrs/central/openmrs-runtime.properties:/usr/local/tomcat/openmrs-runtime.properties
+      - $docker_containers_shared_dir/conf/openmrs/central/openmrs.p12:/usr/local/tomcat/.OpenMRS/mpi/config/openmrs.p12
       - $docker_containers_shared_dir/openmrs/tomcat/webapps:/usr/local/tomcat/webapps/  
-      - $docker_containers_shared_dir/debezium:/root/.OpenMRS/config/debezium
-      - ./openmrs-common/modules/legacyui-1.8.2.omod:/root/.OpenMRS/modules/legacyui.omod
-      - ./openmrs-common/modules/owa-1.12.0.omod:/root/.OpenMRS/modules/owa.omod
-      - ./openmrs-common/modules/webservices.rest-2.30.0.omod:/root/.OpenMRS/modules/webservices.rest.omod
-      - ./openmrs-central/modules/debezium-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/debezium.omod
-      - ./openmrs-central/modules/mpi-1.0.0-SNAPSHOT.omod:/root/.OpenMRS/modules/mpi.omod
+      - $docker_containers_shared_dir/debezium:/usr/local/tomcat/.OpenMRS/config/debezium
+      - ./openmrs-common/modules/legacyui-1.8.2.omod:/usr/local/tomcat/.OpenMRS/.OpenMRS/modules/legacyui.omod
+      - ./openmrs-common/modules/owa-1.12.0.omod:/usr/local/tomcat/.OpenMRS/modules/owa.omod
+      - ./openmrs-common/modules/webservices.rest-2.30.0.omod:/usr/local/tomcat/.OpenMRS/modules/webservices.rest.omod
+      - ./openmrs-central/modules/debezium-1.0.0-SNAPSHOT.omod:/usr/local/tomcat/.OpenMRS/modules/debezium.omod
+      - ./openmrs-central/modules/mpi-1.0.0-SNAPSHOT.omod:/usr/local/tomcat/.OpenMRS/modules/mpi.omod
     ports:
       - "58080:8080"
     entrypoint: [ "sh", "/usr/local/tomcat/bin/run_openmrs.sh" ]
