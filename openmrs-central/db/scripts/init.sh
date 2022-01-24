@@ -13,9 +13,9 @@ echo "Starting cron"
 
 service cron start
 
-echo "Starting mysql"
+#echo "Starting mysql"
 
-/home/scripts/run.sh
+#/home/scripts/run.sh
 #crond -f -l 8
 #echo "Crond finished"
 

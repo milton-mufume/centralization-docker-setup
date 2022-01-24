@@ -71,7 +71,7 @@ services:
   mysql-central:
     image: mysql:5.6
     container_name: mysql-central
-    command: /home/scripts/init.sh
+    #command: /home/scripts/init.sh
     env_file:
       - $docker_containers_shared_dir/conf/openmrs/central/db.env
     ports:
@@ -80,6 +80,7 @@ services:
       - ./openmrs-central/prod.my.cnf:/etc/mysql/my.cnf
       - ./openmrs-central/db/scripts:/home/scripts
       - ./openmrs-central/db/crons:/home/crons
+      - ./openmrs-central/db/scripts/init.sh:/docker-entrypoint-initdb.d/init.sh
       - $docker_containers_shared_dir/bkps/db:/home/shared/bkps/db
       - openmrsDbData:/var/lib/mysql
       - /etc/localtime:/etc/localtime
