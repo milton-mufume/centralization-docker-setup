@@ -71,7 +71,7 @@ services:
   mysql-central:
     image: mysql:5.6
     container_name: mysql-central
-    #command: /home/scripts/init.sh
+    command: /home/scripts/init.sh
     env_file:
       - $docker_containers_shared_dir/conf/openmrs/central/db.env
     ports:
@@ -89,8 +89,8 @@ services:
   openmrs-central:
     image: tomcat:7.0.109-jdk8-openjdk-slim
     container_name: openmrs-central
-    #depends_on:
-    #- mysql-central
+    depends_on:
+      - mysql-central
     volumes:
       - ./openmrs-central/setenv.sh:/usr/local/tomcat/bin/setenv.sh
       - ./openmrs-central/run.prod.sh:/usr/local/tomcat/bin/run_openmrs.sh
