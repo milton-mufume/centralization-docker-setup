@@ -8,7 +8,7 @@ HOME_DIR=/home
 #The database type can be "openmrs" "mgt"
 DATABASE_TYPE=$1
 
-BKPS_DIR=$HOME_DIR/shared/bkps/$DATABASE_TYPE
+BKPS_DIR=$HOME_DIR/shared/bkps/db/$DATABASE_TYPE
 BKPS_TO_BE_PRESERVED_DIR=$HOME_DIR/tmp/$DATABASE_TYPE/to_be_preserved
 timestamp=`date +%Y-%m-%d_%H-%M-%S`
 LOG_DIR=$HOME_DIR/shared/logs/db/bkp/$DATABASE_TYPE
@@ -30,7 +30,7 @@ fi
 #MOVE THE NEWER FILES TO TEMPORARY FOLDER
 echo "MOVING FILES TO TEMPORARY DIRECTORY FOR FILES TO BE PRESERVED" | tee -a $LOG_DIR/bkps_cleanup.log
 
-find $BKPS_DIR -type f -name '*.gz' -mtime -5 -size +1M -exec mv {} $BKPS_TO_BE_PRESERVED_DIR \;
+find $BKPS_DIR -type f -name '*.gz' -mtime -2 -size +1M -exec mv {} $BKPS_TO_BE_PRESERVED_DIR \;
 #find $BKPS_DIR -type f -name '*.gz' -mmin -2 -exec mv {} $BKPS_TO_BE_PRESERVED_DIR \;
 
 

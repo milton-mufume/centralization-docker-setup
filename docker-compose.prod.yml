@@ -68,9 +68,9 @@ services:
     entrypoint: [ "sh", "run.sh" ]
     restart: unless-stopped
 
-  mysql-central:
+  mysql-openmrs-central:
     image: mysql:5.6
-    container_name: mysql-central
+    container_name: mysql-openmrs-central
     command: /home/scripts/init.sh
     env_file:
       - $docker_containers_shared_dir/conf/openmrs/central/db.env
@@ -80,9 +80,25 @@ services:
       - ./openmrs-central/prod.my.cnf:/etc/mysql/my.cnf
       - ./openmrs-central/db/scripts:/home/scripts
       - ./openmrs-central/db/crons:/home/crons
-      - ./openmrs-central/db/scripts/init.sh:/docker-entrypoint-initdb.d/init.sh
-      - $docker_containers_shared_dir/bkps/db:/home/shared/bkps/db
+      - $docker_containers_shared_dir/bkps/db/openmrs:/home/shared/bkps/db/openmrs
       - openmrsDbData:/var/lib/mysql
+      - /etc/localtime:/etc/localtime
+        #- ./openmrs-central/db/scripts/init.sh:/docker-entrypoint-initdb.d/init.sh
+    restart: unless-stopped
+  mysql-dbsync-central:
+    image: mysql:5.6
+    container_name: mysql-dbsync-central
+    command: /home/scripts/init.sh
+    env_file:
+      - $docker_containers_shared_dir/conf/eip/mgt-db.env
+    ports:
+      - "58000:3306"
+    volumes:
+      - ./dbsync-central/mgt-db/prod.my.cnf:/etc/mysql/my.cnf
+      - ./dbsync-central/mgt-db/scripts:/home/scripts
+      - ./dbsync-central/mgt-db/crons:/home/crons
+      - $docker_containers_shared_dir/bkps/db/mgt:/home/shared/bkps/db/mgt
+      - dbSyncCentralDbData:/var/lib/mysql
       - /etc/localtime:/etc/localtime
     restart: unless-stopped
 
@@ -90,7 +106,7 @@ services:
     image: tomcat:7.0.109-jdk8-openjdk-slim
     container_name: openmrs-central
     depends_on:
-      - mysql-central
+      - mysql-openmrs-central
     volumes:
       - ./openmrs-central/setenv.sh:/usr/local/tomcat/bin/setenv.sh
       - ./openmrs-central/run.prod.sh:/usr/local/tomcat/bin/run_openmrs.sh
@@ -120,7 +136,8 @@ services:
     volumes:
       - $docker_containers_shared_dir/conf/artemis/artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
       - $docker_containers_shared_dir/conf/artemis/artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
-      - artemisData:/var/lib/artemis
+      - artemisData:/var/lib/artemis/data/
+        #- $docker_containers_shared_dir/data/artemis:/var/lib/artemis
       - /etc/localtime:/etc/localtime
     restart: unless-stopped
 
@@ -133,7 +150,7 @@ services:
       - home_dir=/home/eip
       - shared_dir=/home/eip/shared
     depends_on:
-      - mysql-central
+      - mysql-dbsync-central
       - openmrs-central
       - artemis
     ports:
@@ -157,5 +174,7 @@ volumes:
     driver: local
   openmrsDbData:
     external: true 
+  dbSyncCentralDbData: 
+    driver: local
   artemisData:
     driver: local

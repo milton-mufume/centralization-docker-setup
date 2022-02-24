@@ -136,7 +136,21 @@
                             "valueString": "identifier.where(system='urn:uuid:e2b966d0-1d5f-11e0-b929-000c29ad1d07').value"
                         }
                     ]
+                },
+		{
+                    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+                    "extension": [
+                        {
+                            "url": "label",
+                            "valueString": "bi"
+                        },
+                        {
+                            "url": "name",
+                            "valueString": "identifier.where(system='urn:uuid:e2b9682e-1d5f-11e0-b929-000c29ad1d07').value"
+                        }
+                    ]
                 }
+
             ]
         }
     ],
