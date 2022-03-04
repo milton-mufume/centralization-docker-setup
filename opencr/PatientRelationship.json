@@ -77,63 +77,11 @@
                     "extension": [
                         {
                             "url": "label",
-                            "valueString": "fullname"
-                        },
-                        {
-                            "url": "name",
-                            "valueString": "name.where(use='official').last().text"
-                        }
-                    ]
-                },
-                {
-                    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
-                    "extension": [
-                        {
-                            "url": "label",
-                            "valueString": "phone"
-                        },
-                        {
-                            "url": "name",
-                            "valueString": "telecom.where(system='phone').value"
-                        }
-                    ]
-                },
-                {
-                    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
-                    "extension": [
-                        {
-                            "url": "label",
-                            "valueString": "nationalid"
-                        },
-                        {
-                            "url": "name",
-                            "valueString": "identifier.where(system='http://clientregistry.org/nationalid').last().value"
-                        }
-                    ]
-                },
-                {
-                    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
-                    "extension": [
-                        {
-                            "url": "label",
-                            "valueString": "art"
-                        },
-                        {
-                            "url": "name",
-                            "valueString": "identifier.where(system='http://clientregistry.org/artnumber').value"
-                        }
-                    ]
-                },
-                {
-                    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
-                    "extension": [
-                        {
-                            "url": "label",
                             "valueString": "nid"
                         },
                         {
                             "url": "name",
-                            "valueString": "identifier.where(system='urn:uuid:15a3fd64-1d5f-11e0-b929-000c29ad1d08').value"
+                            "valueString": "identifier.where(type.coding.last().code='ND').value"
                         }
                     ]
                 }

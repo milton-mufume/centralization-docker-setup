@@ -49,7 +49,7 @@
     "CRBaseURI": "http://openclientregistry.org/fhir",
     "internalid": {
       "uri": [
-        "http://openmrs.org/uuid"
+        "http://test.id.com"
       ],
       "displayName": "OpenMRS UUID"
     },
@@ -63,7 +63,7 @@
     },
     "oldIdNumber": {
       "uri": "urn:uuid:8d79403a-c2cc-11de-8d13-0010c6dffd0f",
-      "displayName": "OpenMR OLD ID"
+      "displayName": "OpenMRS OLD ID"
     },
     "brokenMatch": {
       "uri": "http://clientregistry.org/brokenMatch"
