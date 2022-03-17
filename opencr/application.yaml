@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: 'jdbc:mysql://mysql-opencr:3306/opencr_testing_02?createDatabaseIfNotExist=true'
+    url: 'jdbc:mysql://mysql-opencr:3306/opencr_testing_04?createDatabaseIfNotExist=true'
           #url: 'jdbc:mysql://mysql-opencr:3306/opencr?createDatabaseIfNotExist=true'
     username: opencr
     password: opencr
