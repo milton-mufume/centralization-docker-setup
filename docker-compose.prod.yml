@@ -57,10 +57,10 @@ services:
       - NODE_ENV=production
       - HAPI_FHIR_URL=http://hapi-fhir:8080/fhir/metadata
     volumes:
-      - $docker_containers_shared_dir/conf/opencr/config_production.json:/src/server/config/config_production.json
+      - $docker_containers_shared_dir/conf/opencr/config_production.json:/src/server/config/config_docker.json
       - $docker_containers_shared_dir/conf/opencr/admin.OCRUser.json:/src/resources/ResourcesData/admin.OCRUser.json
-      - ./opencr/decisionRules.json:/src/server/config/decisionRules.json
-      - ./opencr/PatientRelationship.json:/src/resources/Relationships/PatientRelationship.json
+      - ./opencr/decisionRules_prodution.json:/src/server/config/decisionRules.json
+      - ./opencr/PatientRelationship_production.json:/src/resources/Relationships/PatientRelationship.json
       - ./opencr/custom/app.js:/src/server/lib/app.js
       - ./opencr/custom/fhir.js:/src/server/lib/routes/fhir.js
       - ./opencr/run.sh:/src/server/run.sh
