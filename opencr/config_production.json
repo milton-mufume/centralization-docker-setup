@@ -59,7 +59,7 @@
             "displayName": "National ID"
         },
         "nid": {
-            "uri": "urn:uuid:CHANGE-IT",
+            "uri": "CHANGE-IT",
             "displayName": "NID"
         },
         "brokenMatch": {

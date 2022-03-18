@@ -49,20 +49,20 @@
     "CRBaseURI": "http://openclientregistry.org/fhir",
     "internalid": {
       "uri": [
-        "http://test.id.com"
+        "http://test.id.com/uuid"
       ],
-      "displayName": "OpenMRS UUID"
+      "displayName": "Internal ID"
     },
     "nationalid": {
       "uri": "http://clientregistry.org/nationalid",
       "displayName": "National ID"
     },
     "nid": {
-      "uri": "urn:uuid:15a3fd64-1d5f-11e0-b929-000c29ad1d08",
+      "uri": "http://test.id.com/nid",
       "displayName": "NID"
     },
     "oldIdNumber": {
-      "uri": "urn:uuid:8d79403a-c2cc-11de-8d13-0010c6dffd0f",
+      "uri": "http://test.id.com/openmrs-old-id",
       "displayName": "OpenMRS OLD ID"
     },
     "brokenMatch": {
