@@ -20,7 +20,7 @@ services:
     depends_on:
       - mysql-opencr
     ports:
-      - "8181:8080"
+      - "58383:8080"
     environment:
       spring.config.location: 'file:///user/share/hapi-fhir/application.yaml'
     volumes:
@@ -119,7 +119,12 @@ services:
       - $docker_containers_shared_dir/debezium:/usr/local/tomcat/.OpenMRS/config/debezium
       - ./openmrs-common/modules/legacyui-1.8.2.omod:/usr/local/tomcat/.OpenMRS/modules/legacyui.omod
       - ./openmrs-common/modules/owa-1.12.0.omod:/usr/local/tomcat/.OpenMRS/modules/owa.omod
-      - ./openmrs-common/modules/webservices.rest-2.30.0.omod:/usr/local/tomcat/.OpenMRS/modules/webservices.rest.omod
+      - ./openmrs-common/modules/webservices.rest-2.36.0.omod:/usr/local/tomcat/.OpenMRS/modules/webservices.rest.omod
+      - ./openmrs-common/modules/eptsreports-1.16.0.omod:/usr/local/tomcat/.OpenMRS/modules/eptsreports.omod
+      - ./openmrs-common/modules/serialization.xstream-0.2.14.omod:/usr/local/tomcat/.OpenMRS/modules/serialization.xstream.omod
+      - ./openmrs-common/modules/calculation-1.2.1.omod:/usr/local/tomcat/.OpenMRS/modules/calculation.omod
+      - ./openmrs-common/modules/htmlwidgets-1.10.0.omod:/usr/local/tomcat/.OpenMRS/modules/htmlwidgets.omod
+      - ./openmrs-common/modules/reporting-1.21.0.omod:/usr/local/tomcat/.OpenMRS/modules/reporting.omod       
       - ./openmrs-central/modules/debezium-1.0.0-SNAPSHOT.omod:/usr/local/tomcat/.OpenMRS/modules/debezium.omod
       - ./openmrs-central/modules/mpi-1.0.0-SNAPSHOT.omod:/usr/local/tomcat/.OpenMRS/modules/mpi.omod
     ports:

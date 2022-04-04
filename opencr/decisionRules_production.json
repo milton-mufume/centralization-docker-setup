@@ -10,7 +10,7 @@
             "fields": {
                 "nid": {
                     "algorithm": "exact",
-                    "fhirpath": "identifier.where(type.coding.last().code='NID_TARV').value",
+                    "fhirpath": "identifier.where(system='http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nid-tarv').value",
                     "espath": "nid",
                     "nullHandling": "conservative"
                 },
@@ -47,7 +47,7 @@
             "autoMatchThreshold": 5,
             "filters": {
                 "nid": {
-                    "fhirpath": "identifier.where(type.coding.last().code='NID_TARV').value",
+                    "fhirpath": "identifier.where(system='http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nid-tarv').value",
                     "espath": "nid"
                 }
             }
@@ -62,7 +62,7 @@
             "fields": {
                 "nid": {
                     "algorithm": "exact",
-                    "fhirpath": "identifier.where(type.coding.last().code='NID_TARV').value",
+                    "fhirpath": "identifier.where(system='http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nid-tarv').value",
                     "espath": "nid",
                     "nullHandling": "conservative"
                 },

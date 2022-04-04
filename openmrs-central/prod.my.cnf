@@ -11,7 +11,7 @@ character-set-server=utf8
 character-set-client-handshake=FALSE
 collation-server=utf8_general_ci
 datadir=/var/lib/mysql
-max_connections = 1000
+max_connections = 10000
 #MYSQL BIN-LOGS
 log-bin=mysql-bin.log
 binlog_format=row

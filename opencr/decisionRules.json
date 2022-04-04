@@ -10,7 +10,7 @@
             "fields": {
                 "nid": {
                     "algorithm": "exact",
-                    "fhirpath": "identifier.where(type.coding.last().code='ND').value",
+                    "fhirpath": "identifier.where(system='http://test.id.com/nid').value",
                     "espath": "nid",
                     "nullHandling": "conservative"
                 },
@@ -47,7 +47,7 @@
             "autoMatchThreshold": 5,
             "filters": {
                 "nid": {
-                    "fhirpath": "identifier.where(type.coding.last().code='ND').value",
+                    "fhirpath": "identifier.where(system='http://test.id.com/nid').value",
                     "espath": "nid"
                 }
             }
@@ -62,7 +62,7 @@
             "fields": {
                 "nid": {
                     "algorithm": "exact",
-                    "fhirpath": "identifier.where(type.coding.last().code='ND').value",
+                    "fhirpath": "identifier.where(system='http://test.id.com/nid').value",
                     "espath": "nid",
                     "nullHandling": "conservative"
                 },

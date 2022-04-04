@@ -81,7 +81,7 @@
                         },
                         {
                             "url": "name",
-                            "valueString": "identifier.where(type.coding.last().code='NID_TARV').value"
+                            "valueString": "identifier.where(system='http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nid-tarv').value"
                         }
                     ]
                 }

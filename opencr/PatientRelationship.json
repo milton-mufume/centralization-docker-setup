@@ -81,7 +81,7 @@
                         },
                         {
                             "url": "name",
-                            "valueString": "identifier.where(type.coding.last().code='ND').value"
+                            "valueString": "identifier.where(system='http://test.id.com/nid').value"
                         }
                     ]
                 }
