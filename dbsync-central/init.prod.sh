@@ -33,6 +33,11 @@ cp -R $EIP_SETUP_STUFF_DIR/* $HOME_DIR/
 echo "COPYING DOCKER PROJECT TO EIP DIR"
 cp -R $SETUP_MAIN_PROJECT_DIR $HOME_DIR
 
+
+echo "Downloading $OPENMRS_EIP_APP_RELEASE_URL to $HOME_DIR/openmrs-eip-app.jar"
+wget -O "$HOME_DIR/openmrs-eip-app.jar" $OPENMRS_EIP_APP_RELEASE_URL
+
+
 echo "ALL FILES WERE COPIED"
 
 $SCRIPTS_DIR/apk_install.sh
