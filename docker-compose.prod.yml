@@ -47,7 +47,7 @@ services:
 
   opencr:
     container_name: opencr
-    image: intrahealth/opencr
+    image: intrahealth/opencr:76efe76
     ports:
       - "53000:3000"
     depends_on:
