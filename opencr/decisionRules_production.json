@@ -12,35 +12,36 @@
                     "algorithm": "exact",
                     "fhirpath": "identifier.where(system='http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nid-tarv').value",
                     "espath": "nid",
-                    "nullHandling": "conservative"
+                    "nullHandling": "conservative",
+                    "nullHandlingBothFields": "conservative"
                 },
                 "gender": {
                     "algorithm": "exact",
                     "fhirpath": "gender",
                     "espath": "gender",
                     "nullHandling": "conservative",
-                    "nullHandlingBothFields": "greedy"
+                    "nullHandlingBothFields": "conservative"
                 },
                 "birthDate": {
                     "algorithm": "exact",
                     "fhirpath": "birthDate",
                     "espath": "birthDate",
                     "nullHandling": "conservative",
-                    "nullHandlingBothFields": "greedy"
+                    "nullHandlingBothFields": "conservative"
                 },
                 "given": {
                     "algorithm": "exact",
                     "fhirpath": "name.where(use='official').given",
                     "espath": "given",
                     "nullHandling": "conservative",
-                    "nullHandlingBothFields": "greedy"
+                    "nullHandlingBothFields": "conservative"
                 },
                 "family": {
                     "algorithm": "exact",
                     "fhirpath": "name.where(use='official').family",
                     "espath": "family",
                     "nullHandling": "conservative",
-                    "nullHandlingBothFields": "greedy"
+                    "nullHandlingBothFields": "conservative"
                 }
             },
             "potentialMatchThreshold": 3,
@@ -48,7 +49,9 @@
             "filters": {
                 "nid": {
                     "fhirpath": "identifier.where(system='http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nid-tarv').value",
-                    "espath": "nid"
+                    "espath": "nid",
+		    "nullHandling": "conservative",
+                    "nullHandlingBothFields": "conservative"
                 }
             }
         },
