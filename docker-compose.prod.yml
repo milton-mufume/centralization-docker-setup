@@ -117,6 +117,8 @@ services:
       - $docker_containers_shared_dir/conf/openmrs/central/openmrs.p12:/usr/local/tomcat/.OpenMRS/mpi/config/openmrs.p12
       - $docker_containers_shared_dir/openmrs/tomcat/webapps:/usr/local/tomcat/webapps/  
       - $docker_containers_shared_dir/debezium:/usr/local/tomcat/.OpenMRS/config/debezium
+      - $docker_containers_shared_dir/openmrs/data:/usr/local/tomcat/.OpenMRS
+      - $docker_containers_shared_dir/openmrs/data/hl7:/usr/local/tomcat/.OpenMRS/hl7
       - ./openmrs-common/modules/legacyui-1.8.2.omod:/usr/local/tomcat/.OpenMRS/modules/legacyui.omod
       - ./openmrs-common/modules/owa-1.12.0.omod:/usr/local/tomcat/.OpenMRS/modules/owa.omod
       - ./openmrs-common/modules/webservices.rest-2.36.0.omod:/usr/local/tomcat/.OpenMRS/modules/webservices.rest.omod
