@@ -116,8 +116,8 @@ services:
       - $docker_containers_shared_dir/conf/openmrs/central/openmrs-runtime.properties:/usr/local/tomcat/openmrs-runtime.properties
       - $docker_containers_shared_dir/conf/openmrs/central/openmrs.p12:/usr/local/tomcat/.OpenMRS/mpi/config/openmrs.p12
       - $docker_containers_shared_dir/openmrs/tomcat/webapps:/usr/local/tomcat/webapps/  
-      - $docker_containers_shared_dir/debezium:/usr/local/tomcat/.OpenMRS/config/debezium
       - $docker_containers_shared_dir/openmrs/data:/usr/local/tomcat/.OpenMRS
+      - $docker_containers_shared_dir/debezium:/usr/local/tomcat/.OpenMRS/config/debezium
       - $docker_containers_shared_dir/openmrs/data/hl7:/usr/local/tomcat/.OpenMRS/hl7
       - ./openmrs-common/modules/legacyui-1.8.2.omod:/usr/local/tomcat/.OpenMRS/modules/legacyui.omod
       - ./openmrs-common/modules/owa-1.12.0.omod:/usr/local/tomcat/.OpenMRS/modules/owa.omod
@@ -144,7 +144,6 @@ services:
       - $docker_containers_shared_dir/conf/artemis/artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
       - $docker_containers_shared_dir/conf/artemis/artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
       - artemisData:/var/lib/artemis/data/
-        #- $docker_containers_shared_dir/data/artemis:/var/lib/artemis
       - /etc/localtime:/etc/localtime
     restart: unless-stopped
 
