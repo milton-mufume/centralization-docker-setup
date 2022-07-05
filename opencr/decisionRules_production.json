@@ -12,72 +12,32 @@
                     "algorithm": "exact",
                     "fhirpath": "identifier.where(system='http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nid-tarv').value",
                     "espath": "nid",
-                    "nullHandling": "conservative",
-                    "nullHandlingBothFields": "conservative"
-                },
-                "gender": {
-                    "algorithm": "exact",
-                    "fhirpath": "gender",
-                    "espath": "gender",
-                    "nullHandling": "conservative",
-                    "nullHandlingBothFields": "conservative"
-                },
-                "birthDate": {
-                    "algorithm": "exact",
-                    "fhirpath": "birthDate",
-                    "espath": "birthDate",
-                    "nullHandling": "conservative",
-                    "nullHandlingBothFields": "conservative"
-                },
-                "given": {
-                    "algorithm": "exact",
-                    "fhirpath": "name.where(use='official').given",
-                    "espath": "given",
-                    "nullHandling": "conservative",
-                    "nullHandlingBothFields": "conservative"
-                },
-                "family": {
-                    "algorithm": "exact",
-                    "fhirpath": "name.where(use='official').family",
-                    "espath": "family",
-                    "nullHandling": "conservative",
-                    "nullHandlingBothFields": "conservative"
+                    "nullHandling": "conservative"
                 }
             },
-            "potentialMatchThreshold": 3,
-            "autoMatchThreshold": 5,
+            "potentialMatchThreshold": 1,
+	    "autoMatchThreshold": 3,
             "filters": {
                 "nid": {
                     "fhirpath": "identifier.where(system='http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nid-tarv').value",
-                    "espath": "nid",
-		    "nullHandling": "conservative",
-                    "nullHandlingBothFields": "conservative"
+                    "espath": "nid"
                 }
             }
         },
         {
-            "supported_algorithms": {
-                "elasticsearch": [
-                    "https://github.com/intrahealth/similarity-scoring"
-                ]
-            },
             "matchingType": "deterministic",
             "fields": {
-                "nid": {
-                    "algorithm": "exact",
-                    "fhirpath": "identifier.where(system='http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nid-tarv').value",
-                    "espath": "nid",
-                    "nullHandling": "conservative"
-                },
                 "given": {
-                    "algorithm": "exact",
+		    "algorithm": "jaro-winkler-similarity",
+		    "threshold": 0.97,
                     "fhirpath": "name.where(use='official').given",
                     "espath": "given",
                     "nullHandling": "conservative",
                     "nullHandlingBothFields": "greedy"
                 },
                 "family": {
-                    "algorithm": "exact",
+	            "algorithm": "jaro-winkler-similarity",
+                    "threshold": 0.97,
                     "fhirpath": "name.where(use='official').family",
                     "espath": "family",
                     "nullHandling": "conservative",

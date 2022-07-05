@@ -55,5 +55,9 @@ else
 
 fi
 
+echo 'my.cnf content'
+
+cat /etc/mysql/my.cnf
+
 echo 'Starting server'
 exec /usr/sbin/mysqld --user=root --console

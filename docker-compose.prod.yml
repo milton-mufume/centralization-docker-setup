@@ -6,9 +6,9 @@ services:
     image: mysql:5.7.34
     container_name: mysql-opencr
     env_file:
-      - ./opencr/db.env
+      -  $docker_containers_shared_dir/conf/opencr/db.env
     ports:
-      - "3309:3306"
+      - "$port_mysql_opencr:3306"
     volumes:
       - ./opencr/my.cnf:/etc/mysql/my.cnf
       - opencrDbData:/var/lib/mysql
@@ -20,11 +20,11 @@ services:
     depends_on:
       - mysql-opencr
     ports:
-      - "58383:8080"
+      - "$port_hapi_fhir:8080"
     environment:
       spring.config.location: 'file:///user/share/hapi-fhir/application.yaml'
     volumes:
-      - ./opencr/application.yaml:/user/share/hapi-fhir/application.yaml
+      - $docker_containers_shared_dir/conf/opencr/application.yaml:/user/share/hapi-fhir/application.yaml
     restart: unless-stopped
 
   es:
@@ -42,14 +42,14 @@ services:
     volumes:
       - esData:/usr/share/elasticsearch/data
     ports:
-      - 9200:9200
+      - "$port_es:9200"
     restart: unless-stopped
 
   opencr:
     container_name: opencr
-    image: intrahealth/opencr:76efe76
+    image: intrahealth/opencr:beac58a
     ports:
-      - "53000:3000"
+      - "$port_opencr:3000"
     depends_on:
       - hapi-fhir
       - es
@@ -59,6 +59,7 @@ services:
     volumes:
       - $docker_containers_shared_dir/conf/opencr/config_production.json:/src/server/config/config_production.json
       - $docker_containers_shared_dir/conf/opencr/admin.OCRUser.json:/src/resources/ResourcesData/admin.OCRUser.json
+      - $docker_containers_shared_dir/conf/opencr/certificates/server:/src/server/serverCertificates/
       - ./opencr/decisionRules_production.json:/src/server/config/decisionRules.json
       - ./opencr/PatientRelationship_production.json:/src/resources/Relationships/PatientRelationship.json
       - ./opencr/custom/app.js:/src/server/lib/app.js
@@ -75,7 +76,7 @@ services:
     env_file:
       - $docker_containers_shared_dir/conf/openmrs/central/db.env
     ports:
-      - "53307:3306"
+      - "$port_mysql_openmrs_central:3306"
     volumes:
       - ./openmrs-central/prod.my.cnf:/etc/mysql/my.cnf
       - ./openmrs-central/db/scripts:/home/scripts
@@ -92,7 +93,7 @@ services:
     env_file:
       - $docker_containers_shared_dir/conf/eip/mgt-db.env
     ports:
-      - "58000:3306"
+      - "$port_mysql_dbsync_central:3306"
     volumes:
       - ./dbsync-central/mgt-db/prod.my.cnf:/etc/mysql/my.cnf
       - ./dbsync-central/mgt-db/scripts:/home/scripts
@@ -117,7 +118,6 @@ services:
       - $docker_containers_shared_dir/conf/openmrs/central/openmrs.p12:/usr/local/tomcat/.OpenMRS/mpi/config/openmrs.p12
       - $docker_containers_shared_dir/openmrs/tomcat/webapps:/usr/local/tomcat/webapps/  
       - $docker_containers_shared_dir/openmrs/data:/usr/local/tomcat/.OpenMRS
-      - $docker_containers_shared_dir/debezium:/usr/local/tomcat/.OpenMRS/config/debezium
       - $docker_containers_shared_dir/openmrs/data/hl7:/usr/local/tomcat/.OpenMRS/hl7
       - ./openmrs-common/modules/legacyui-1.8.2.omod:/usr/local/tomcat/.OpenMRS/modules/legacyui.omod
       - ./openmrs-common/modules/owa-1.12.0.omod:/usr/local/tomcat/.OpenMRS/modules/owa.omod
@@ -130,7 +130,7 @@ services:
       - ./openmrs-central/modules/debezium-1.0.0-SNAPSHOT.omod:/usr/local/tomcat/.OpenMRS/modules/debezium.omod
       - ./openmrs-central/modules/mpi-1.0.0-SNAPSHOT.omod:/usr/local/tomcat/.OpenMRS/modules/mpi.omod
     ports:
-      - "58080:8080"
+      - "$port_openmrs_central:8080"
     entrypoint: [ "sh", "/usr/local/tomcat/bin/run_openmrs.sh" ]
     restart: unless-stopped
 
@@ -138,8 +138,8 @@ services:
     image: cnocorch/activemq-artemis
     container_name: artemis
     ports:
-      - "51616:61616"
-      - "58161:8161"
+      - "$port_artemis_brocker:61616"
+      - "$port_artemis_console:8161"
     volumes:
       - $docker_containers_shared_dir/conf/artemis/artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
       - $docker_containers_shared_dir/conf/artemis/artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
@@ -160,7 +160,7 @@ services:
       - openmrs-central
       - artemis
     ports:
-      - "58081:8081"
+      - "$port_dbsync_console:8081"
     volumes:
       - $docker_containers_shared_dir/conf/eip/dbsync-users.properties:/home/eip/dbsync-users.properties
       - $docker_containers_shared_dir:/home/eip/shared
