@@ -179,7 +179,7 @@ volumes:
   esData:
     driver: local
   openmrsDbData:
-    external: true 
+    driver: local 
   dbSyncCentralDbData: 
     driver: local
   artemisData:
