@@ -45,6 +45,6 @@ else
 fi
 
 echo "STARTING BACKUP OF $DATABASE database" | tee  -a $LOG_DIR/bkps.log
-/usr/bin/mysqldump -u root --password=$MYSQL_ROOT_PASSWORD $DATABASE | gzip > $BKPS_HOME/$DB_BKP_FILE 
+/usr/bin/mysqldump -u root --password=$MYSQL_ROOT_PASSWORD $DATABASE 2> /dev/null | gzip > $BKPS_HOME/$DB_BKP_FILE 
 echo "BACKUP FINISHED" | tee  -a $LOG_DIR/bkps.log
 
