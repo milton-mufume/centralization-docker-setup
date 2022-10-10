@@ -18,6 +18,9 @@
         <setProperty name="site">
             <simple>${body.site}</simple>
         </setProperty>
+        <setProperty name="date-sent-by-sender">
+            <simple>${body.dateSentBySender}</simple>
+        </setProperty>
         <setBody>
             <method beanType="org.openmrs.eip.component.utils.JsonUtils" method="unmarshalSyncModel(${body.entityPayload})" />
         </setBody>
@@ -55,8 +58,6 @@
         </setBody>
 
         <toD uri="direct:{{message.destination}}" />
-
-        <log message="Done processing message" />
 
         <log loggingLevel="DEBUG" message="End: ${routeId}" />
 

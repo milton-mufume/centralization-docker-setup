@@ -11,7 +11,7 @@
         <choice>
             <when>
                 <simple>${body.size()} > 0</simple>
-                <log message="Fetched ${body.size()} sync requests" />
+                <log message="Fetched ${body.size()} sync request(s)" />
 
                 <split parallelProcessing="false">
                     <simple>${body}</simple>
@@ -32,7 +32,7 @@
 
                     <log message="Sending sync request -> ${body}" />
 
-                    <toD uri="activemq:openmrs.sync.request.${exchangeProperty.syncRequest.site.identifier}" />
+                    <toD uri="activemq:openmrs.sync.${exchangeProperty.syncRequest.site.identifier}" />
 
                     <log message="Request sent! Updating request status to sent" />
 
