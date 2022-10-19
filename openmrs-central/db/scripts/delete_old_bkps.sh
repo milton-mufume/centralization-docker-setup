@@ -3,7 +3,8 @@
 #
 
 # Set environment.
-HOME_DIR=/home
+#HOME_DIR=/home
+HOME_DIR="/home/eip/prg/docker/centralization-docker-setup/openmrs-central/db/scripts/testing"
 
 #The database type can be "openmrs" "mgt"
 DATABASE_TYPE=$1
@@ -26,30 +27,34 @@ if [ ! -d "$BKPS_TO_BE_PRESERVED_DIR" ]; then
    echo "$timestamp THE TEMPORARY DIRECTORY FOR FILES TO BE PRESERVED($BKPS_TO_BE_PRESERVED_DIR) WAS CREATED" | tee -a $LOG_DIR/bkps_cleanup.log
 fi
 
+DAY=2
+MAX_DAY=365
+MIN_FILES_TO_BE_PRESERVED=2
+QTY_RECORDS_TO_BE_PRESERVED=0
 
-#MOVE THE NEWER FILES TO TEMPORARY FOLDER
-echo "MOVING FILES TO TEMPORARY DIRECTORY FOR FILES TO BE PRESERVED" | tee -a $LOG_DIR/bkps_cleanup.log
+while [ "$QTY_RECORDS_TO_BE_PRESERVED" -le "$MIN_FILES_TO_BE_PRESERVED" ] && [ "$DAY" -le "$MAX_DAY" ]
+do
+        #MOVE THE NEWER FILES TO TEMPORARY FOLDER
+        echo "TRYING TO MOVE LESS THAT $DAY FILES TO TEMPORARY DIRECTORY FOR FILES TO BE PRESERVED" | tee -a $LOG_DIR/bkps_cleanup.log
 
-find $BKPS_DIR -type f -name '*.gz' -mtime -2 -size +1M -exec mv {} $BKPS_TO_BE_PRESERVED_DIR \;
-#find $BKPS_DIR -type f -name '*.gz' -mmin -2 -exec mv {} $BKPS_TO_BE_PRESERVED_DIR \;
+        find $BKPS_DIR -type f -name '*.gz' -mtime -$DAY -size +1M -exec mv {} $BKPS_TO_BE_PRESERVED_DIR \;
 
+        QTY_RECORDS_TO_BE_PRESERVED=$(ls $BKPS_TO_BE_PRESERVED_DIR/ | wc -l)
 
-QTY_RECORDS_TO_BE_PRESERVED=$(ls $BKPS_TO_BE_PRESERVED_DIR/ | wc -l)
+        DAY=$((DAY+1))
+done
 
 echo "$timestamp $QTY_RECORDS_TO_BE_PRESERVED RECORDS WILL BE PRESERVED!" | tee -a $LOG_DIR/bkps_cleanup.log
 
-if [ "$QTY_RECORDS_TO_BE_PRESERVED" -gt 2 ]; then
-	echo "$timestamp REMOVING OLDER BKPS..." | tee -a $LOG_DIR/bkps_cleanup.log
-	rm $BKPS_DIR/*.gz
-	echo "$timestamp OLDER BKPS REMOVED" | tee -a $LOG_DIR/bkps_cleanup.log
+if [ "$QTY_RECORDS_TO_BE_PRESERVED" -ge "$MIN_FILES_TO_BE_PRESERVED" ]; then
+        echo "$timestamp REMOVING OLDER BKPS..." | tee -a $LOG_DIR/bkps_cleanup.log
+        rm $BKPS_DIR/*.gz
+        echo "$timestamp OLDER BKPS REMOVED" | tee -a $LOG_DIR/bkps_cleanup.log
 else
-	echo "$timestamp THE NUMBER OF FILES TO BE PRESERVED IS LESS THAT 2. THE REMOTION WILL BE SKIPPED" | tee -a $LOG_DIR/bkps_cleanup.log
+        echo "$timestamp THE NUMBER OF FILES TO BE PRESERVED IS LESS THAT 2. THE REMOTION WILL BE SKIPPED" | tee -a $LOG_DIR/bkps_cleanup.log
 fi
 
 mv $BKPS_TO_BE_PRESERVED_DIR/* $BKPS_DIR/
 rm -fr $BKPS_TO_BE_PRESERVED_DIR
 
-
 echo "$timestamp THE CLEANUP OF OLDER FILES IS DONE!" | tee -a $LOG_DIR/arquive.log
-
-
