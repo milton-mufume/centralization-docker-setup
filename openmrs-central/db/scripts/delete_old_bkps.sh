@@ -3,8 +3,7 @@
 #
 
 # Set environment.
-#HOME_DIR=/home
-HOME_DIR="/home/eip/prg/docker/centralization-docker-setup/openmrs-central/db/scripts/testing"
+HOME_DIR=/home
 
 #The database type can be "openmrs" "mgt"
 DATABASE_TYPE=$1
@@ -35,7 +34,7 @@ QTY_RECORDS_TO_BE_PRESERVED=0
 while [ "$QTY_RECORDS_TO_BE_PRESERVED" -le "$MIN_FILES_TO_BE_PRESERVED" ] && [ "$DAY" -le "$MAX_DAY" ]
 do
         #MOVE THE NEWER FILES TO TEMPORARY FOLDER
-        echo "TRYING TO MOVE LESS THAT $DAY FILES TO TEMPORARY DIRECTORY FOR FILES TO BE PRESERVED" | tee -a $LOG_DIR/bkps_cleanup.log
+        echo "TRYING TO MOVE LESS THAT $DAY DAYS FILES TO TEMPORARY DIRECTORY FOR FILES TO BE PRESERVED" | tee -a $LOG_DIR/bkps_cleanup.log
 
         find $BKPS_DIR -type f -name '*.gz' -mtime -$DAY -size +1M -exec mv {} $BKPS_TO_BE_PRESERVED_DIR \;
 
