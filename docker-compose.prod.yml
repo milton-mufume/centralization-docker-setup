@@ -129,6 +129,8 @@ services:
       - ./openmrs-common/modules/reporting-1.21.0.omod:/usr/local/tomcat/.OpenMRS/modules/reporting.omod       
       - ./openmrs-central/modules/debezium-1.0.0-SNAPSHOT.omod:/usr/local/tomcat/.OpenMRS/modules/debezium.omod
       - ./openmrs-central/modules/mpi-1.0.0-SNAPSHOT.omod:/usr/local/tomcat/.OpenMRS/modules/mpi.omod
+      - ./openmrs-central/modules/formdataexport-1.0.0.omod:/usr/local/tomcat/.OpenMRS/modules/formdataexport.omod
+      - ./openmrs-central/modules/htmlformentry-3.13.1.omod:/usr/local/tomcat/.OpenMRS/modules/htmlformentry.omod
     ports:
       - "$port_openmrs_central:8080"
     entrypoint: [ "sh", "/usr/local/tomcat/bin/run_openmrs.sh" ]
@@ -175,12 +177,12 @@ services:
 
 volumes:
   opencrDbData:
-    driver: local
+    external: true
   esData:
-    driver: local
+    external: true
   openmrsDbData:
-    driver: local 
+    external: true 
   dbSyncCentralDbData: 
-    driver: local
+    external: true
   artemisData:
-    driver: local
+    external: true
