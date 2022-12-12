@@ -10,7 +10,7 @@ services:
     ports:
       - "$port_mysql_opencr:3306"
     volumes:
-      - ./opencr/my.cnf:/etc/mysql/my.cnf
+      - ./opencr/prod.my.cnf:/etc/mysql/my.cnf
       - opencrDbData:/var/lib/mysql
     restart: unless-stopped
 
@@ -142,10 +142,13 @@ services:
     ports:
       - "$port_artemis_brocker:61616"
       - "$port_artemis_console:8161"
+      - "$port_artemis_jmx_prometheus:9080"
     volumes:
       - $docker_containers_shared_dir/conf/artemis/artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
       - $docker_containers_shared_dir/conf/artemis/artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
       - $docker_containers_shared_dir/conf/artemis/broker.xml:/var/lib/artemis/etc/broker.xml
+	  - ./artemis/monitoring/jmx_prometheus_config.yml:/var/lib/artemis/etc/jmx_prometheus_config.yml
+	  - ./artemis/monitoring/jmx_prometheus_javaagent-0.17.2.jar:/var/lib/artemis/etc/jmx_prometheus_javaagent.jar
       - artemisData:/var/lib/artemis/data/
       - /etc/localtime:/etc/localtime
     restart: unless-stopped
