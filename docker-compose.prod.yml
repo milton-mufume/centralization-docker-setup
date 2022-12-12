@@ -147,8 +147,9 @@ services:
       - $docker_containers_shared_dir/conf/artemis/artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
       - $docker_containers_shared_dir/conf/artemis/artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
       - $docker_containers_shared_dir/conf/artemis/broker.xml:/var/lib/artemis/etc/broker.xml
-	  - ./artemis/monitoring/jmx_prometheus_config.yml:/var/lib/artemis/etc/jmx_prometheus_config.yml
-	  - ./artemis/monitoring/jmx_prometheus_javaagent-0.17.2.jar:/var/lib/artemis/etc/jmx_prometheus_javaagent.jar
+      - ./artemis/monitoring/jmx_prometheus_config.yml:/var/lib/artemis/etc/jmx_prometheus_config.yml
+      - ./artemis/monitoring/jmx_prometheus_javaagent-0.17.2.jar:/var/lib/artemis/etc/jmx_prometheus_javaagent.jar
+      - ./artemis/artemis:/var/lib/artemis/bin/artemis
       - artemisData:/var/lib/artemis/data/
       - /etc/localtime:/etc/localtime
     restart: unless-stopped
