@@ -1,0 +1,12 @@
+export docker_containers_shared_dir="/home/eip/shared"
+export port_mysql_opencr=3309
+export port_hapi_fhir=58381
+export port_es=9200
+export port_opencr=53000
+export port_mysql_openmrs_central=53307
+export port_mysql_dbsync_central=53308
+export port_openmrs_central=58080
+export port_artemis_console=58161
+export port_artemis_brocker=51616
+export port_dbsync_console=58081
+export port_artemis_jmx_prometheus=9080
