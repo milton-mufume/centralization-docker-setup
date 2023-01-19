@@ -16,10 +16,6 @@ character-set-client-handshake=FALSE
 collation-server=utf8_general_ci
 datadir=/var/lib/mysql
 max_connections = 10000
-#MYSQL BIN-LOGS
-log-bin=mysql-bin.log
-binlog_format=row
-server-id=3002
 
 skip-name-resolve=1
 tmp_table_size=64M
