@@ -89,7 +89,7 @@ services:
     ports:
       - "$port_mysql_dbsync_central:3306"
     volumes:
-      - ./mysql-dbsync-central/mgt-db/prod.my.cnf:/etc/mysql/my.cnf
+      - ./mysql-dbsync-central/prod.my.cnf:/etc/mysql/my.cnf
       - dbSyncCentralDbData:/var/lib/mysql
       - /etc/localtime:/etc/localtime
     restart: unless-stopped
