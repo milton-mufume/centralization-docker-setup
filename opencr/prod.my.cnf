@@ -1,13 +1,15 @@
 [mysqld]
-init_connect='SET collation_connection = utf8_general_ci; SET NAMES utf8'
+#This configurations assumes that the memory allocation for DB container is 24G
 
-innodb_buffer_pool_size=28G
+init_connect='SET collation_connection = utf8_general_ci; SET NAMES utf8'
+lower_case_table_names=1
+
+innodb_buffer_pool_size=16G
 innodb_log_buffer_size=8M
-innodb_log_file_size=7G
+innodb_log_file_size=2G
 innodb_write_io_threads=16
 innodb_flush_log_at_trx_commit=0
 innodb_lock_wait_timeout=30000
-
 innodb_buffer_pool_instances=16
 
 max_allowed_packet=512M
@@ -16,15 +18,11 @@ character-set-client-handshake=FALSE
 collation-server=utf8_general_ci
 datadir=/var/lib/mysql
 max_connections = 10000
-#MYSQL BIN-LOGS
-log-bin=mysql-bin.log
-binlog_format=row
-server-id=3002
 
 skip-name-resolve=1
 tmp_table_size=64M
 max_heap_table_size=64M
-key_buffer_size=8G
+key_buffer_size=4G
 
 [mysql]
 default-character-set=utf8
