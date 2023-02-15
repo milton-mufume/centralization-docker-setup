@@ -61,7 +61,7 @@ echo "STARTING BACKUP OF $DATABASE database" | tee  -a $LOG_DIR/bkps.log
 docker exec $CONTAINER_NAME bash -c "/usr/bin/mysqldump -u root --password=$MYSQL_ROOT_PASSWORD $DATABASE  2> /dev/null | gzip > $HOME_DIR/openmrs_db_$timestamp.sql.gz"
 
 docker cp $CONTAINER_NAME:$HOME_DIR/openmrs_db_$timestamp.sql.gz $BKPS_HOME
-docker exec $CONTAINER_NAME bash -c "rm $ $HOME_DIR/openmrs_db_$timestamp.sql.gz"
+docker exec $CONTAINER_NAME bash -c "rm $HOME_DIR/openmrs_db_$timestamp.sql.gz"
 
 echo "BACKUP FINISHED" | tee  -a $LOG_DIR/bkps.log
 
