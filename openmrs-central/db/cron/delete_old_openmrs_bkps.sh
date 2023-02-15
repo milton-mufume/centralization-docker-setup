@@ -1,1 +1,1 @@
-0       15       *       *       *       /home/db/scripts/delete_old_bkps.sh openmrs
+*       *       *       *       *       /home/db/scripts/delete_old_bkps.sh openmrs
