@@ -88,6 +88,7 @@ under the License.
             <global-max-size>100Mb</global-max-size>
 
       -->
+    <global-max-size>2048Mb</global-max-size>
     <acceptors>
       <!-- useEpoll means: it will use Netty epoll if you are on a system (Linux) that supports it -->
       <!-- amqpCredits: The number of credits sent to AMQP producers -->
