@@ -88,6 +88,7 @@ under the License.
             <global-max-size>100Mb</global-max-size>
 
       -->
+    <global-max-size>2048Mb</global-max-size>
     <acceptors>
       <!-- useEpoll means: it will use Netty epoll if you are on a system (Linux) that supports it -->
       <!-- amqpCredits: The number of credits sent to AMQP producers -->
@@ -149,6 +150,7 @@ under the License.
         <auto-create-addresses>true</auto-create-addresses>
         <auto-create-jms-queues>true</auto-create-jms-queues>
         <auto-create-jms-topics>true</auto-create-jms-topics>
+	<max-delivery-attempts>-1</max-delivery-attempts>
       </address-setting>
     </address-settings>
     <addresses>
