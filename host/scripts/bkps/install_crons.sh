@@ -3,7 +3,7 @@
 #
 
 # Set environment.
-HOME_DIR=/home
+HOME_DIR=/home/mmufume
 CRONS_HOME=$HOME_DIR/db/crons
 timestamp=`date +%Y-%m-%d_%H-%M-%S`
 LOG_DIR=$HOME_DIR/shared/logs/db/cron

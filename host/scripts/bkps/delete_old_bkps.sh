@@ -3,7 +3,7 @@
 #
 
 # Set environment.
-HOME_DIR=/home
+HOME_DIR=/home/mmufume
 
 #The database type can be "openmrs" "mgt"
 DATABASE_TYPE=$1
