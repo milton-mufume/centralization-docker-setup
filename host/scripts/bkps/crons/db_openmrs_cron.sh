@@ -1,1 +1,1 @@
-*/1    *       *       *       *       /home/mmufume/db/scripts/bkp_db.sh openmrs
+*/1    *       *       *       *       /home/mmufume/db/scripts/openmrs_bkp_db.sh openmrs
