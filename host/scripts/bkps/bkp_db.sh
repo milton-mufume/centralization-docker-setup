@@ -2,10 +2,10 @@
 # generic script for backup the dbsync mgt and openmrs databases
 #
 
-source /home/mmufume/db/env.sh
+source /home/db/env.sh
 
 # Set environment.
-HOME_DIR=/home/mmufume
+HOME_DIR=/home
 
 #The database type can be "openmrs" "mgt"
 DATABASE_TYPE=$1

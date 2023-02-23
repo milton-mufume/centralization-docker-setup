@@ -1,7 +1,7 @@
 #!/bin/bash
 # specific script for backup the openmrs database
 #
-source /home/mmufume/db/scripts/bkp_db.sh
+source /home/db/scripts/bkp_db.sh
 
 #
 docker exec $OPENMRS_DB_CONTAINER bash -c "/usr/bin/mysqldump -u $OPENMRS_DB_USER --password=$OPENMRS_DB_PASSWORD $OPENMRS_DB_NAME 2> /dev/null | gzip > /$OPENMRS_HOME_DIR_CONTAINER/${OPENMRS_DB_NAME}_db_$timestamp.sql.gz"

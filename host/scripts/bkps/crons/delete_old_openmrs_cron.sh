@@ -1,1 +1,1 @@
-*/5       *       *       *       *       /home/mmufume/db/scripts/delete_old_bkps.sh openmrs
+*/5       *       *       *       *       /home/db/scripts/delete_old_bkps.sh openmrs
