@@ -78,6 +78,7 @@ services:
       - "$port_mysql_openmrs_central:3306"
     volumes:
       - ./mysql-openmrs-central/prod.my.cnf:/etc/mysql/my.cnf
+      - $docker_containers_shared_dir/conf/openmrs/central/db/certificates/server/:/home/ssl/     
       - openmrsDbData:/var/lib/mysql
       - /etc/localtime:/etc/localtime
     restart: unless-stopped
@@ -90,7 +91,6 @@ services:
       - "$port_mysql_dbsync_central:3306"
     volumes:
       - ./mysql-dbsync-central/prod.my.cnf:/etc/mysql/my.cnf
-      - $docker_containers_shared_dir/conf/openmrs/central/db/certificates/server/:/home/ssl/     
       - dbSyncCentralDbData:/var/lib/mysql
       - /etc/localtime:/etc/localtime
     restart: unless-stopped
