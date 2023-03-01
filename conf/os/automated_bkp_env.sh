@@ -10,4 +10,4 @@ export MGT_DB_PASSWORD=" "
 export MGT_DB_CONTAINER=" "
 export MGT_HOME_DIR_CONTAINER=" "
 
-export HOME_DIR=/home/$USER
+export HOME_DIR=/home/$(whoami)
