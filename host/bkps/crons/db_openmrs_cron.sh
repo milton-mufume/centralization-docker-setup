@@ -1,1 +1,1 @@
-*/1 * * * * $HOME_DIR/db/scripts/openmrs_bkp_db.sh
+* * * * * $HOME_DIR/db/scripts/openmrs_bkp_db.sh
