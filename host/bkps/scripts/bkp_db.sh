@@ -1,15 +1,6 @@
 #!/bin/bash
 # generic script for backup the dbsync mgt and openmrs databases
 #
-
-source /home/db/env.sh
-
-# Set environment.
-HOME_DIR=/home
-
-#The database type can be "openmrs" "mgt"
-DATABASE_TYPE=$1
-
 BKPS_HOME=$HOME_DIR/shared/bkps/db/$DATABASE_TYPE
 timestamp=$(date +%Y-%m-%d_%H-%M-%S)
 DB_BKP_FILE="${DATABASE_TYPE}_db_$timestamp.sql.gz"
@@ -42,8 +33,17 @@ cd $BKPS_HOME
 
 DATABASE=$DATABASE_TYPE
 
-echo "THE DATABASE IS" $DATABASE | tee -a $LOG_DIR/bkps.log
-echo "THE DATABASE IS $DATABASE: $DATABASE ALIAS: $DATABASE" | tee -a $LOG_DIR/bkps.log
+echo "THE DATABASE IS" $DATABASE_TYPE | tee -a $LOG_DIR/bkps.log
+echo "THE DATABASE IS $DATABASE_TYPE: $DATABASE_TYPE ALIAS: $DATABASE_TYPE" | tee -a $LOG_DIR/bkps.log
 
-echo "STARTING BACKUP OF $DATABASE database" | tee -a $LOG_DIR/bkps.log
+echo "STARTING BACKUP OF $DATABASE_TYPE database" | tee -a $LOG_DIR/bkps.log
+
+#
+docker exec $DB_CONTAINER bash -c "/usr/bin/mysqldump -u $DB_USER --password=$DB_PASSWORD $DB_NAME 2> /dev/null | gzip > /$HOME_DIR_CONTAINER/${DB_NAME}_db_$timestamp.sql.gz"
+#
+docker cp $DB_CONTAINER:/$HOME_DIR_CONTAINER/"${DB_NAME}"_db_$timestamp.sql.gz $BKPS_HOME
+#
+docker exec $DB_CONTAINER bash -c "rm /$HOME_DIR_CONTAINER/${DB_NAME}_db_$timestamp.sql.gz"
+#
+echo "BACKUP FINISHED" | tee -a $LOG_DIR/bkps.log
 

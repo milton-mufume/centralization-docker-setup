@@ -3,7 +3,7 @@
 #
 
 # Set environment.
-HOME_DIR=/home
+echo "INSTALLING CRON JOBS FROM: "$HOME_DIR/db/crons
 CRONS_HOME=$HOME_DIR/db/crons
 timestamp=`date +%Y-%m-%d_%H-%M-%S`
 LOG_DIR=$HOME_DIR/shared/logs/db/cron
@@ -17,9 +17,9 @@ fi
 
 cd $CRONS_HOME
 
-cat default > CRONTAB 
+cat default > CRONTAB
 
-for FILE in *.sh; do 
+for FILE in *.sh; do
 	cat ./$FILE >> CRONTAB
 done
 
@@ -27,5 +27,5 @@ crontab CRONTAB
 
 rm CRONTAB
 
-echo "AL CRONS WERE INSTALLED" | tee -a $LOG_DIR/cron_install.log
+echo "ALL CRONS WERE INSTALLED" | tee -a $LOG_DIR/cron_install.log
 
