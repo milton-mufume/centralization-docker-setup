@@ -12,7 +12,7 @@ Here we have the procedure to install the jobs to automate the dbsync and openmr
 2. Edit the file **CENTRALIZATION_HOME_DIRECTORY/conf/os/automated_bkp_env.sh** and set the values for the variables;
 3. After editing the file execute the following commands:
     
-    **a.** cp CENTRALIZATION_HOME_DIRECTORY/conf/os/automated_bkp_env.sh etc/profile.d/;
+    **a.** cp CENTRALIZATION_HOME_DIRECTORY/conf/os/automated_bkp_env.sh /etc/profile.d/;
     
     **b.** source /etc/profile.d/automated_bkp_env.sh;
 4. Edit the time (minutes, hours, dates, etc) inside the cron's scripts within directory **CENTRALIZATION_HOME_DIRECTORY/host/bkps/crons** **¹**;
