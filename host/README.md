@@ -1,9 +1,10 @@
+# Installation guide of cron jobs for database backups 
 
-**Introduction**
+## Introduction
 
-This installation guide is for those intending to install an automated database mechanism in an environment running openmrs and dbsync databases within docker containers.
+This installation guide is for those intending to install an automated database backup mechanism in an environment running openmrs and dbsync databases within docker containers.
 
-**Steps to the installation**
+## Steps to the installation
 
 Here we have the procedure to install the jobs to automate the dbsync and openmrs databases backup:
 
@@ -17,7 +18,7 @@ Here we have the procedure to install the jobs to automate the dbsync and openmr
 4. Edit the time (minutes, hours, dates, etc) inside the cron's scripts within directory **CENTRALIZATION_HOME_DIRECTORY/host/bkps/crons** **¹**;
 5. Run the script **CENTRALIZATION_HOME_DIRECTORY/host/bkps/bkp_installation_setup.sh** to create the directories and install the cron jobs into the host:
    
-   **a.** ./bkp_installation_setup.sh (inside the **bkps** directory);
+    **a.** ./bkp_installation_setup.sh (inside the **bkps** directory);
 
 **¹**The pattern to define the times that we want the cron jobs do be executed is ***/VALUE** where the VALUE is the time shceduled to run the backups.
 
