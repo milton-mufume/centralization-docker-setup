@@ -6,7 +6,6 @@ DB_CONTAINER=$2
 DB_USER=$3
 DB_PASSWORD=$4
 DB_NAME=$5
-HOME_DIR_CONTAINER=$6
 
 #
 HOME_DIR=$BKP_HOME_DIR
@@ -48,11 +47,7 @@ echo "THE DATABASE IS $DATABASE_TYPE: $DATABASE_TYPE ALIAS: $DATABASE_TYPE" | te
 echo "STARTING BACKUP OF $DATABASE_TYPE database" | tee -a $LOG_DIR/bkps.log
 
 #
-docker exec $DB_CONTAINER bash -c "/usr/bin/mysqldump -u $DB_USER --password=$DB_PASSWORD $DB_NAME 2> /dev/null | gzip > $HOME_DIR_CONTAINER/${DB_BKP_FILE}"
-#
-docker cp $DB_CONTAINER:$HOME_DIR_CONTAINER/$DB_BKP_FILE $BKPS_HOME
-#
-docker exec $DB_CONTAINER bash -c "rm $HOME_DIR_CONTAINER/$DB_BKP_FILE"
+docker exec $DB_CONTAINER bash -c "/usr/bin/mysqldump -u $DB_USER --password=$DB_PASSWORD $DB_NAME 2> /dev/null | gzip" > $BKPS_HOME/${DB_BKP_FILE}
 #
 echo "BACKUP FINISHED" | tee -a $LOG_DIR/bkps.log
 
