@@ -3,6 +3,8 @@
 #
 
 # Set environment.
+HOME_DIR=$BKP_HOME_DIR
+
 echo "INSTALLING CRON JOBS FROM: "$HOME_DIR/db/crons
 CRONS_HOME=$HOME_DIR/db/crons
 timestamp=`date +%Y-%m-%d_%H-%M-%S`

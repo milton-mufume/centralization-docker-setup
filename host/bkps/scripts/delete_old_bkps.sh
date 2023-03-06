@@ -4,6 +4,7 @@
 
 #The database type can be "openmrs" "mgt"
 DATABASE_TYPE=$1
+HOME_DIR=$BKP_HOME_DIR
 
 BKPS_DIR=$HOME_DIR/shared/bkps/db/$DATABASE_TYPE
 BKPS_TO_BE_PRESERVED_DIR=$HOME_DIR/tmp/$DATABASE_TYPE/to_be_preserved

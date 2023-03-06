@@ -1,12 +1,14 @@
 #!/bin/bash
 
-echo "CREATING THE db/scripts and db/crons DIRECTORIES AT: "$HOME_DIR
+echo "CREATING THE db/scripts and db/crons DIRECTORIES AT: "$BKP_HOME_DIR
+
+HOME_DIR=$BKP_HOME_DIR
 
 mkdir -p $HOME_DIR/db/crons
-mkdir -p $HOME_DIR/db/scripts
+mkdir -p $HOME_DIR/scripts
 
 cp crons/* -r $HOME_DIR/db/crons
-cp scripts/* -r $HOME_DIR/db/scripts
+cp scripts/* -r $HOME_DIR/scripts
 
 cp install_crons.sh $HOME_DIR/db/
 
