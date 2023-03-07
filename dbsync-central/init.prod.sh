@@ -42,6 +42,9 @@ echo "ALL FILES WERE COPIED"
 
 $SCRIPTS_DIR/apk_install.sh
 $SCRIPTS_DIR/install_crons.sh
+$SCRIPTS_DIR/generate_certificate.sh "$spring_artemis_host:$spring_artemis_port" "$HOME_DIR/artemis.cert"
+$SCRIPTS_DIR/install_certificate_to_jdk_carcets.sh "$HOME_DIR/artemis.cert"
+
 
 timestamp=`date +%Y-%m-%d_%H-%M-%S`
 echo "Installation finished at $timestamp" >> $INSTALL_FINISHED_REPORT_FILE
