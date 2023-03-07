@@ -8,6 +8,6 @@ CERT_FILE=$2
 
 echo "GENERATING CERTIFICATE USING URL: "
 
-echo "Q" | openssl s_client -connect URL | openssl x509 > CERT_FILE
+echo "Q" | openssl s_client -connect $URL | openssl x509 > $CERT_FILE
 
 echo "CERTIFICATE GENERATED!"

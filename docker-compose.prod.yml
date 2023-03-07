@@ -123,9 +123,7 @@ services:
       - artemis
     volumes:
       - ./openmrs-central/setenv.sh:/usr/local/tomcat/bin/setenv.sh
-      - ./openmrs-central/run.prod.sh:/usr/local/tomcat/bin/run_openmrs.sh
-      - ./openmrs-central/init.prod.sh:/usr/local/tomcat/bin/init.sh
-      - ./openmrs-central/install_opencr_cert.exp:/usr/local/tomcat/bin/install_opencr_cert.exp
+      - ./openmrs-central/scripts/:/usr/local/tomcat/scripts/
       - /etc/localtime:/etc/localtime
       - $docker_containers_shared_dir/conf/openmrs/central/openmrs-runtime.properties:/usr/local/tomcat/openmrs-runtime.properties
       - $docker_containers_shared_dir/conf/openmrs/central/openmrs.p12:/usr/local/tomcat/.OpenMRS/mpi/config/openmrs.p12
@@ -146,7 +144,7 @@ services:
       - ./openmrs-central/modules/htmlformentry-3.13.1.omod:/usr/local/tomcat/.OpenMRS/modules/htmlformentry.omod
     ports:
       - "$port_openmrs_central:8080"
-    entrypoint: [ "sh", "/usr/local/tomcat/bin/run_openmrs.sh" ]
+    entrypoint: [ "sh", "/usr/local/tomcat/scripts/run.sh" ]
     restart: unless-stopped
 
   dbsync-central:
