@@ -10,4 +10,4 @@ export MGT_DB_PASSWORD=" "
 export MGT_DB_CONTAINER=" "
 
 
-export BKP_HOME_DIR="/home/eip"
+export EIP_HOME_DIR="/home/eip"

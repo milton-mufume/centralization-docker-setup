@@ -1,24 +1,24 @@
 #!/bin/bash
 # generic script for backup the dbsync mgt and openmrs databases
 #
-DATABASE_TYPE=$1
-DB_CONTAINER=$2
-DB_USER=$3
-DB_PASSWORD=$4
-DB_NAME=$5
+DB_CONTAINER=$1
+DB_USER=$2
+DB_PASSWORD=$3
+DB_NAME=$4
+HOME_DIR=$5
 
 #
-HOME_DIR=$BKP_HOME_DIR
-BKPS_HOME=$HOME_DIR/shared/bkps/db/$DATABASE_TYPE
+
+BKPS_HOME=$HOME_DIR/shared/bkps/db/$DB_NAME
 timestamp=$(date +%Y-%m-%d_%H-%M-%S)
-DB_BKP_FILE="${DATABASE_TYPE}_db_$timestamp.sql.gz"
-LOG_DIR=$HOME_DIR/shared/logs/db/bkp/$DATABASE_TYPE
+DB_BKP_FILE="${DB_NAME}_db_$timestamp.sql.gz"
+LOG_DIR=$HOME_DIR/shared/logs/db/bkp/$DB_NAME
 
 echo "USER: $(whoami)" | tee -a $LOG_DIR/bkps.log
 
 printenv >>$LOG_DIR/bkps.log
 
-echo "DB TYPE: $DATABASE_TYPE" | tee -a $LOG_DIR/bkps.log
+echo "DB TYPE: $DB_NAME" | tee -a $LOG_DIR/bkps.log
 
 if [ -d "$LOG_DIR" ]; then
   echo "THE LOG DIR EXISTS" | tee -a $LOG_DIR/bkps.log
@@ -39,12 +39,12 @@ fi
 
 cd $BKPS_HOME
 
-DATABASE=$DATABASE_TYPE
+DATABASE=$DB_NAME
 
-echo "THE DATABASE IS" $DATABASE_TYPE | tee -a $LOG_DIR/bkps.log
-echo "THE DATABASE IS $DATABASE_TYPE: $DATABASE_TYPE ALIAS: $DATABASE_TYPE" | tee -a $LOG_DIR/bkps.log
+echo "THE DATABASE IS" $DB_NAME | tee -a $LOG_DIR/bkps.log
+echo "THE DATABASE IS $DB_NAME: $DB_NAME ALIAS: $DB_NAME" | tee -a $LOG_DIR/bkps.log
 
-echo "STARTING BACKUP OF $DATABASE_TYPE database" | tee -a $LOG_DIR/bkps.log
+echo "STARTING BACKUP OF $DB_NAME database" | tee -a $LOG_DIR/bkps.log
 
 #
 docker exec $DB_CONTAINER bash -c "/usr/bin/mysqldump -u $DB_USER --password=$DB_PASSWORD $DB_NAME 2> /dev/null | gzip" > $BKPS_HOME/${DB_BKP_FILE}

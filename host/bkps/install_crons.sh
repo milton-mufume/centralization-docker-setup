@@ -2,11 +2,10 @@
 # script for install cron jobs. The cron jobs a picked up from $HOME_DIR/cron
 #
 
-# Set environment.
-HOME_DIR=$BKP_HOME_DIR
+HOME_DIR=$1
+echo "INSTALLING CRON JOBS FROM: "/crons
 
-echo "INSTALLING CRON JOBS FROM: "$HOME_DIR/db/crons
-CRONS_HOME=$HOME_DIR/db/crons
+CRONS_HOME=crons/
 timestamp=`date +%Y-%m-%d_%H-%M-%S`
 LOG_DIR=$HOME_DIR/shared/logs/db/cron
 

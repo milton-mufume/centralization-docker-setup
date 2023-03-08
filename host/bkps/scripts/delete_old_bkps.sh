@@ -3,13 +3,13 @@
 #
 
 #The database type can be "openmrs" "mgt"
-DATABASE_TYPE=$1
-HOME_DIR=$BKP_HOME_DIR
+DATABASE_NAME=$1
+HOME_DIR=$2
 
-BKPS_DIR=$HOME_DIR/shared/bkps/db/$DATABASE_TYPE
-BKPS_TO_BE_PRESERVED_DIR=$HOME_DIR/tmp/$DATABASE_TYPE/to_be_preserved
+BKPS_DIR=$HOME_DIR/shared/bkps/db/$DATABASE_NAME
+BKPS_TO_BE_PRESERVED_DIR=$HOME_DIR/tmp/$DATABASE_NAME/to_be_preserved
 timestamp=$(date +%Y-%m-%d_%H-%M-%S)
-LOG_DIR=$HOME_DIR/shared/logs/db/bkp/$DATABASE_TYPE
+LOG_DIR=$HOME_DIR/shared/logs/db/bkp/$DATABASE_NAME
 
 if [ -d "$LOG_DIR" ]; then
   echo "THE LOG DIR EXISTS" | tee -a $LOG_DIR/arquive.log

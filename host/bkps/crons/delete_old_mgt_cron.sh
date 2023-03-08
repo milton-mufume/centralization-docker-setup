@@ -1,1 +1,1 @@
-*/30 */4 */28 * * $BKP_HOME_DIR/scripts/delete_old_bkps.sh $MGT_DB_NAME
+*/30 */4 */28 * * $EIP_HOME_DIR/scripts/db-backup/delete_old_bkps.sh $MGT_DB_NAME $EIP_HOME_DIR

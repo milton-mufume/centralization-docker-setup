@@ -1,1 +1,1 @@
-* */1 * * * $BKP_HOME_DIR/scripts/openmrs_bkp_db.sh
+* */1 * * * $EIP_HOME_DIR/scripts/db-backup/openmrs_bkp_db.sh
