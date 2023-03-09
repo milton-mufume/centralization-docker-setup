@@ -8,15 +8,12 @@ DB_NAME=$4
 HOME_DIR=$5
 
 #
-
 BKPS_HOME=$HOME_DIR/shared/bkps/db/$DB_NAME
 timestamp=$(date +%Y-%m-%d_%H-%M-%S)
 DB_BKP_FILE="${DB_NAME}_db_$timestamp.sql.gz"
 LOG_DIR=$HOME_DIR/shared/logs/db/bkp/$DB_NAME
 
-echo "USER: $(whoami)" | tee -a $LOG_DIR/bkps.log
 
-printenv >>$LOG_DIR/bkps.log
 
 echo "DB TYPE: $DB_NAME" | tee -a $LOG_DIR/bkps.log
 
@@ -39,12 +36,8 @@ fi
 
 cd $BKPS_HOME
 
-DATABASE=$DB_NAME
-
 echo "THE DATABASE IS" $DB_NAME | tee -a $LOG_DIR/bkps.log
 echo "THE DATABASE IS $DB_NAME: $DB_NAME ALIAS: $DB_NAME" | tee -a $LOG_DIR/bkps.log
-
-echo "STARTING BACKUP OF $DB_NAME database" | tee -a $LOG_DIR/bkps.log
 
 #
 docker exec $DB_CONTAINER bash -c "/usr/bin/mysqldump -u $DB_USER --password=$DB_PASSWORD $DB_NAME 2> /dev/null | gzip" > $BKPS_HOME/${DB_BKP_FILE}
