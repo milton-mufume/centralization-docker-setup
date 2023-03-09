@@ -166,7 +166,7 @@ E.g:
    
    c. Retest access with previously created users.
 
-4. Restart all services using the command
-docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml restart
+4. Restart all services using the command<br>
+>**docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml restart**
  
  
