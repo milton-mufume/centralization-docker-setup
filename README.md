@@ -168,5 +168,17 @@ E.g:
 
 4. Restart all services using the command<br>
 >**docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml restart**
+
+
+### Volumes defined on the Server
+
+The table below lists all docker volumes where important container information is persisted. Ensure these volumes are instantly backed up.
  
- 
+ | **Volume**   |**Description**| **what is saved**  |
+| ------------- |:-------------:| -----:|
+| centralizationdockersetup_artemisData      |ArtemisMQ data| /var/lib/artemis|
+|centralizationdockersetup_esData    | opencr elastic search data      |   /usr/share/elasticsearch/data |
+| openmrsDbData| openmrs database and receiver mgt database    |    /var/lib/mysql |
+|opencrDbData|Opencr database|/var/lib/mysql|
+
+
