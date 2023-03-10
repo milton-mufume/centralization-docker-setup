@@ -1,9 +1,9 @@
 # Centralization Project -  Implementation Plan
 ## Introduction
 
-This document intends the important notes to be observed by the BD SYNC implementer. Here, the steps that are supposed to be followed to carry out the installation are presented.
+This document intends the important notes to be observed by the BD SYNC implementer. Here  are presented the steps that are supposed to be followed to carry out the installation.
 The implementation of centralization is fundamentally divided into two stages: (1) configuration and initialization of central server services (2) configuration of remote sites and their inclusion in the central site. The inclusion of remote sites will be done one by one.
-In this document we'll cover the setup of the central servers.
+In this document we'll cover the setup of the central servers (stage (1)).
 
 # Execution of synchronization and creation of sede backup
 Synchronization and backup should be done following the usual procedures.
@@ -28,24 +28,23 @@ Add user eip to admin groups:
 ### Installation and Configuration of the Central Server
 All services needed to get the core server up and running will be installed using [this docker project](https://github.com/FriendsInGlobalHealth/centralization-docker-setup/tree/production).
 Follow the steps below to configure the central server:
- 1. Login to the server using user **eip**<br>
+<br><br>**1.** Login to the server using user **eip**
      
  
- 2. Position yourself in the user's root directory
->**cd /home/eip**<br>
+ <br>**2.** Position yourself in the user's root directory
+>**cd /home/eip**
  
  
- 3. Create the required directory structure.
+<br>**3.** Create the required directory structure.
 
 >**mkdir -p prg/docker**
 
 >**mkdir -p shared/**
 
->**mkdir -p shared/bkps**<br>
+>**mkdir -p shared/bkps**
 
 
-
-4. Install docker following the commands below
+<br>**4.** Install docker following the commands below
 
 
 >**sudo apt-get update**
@@ -62,59 +61,54 @@ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev
 
 >**sudo apt-get update**
 
->**sudo apt-get install docker-ce docker-ce-cli containerd.io**<br>
+>**sudo apt-get install docker-ce docker-ce-cli containerd.io**
 
 
-5. Install docker-compose
+<br>**5.** Install docker-compose
 
->**sudo apt-get install docker-compose**<br>
+>**sudo apt-get install docker-compose**
     
 
-6. Create the docker group and add the eip user in it
+<br>**6.** Create the docker group and add the eip user in it
 
 >**sudo adduser $USER docker**
 
->**sudo systemctl restart docker.service**<br>
+>**sudo systemctl restart docker.service**
 
 
-
-7. Clone the docker project for services configuration
+<br>**7.** Clone the docker project for services configuration
 
 >**cd /home/eip/prg/docker**
 
->**git clone https://github.com/FriendsInGlobalHealth/centralization-docker-setup.git**<br>
+>**git clone https://github.com/FriendsInGlobalHealth/centralization-docker-setup.git**
 
 
 
-8. Copy the configuration files to the directory shared
+<br>**8.** Copy the configuration files to the directory shared
 
->**cp -R /home/eip/prg/docker/centralization-docker-setup/conf /home/eip/shared**<br>
+>**cp -R /home/eip/prg/docker/centralization-docker-setup/conf /home/eip/shared**
 
 
 
-9. Copy the **/home/eip/shared/conf/os/centralization.sh** file to the **/etc/profile.d/ directory**. This file contains environment variables used in docker services. **Example:** access ports to services from the host. Make the necessary changes if you want to modify any service access port.
+<br>**9.** Copy the **/home/eip/shared/conf/os/centralization.sh** file to the **/etc/profile.d/ directory**. This file contains environment variables used in docker services. **Example:** access ports to services from the host. Make the necessary changes if you want to modify any service access port.
 
 >**sudo cp /home/eip/shared/conf/os/centralization.sh  /etc/profile.d/**
 
 Then run:
 
->**source /etc/profile.d/centralization.sh**<br>
+>**source /etc/profile.d/centralization.sh**
 
 
+<br>**10.** Make the necessary changes to the files contained in the newly copied conf directory to **/home/eip/shared**.<br>
 
-10. Make the necessary changes to the files contained in the newly copied conf directory to **/home/eip/shared**.<br>
-
-
-
-
-11. Create the volumes below:
+<br>**11.** Create the volumes below:
 >**docker volume create openmrsDbata**<br>
 >**docker volume create opencrDbData**<br>
 >**docker volume create esData**<br>
 >**docker volume create dbSyncCentralDbData**<br>
->**docker volume create artemisData**<br>
+>**docker volume create artemisData**
 
- 12. After making the necessary settings, run the command below to start all services.
+ <br>**12.** After making the necessary settings, run the command below to start all services.
 >**docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml up -d**
 
 This command creates 9 containers described below:<br>
@@ -129,15 +123,15 @@ This command creates 9 containers described below:<br>
     • mysql-opencr: this container makes the DBMS available to opencr<br>
     
  Alternatively, containers can be created individually using the command below:<br>
- >**docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml up -d --build container-name**<br>
+ >**docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml up -d --build CONTAINER-NAME**<br>
  
- Where **container-name** is the identifier of the container to be created.<br>
+ Where **CONTAINER-NAME** is the identifier of the container to be created.<br>
  
  The alternative of installing individual containers is indicated in those situations in which it is not intended to install all containers on the central server.<br>
  
  ### Replacement of the first database on the Central site
  
- To restore the backup of the headquarters database on the central site, you must first ensure that the mysql-central container is on top and then: 
+ To restore the backup of the 'Sede' database on the central site, you must first ensure that the mysql-central container is on top and then: 
 
 1. Upload the database reset file to /home/eip/shared/bkps. Note that this is the database dump chosen to initialize the switch database.
 
