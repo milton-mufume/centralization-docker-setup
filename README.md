@@ -28,11 +28,11 @@ Add user eip to admin groups:
 ### Installation and Configuration of the Central Server
 All services needed to get the core server up and running will be installed using [this docker project](https://github.com/FriendsInGlobalHealth/centralization-docker-setup/tree/production).
 Follow the steps below to configure the central server:
- 1. Login to the server using user **eip**
+ 1. Login to the server using user **eip**<br>
      
  
  2. Position yourself in the user's root directory
->**cd /home/eip**
+>**cd /home/eip**<br>
  
  
  3. Create the required directory structure.
@@ -41,7 +41,7 @@ Follow the steps below to configure the central server:
 
 >**mkdir -p shared/**
 
->**mkdir -p shared/bkps**
+>**mkdir -p shared/bkps**<br>
 
 
 
@@ -62,19 +62,19 @@ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev
 
 >**sudo apt-get update**
 
->**sudo apt-get install docker-ce docker-ce-cli containerd.io**
+>**sudo apt-get install docker-ce docker-ce-cli containerd.io**<br>
 
 
 5. Install docker-compose
 
->**sudo apt-get install docker-compose**
+>**sudo apt-get install docker-compose**<br>
     
 
 6. Create the docker group and add the eip user in it
 
 >**sudo adduser $USER docker**
 
->**sudo systemctl restart docker.service**
+>**sudo systemctl restart docker.service**<br>
 
 
 
@@ -82,13 +82,13 @@ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev
 
 >**cd /home/eip/prg/docker**
 
->**git clone https://github.com/FriendsInGlobalHealth/centralization-docker-setup.git**
+>**git clone https://github.com/FriendsInGlobalHealth/centralization-docker-setup.git**<br>
 
 
 
 8. Copy the configuration files to the directory shared
 
->**cp -R /home/eip/prg/docker/centralization-docker-setup/conf /home/eip/shared**
+>**cp -R /home/eip/prg/docker/centralization-docker-setup/conf /home/eip/shared**<br>
 
 
 
@@ -98,23 +98,23 @@ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev
 
 Then run:
 
->**source /etc/profile.d/centralization.sh**
+>**source /etc/profile.d/centralization.sh**<br>
 
 
 
-11. Make the necessary changes to the files contained in the newly copied conf directory to **/home/eip/shared**.
+10. Make the necessary changes to the files contained in the newly copied conf directory to **/home/eip/shared**.<br>
 
 
 
 
-12. Create the volumes below:
+11. Create the volumes below:
 >**docker volume create openmrsDbata**<br>
 >**docker volume create opencrDbData**<br>
 >**docker volume create esData**<br>
 >**docker volume create dbSyncCentralDbData**<br>
 >**docker volume create artemisData**<br>
 
- 13. After making the necessary settings, run the command below to start all services.
+ 12. After making the necessary settings, run the command below to start all services.
 >**docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml up -d**
 
 This command creates 9 containers described below:<br>
