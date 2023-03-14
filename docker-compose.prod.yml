@@ -116,7 +116,7 @@ services:
     restart: unless-stopped
     
   openmrs-central:
-    image: tomcat:7.0.109-jdk8-openjdk-slim
+    image: tomcat:8.5.87-jdk8
     container_name: openmrs-central
     depends_on:
       - mysql-openmrs-central
