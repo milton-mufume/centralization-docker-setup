@@ -54,9 +54,7 @@ Follow the steps below to configure the central server:
 
 >**curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg**
 
->**echo \
-"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null**
+>**echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null**
 
 
 >**sudo apt-get update**
@@ -81,6 +79,7 @@ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev
 >**cd /home/eip/prg/docker**
 
 >**git clone https://github.com/FriendsInGlobalHealth/centralization-docker-setup.git**
+<br>**NOTE:** After cloning the above project we need to swicth to the branch **"production"** in order to continue with this process
 
 
 
