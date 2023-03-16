@@ -101,7 +101,7 @@ Then run:
 <br>**10.** Make the necessary changes to the files contained in the newly copied conf directory to **/home/eip/shared**.<br>
 
 <br>**11.** Create the volumes below:
->**docker volume create openmrsDbata**<br>
+>**docker volume create openmrsDbData**<br>
 >**docker volume create opencrDbData**<br>
 >**docker volume create esData**<br>
 >**docker volume create dbSyncCentralDbData**<br>
