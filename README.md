@@ -147,8 +147,8 @@ Where:<br>
 
 3. If necessary, create the database access users (container mysql-central) that were defined in the configuration files in point 10 of the previous section.
 E.g:
->**CREATE USER 'USER'@'%' IDENTIFIED BY 'DB_PASSWORD';**
->**GRANT ALL PRIVILEGES ON DB_NAME.* TO 'USER'@'%';**
+>**CREATE USER 'USER'@'%' IDENTIFIED BY 'DB_PASSWORD';**<br>
+>**GRANT ALL PRIVILEGES ON DB_NAME.\* TO 'USER'@'%';**<br>
 >**FLUSH PRIVILEGES;**
 
    a. Test access to the MySQL console using the users created above, and if you get an error, check if there are registered anonymous users:
