@@ -98,7 +98,7 @@ Then run:
 >**source /etc/profile.d/centralization.sh**
 
 
-<br>**10.** Make the necessary changes to the files contained in the newly copied conf directory to **/home/eip/shared**.<br>
+<br>**10.** Make the necessary changes to the files contained in the newly copied **'conf'** directory to **/home/eip/shared**.<br>
 
 <br>**11.** Create the volumes below:
 >**docker volume create openmrsDbData**<br>
