@@ -5,7 +5,7 @@ This document intends the important notes to be observed by the BD SYNC implemen
 The implementation of centralization is fundamentally divided into two stages: (1) configuration and initialization of central server services (2) configuration of remote sites and their inclusion in the central site. The inclusion of remote sites will be done one by one.
 In this document we'll cover the setup of the central servers (stage (1)).
 
-# Execution of synchronization and creation of sede backup
+# Central Server Setup
 Synchronization and backup should be done following the usual procedures.
 
 ### Creation of user eip on the Server
