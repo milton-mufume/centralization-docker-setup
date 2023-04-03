@@ -6,7 +6,6 @@ The implementation of centralization is fundamentally divided into two stages: (
 In this document we'll cover the setup of the central servers (stage (1)).
 
 # Central Server Setup
-Synchronization and backup should be done following the usual procedures.
 
 ### Creation of user eip on the Server
 
