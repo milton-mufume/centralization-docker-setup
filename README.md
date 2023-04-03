@@ -1,4 +1,4 @@
-# Centralization Project -  Implementation Plan
+# Centralization Project
 ## Introduction
 
 This document intends the important notes to be observed by the BD SYNC implementer. Here  are presented the steps that are supposed to be followed to carry out the installation.
