@@ -1,0 +1,37 @@
+#!/bin/bash
+
+echo "CREATING THE scripts/db-backup DIRECTORY AT: "$EIP_HOME_DIR
+
+SCRIPTS_DIR=EIP_HOME_DIR/scripts
+
+BACKUP_DIR=EIP_HOME_DIR/scripts/db-backup
+
+if [ -d "$SCRIPTS_DIR" ]; then
+  echo "THE SCRIPTS DIRECTORY EXISTS"
+
+else
+   echo "THE SCRIPTS DIRECTORY DOESN'T EXISTS"
+   echo "THE SCRIPTS DIRECTORY IS BEING CREATED"
+
+mkdir -p $SCRIPTS_DIR
+
+ echo "THE SCRIPTS DIRECTORY WAS CREATED"
+fi
+
+if [ -d "$BACKUP_DIR" ]; then
+   echo "THE BACKUP DIR EXISTS"
+
+else
+    echo "THE BACKUP DIRECTORY DOESN'T EXISTS"
+    echo "THE BACKUP DIRECTORY IS BEING CREATED"
+
+mkdir -p $BACKUP_DIR
+
+ echo "THE BACKUP DIRECTORY WAS CREATED"
+fi
+
+cp scripts/* -r $EIP_HOME_DIR/scripts/db-backup
+
+/bin/bash install_crons.sh $EIP_HOME_DIR
+
+echo "SCRIPTS CREATED AT HOME DIRECTORY: "$BACKUP_DIR

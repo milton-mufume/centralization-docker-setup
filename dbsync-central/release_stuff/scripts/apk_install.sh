@@ -30,29 +30,12 @@ echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_
 echo "Installing NANO"  | tee -a $LOG_DIR/apk_install.log
 apk add nano
 echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_install.log
-#echo "Installing Maven"  | tee -a $LOG_DIR/apk_install.log
-#apk add maven
-#echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_install.log
-#echo "TRYING TO INSTALL CURL" | tee -a $LOG_DIR/apk_install.log
-#apk add curl
-#echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_install.log
 
-#echo "TRYING TO INSTALL MUTT" | tee -a $LOG_DIR/apk_install.log
-#apk add mutt
-#echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_install.log
+echo "Installing OPENSSL"  | tee -a $LOG_DIR/apk_install.log
+apk add openssl
 
-#echo "TRYING TO INSTALL GIT" | tee -a $LOG_DIR/apk_install.log
-#apk add git
-#echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_install.log
+echo "INSTALLING EXPECT" | tee -a $LOG_DIR/apk_install.log
+apk add expect
 
-#echo "INSTALLING SSMPT" | tee -a $LOG_DIR/apk_install.log
-#apk add ssmtp
-#echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_install.log
+echo "-------------- APK INSTALLATION FINISHED -------------"  | tee -a $LOG_DIR/apk_install.log
 
-#echo "INSTALLING OPENSSH" | tee -a $LOG_DIR/apk_install.log
-#apk add openssh
-#echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_install.log
-
-#echo "INSTALLING EXPECT" | tee -a $LOG_DIR/apk_install.log
-#apk add expect
-#echo "-------------------------------------------------"  | tee -a $LOG_DIR/apk_install.log
