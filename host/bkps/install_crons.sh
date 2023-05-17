@@ -3,11 +3,14 @@
 #
 
 HOME_DIR=$1
-echo "INSTALLING CRON JOBS FROM: "/crons
 
-CRONS_HOME=crons/
+SETUP_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+CRONS_HOME="$SETUP_DIR/crons"
 timestamp=`date +%Y-%m-%d_%H-%M-%S`
 LOG_DIR=$HOME_DIR/shared/logs/db/cron
+
+echo "INSTALLING CRON JOBS FROM $CRONS_HOME"
 
 if [ -d "$LOG_DIR" ]; then
        echo "THE LOG DIR EXISTS" | tee -a $LOG_DIR/cron_install.log
@@ -16,17 +19,21 @@ else
        echo "THE LOG DIR WAS CREATED" | tee -a $LOG_DIR/cron_install.log
 fi
 
+
+CURR_DIR=$(pwd)
+
 cd $CRONS_HOME
 
-cat default > CRONTAB
+cat /var/spool/cron/crontabs/eip > CRONTAB
 
 for FILE in *.sh; do
 	cat ./$FILE >> CRONTAB
 done
 
-crontab CRONTAB
+crontab CRONTAB -u eip
 
 rm CRONTAB
 
 echo "ALL CRONS WERE INSTALLED" | tee -a $LOG_DIR/cron_install.log
 
+cd $CURR_DIR
