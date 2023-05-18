@@ -8,13 +8,8 @@ This installation guide is for those intending to install an automated database 
 
 Here we have the procedure to install the jobs to automate the dbsync and openmrs databases backup:
 
-1. Checkout the centralization-docker-setup branch EC-295 from the github;
-2. Edit the file **CENTRALIZATION_HOME_DIRECTORY/conf/os/automated_bkp_env.sh** and set the values for the variables;
-3. After editing the file execute the following commands:
-    
-    **a.** cp CENTRALIZATION_HOME_DIRECTORY/conf/os/automated_bkp_env.sh /etc/profile.d/;
-    
-    **b.** source /etc/profile.d/automated_bkp_env.sh;
-4. Run the script **CENTRALIZATION_HOME_DIRECTORY/host/bkps/bkp_installation_setup.sh** to create the directories and install the cron jobs into the host:
-   
-    **a.** ./bkp_installation_setup.sh (inside the **bkps** directory);
+1. Checkout the centralization-docker-setup branch production from the github;
+2. Copy all content of the **CENTRALIZATION_HOME_DIRECTORY/host/bkps/** folder to /home/eip/shared/bkps/
+3. Edit the configuration file (conf.sh) under /home/eip/shared/bkps/ providing the correct values
+4. Run the install.sh script under /home/eip/shared/bkps/ as a sudo
+5. You are done
