@@ -7,15 +7,10 @@ DB_PASSWORD=$3
 DB_NAME=$4
 HOME_DIR=$5
 
-#
 BKPS_HOME=$HOME_DIR/shared/bkps/db/$DB_NAME
 timestamp=$(date +%Y-%m-%d_%H-%M-%S)
 DB_BKP_FILE="${DB_NAME}_db_$timestamp.sql.gz"
 LOG_DIR=$HOME_DIR/shared/logs/db/bkp/$DB_NAME
-
-
-
-echo "DB TYPE: $DB_NAME" | tee -a $LOG_DIR/bkps.log
 
 if [ -d "$LOG_DIR" ]; then
   echo "THE LOG DIR EXISTS" | tee -a $LOG_DIR/bkps.log
@@ -39,8 +34,8 @@ cd $BKPS_HOME
 echo "THE DATABASE IS" $DB_NAME | tee -a $LOG_DIR/bkps.log
 echo "THE DATABASE IS $DB_NAME: $DB_NAME ALIAS: $DB_NAME" | tee -a $LOG_DIR/bkps.log
 
-#
-docker exec $DB_CONTAINER bash -c "/usr/bin/mysqldump -u $DB_USER --password=$DB_PASSWORD $DB_NAME 2> /dev/null | gzip" > $BKPS_HOME/${DB_BKP_FILE}
-#
-echo "BACKUP FINISHED" | tee -a $LOG_DIR/bkps.log
 
+echo "EXPORTING $DB_NAME to $BKPS_HOME/${DB_BKP_FILE}" | tee -a $LOG_DIR/bkps.log
+
+docker exec $DB_CONTAINER bash -c "/usr/bin/mysqldump -u $DB_USER --password=$DB_PASSWORD $DB_NAME 2> /dev/null | gzip" > $BKPS_HOME/${DB_BKP_FILE}
+echo "BACKUP FINISHED" | tee -a $LOG_DIR/bkps.log

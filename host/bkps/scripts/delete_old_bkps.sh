@@ -33,6 +33,7 @@ while [ "$QTY_RECORDS_TO_BE_PRESERVED" -le "$MIN_FILES_TO_BE_PRESERVED" ] && [ "
   #MOVE THE NEWER FILES TO TEMPORARY FOLDER
   echo "TRYING TO MOVE LESS THAT $DAY DAYS FILES TO TEMPORARY DIRECTORY FOR FILES TO BE PRESERVED" | tee -a $LOG_DIR/bkps_cleanup.log
 
+  #find $BKPS_DIR -type f -name '*.gz' -mmin -$DAY -size +1M -exec mv {} $BKPS_TO_BE_PRESERVED_DIR \;
   find $BKPS_DIR -type f -name '*.gz' -mtime -$DAY -size +1M -exec mv {} $BKPS_TO_BE_PRESERVED_DIR \;
 
   QTY_RECORDS_TO_BE_PRESERVED=$(ls $BKPS_TO_BE_PRESERVED_DIR/ | wc -l)
