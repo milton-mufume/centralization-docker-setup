@@ -12,9 +12,6 @@ LOG_DIR=$EIP_HOME_DIR/shared/logs/bkps/db/cron
 
 timestamp=`date +%Y-%m-%d_%H-%M-%S`
 
-echo "SETUP DIR: $SETUP_DIR" | tee -a $LOG_DIR/cron_install.log
-echo "EIP_HOME_DIR $EIP_HOME_DIR"
-echo "INSTALLING CRON JOBS FROM $CRONS_HOME" | tee -a $LOG_DIR/cron_install.log
 
 if [ -d "$LOG_DIR" ]; then
        echo "THE LOG DIR EXISTS" | tee -a $LOG_DIR/cron_install.log
@@ -23,6 +20,9 @@ else
        echo "THE LOG DIR WAS CREATED" | tee -a $LOG_DIR/cron_install.log
 fi
 
+echo "SETUP DIR: $SETUP_DIR" | tee -a $LOG_DIR/cron_install.log
+echo "EIP_HOME_DIR $EIP_HOME_DIR"
+echo "INSTALLING CRON JOBS FROM $CRONS_HOME" | tee -a $LOG_DIR/cron_install.log
 
 CURR_DIR=$(pwd)
 

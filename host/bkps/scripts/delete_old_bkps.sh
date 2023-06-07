@@ -45,7 +45,7 @@ echo "$timestamp $QTY_RECORDS_TO_BE_PRESERVED RECORDS WILL BE PRESERVED!" | tee 
 
 if [ "$QTY_RECORDS_TO_BE_PRESERVED" -ge "$MIN_FILES_TO_BE_PRESERVED" ]; then
   echo "$timestamp REMOVING OLDER BKPS..." | tee -a $LOG_DIR/bkps_cleanup.log
-  rm $BKPS_DIR/*.gz
+  rm -fr $BKPS_DIR/*.gz
   echo "$timestamp OLDER BKPS REMOVED" | tee -a $LOG_DIR/bkps_cleanup.log
 else
   echo "$timestamp THE NUMBER OF FILES TO BE PRESERVED IS LESS THAT 2. THE REMOTION WILL BE SKIPPED" | tee -a $LOG_DIR/bkps_cleanup.log
