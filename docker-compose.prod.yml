@@ -167,7 +167,8 @@ services:
       - ./dbsync-central/run.prod.sh:/home/eip/run.sh
       - ./dbsync-central/init.prod.sh:/home/eip/init.sh
       - ./:/home/centralization-docker-setup/:ro
-      - /etc/localtime:/etc/localtime
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     working_dir: /home/eip
     entrypoint: [ "sh", "run.sh" ]
     restart: unless-stopped
