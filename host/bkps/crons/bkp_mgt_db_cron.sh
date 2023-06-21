@@ -1,1 +1,1 @@
-0 3 * * * SCRIPT_LOCATION/bkp_dbsync_mgt_db.sh CONFIG_FILE
+0 23 * * 6 SCRIPT_LOCATION/bkp_dbsync_mgt_db.sh CONFIG_FILE
