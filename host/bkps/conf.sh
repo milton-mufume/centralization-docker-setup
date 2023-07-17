@@ -13,4 +13,4 @@ export MGT_DB_CONTAINER=
 export DBSYNC_CENTRAL_APP_CONTAINER=
 
 #EIP HOME
-export EIP_HOME_DIR="/home/mufume"
+export EIP_HOME_DIR=
