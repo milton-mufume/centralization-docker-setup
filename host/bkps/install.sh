@@ -29,6 +29,7 @@ CURR_DIR=$(pwd)
 cd $CRONS_HOME
 
 cat /var/spool/cron/crontabs/eip > CRONTAB
+cat /var/spool/cron/crontabs/eip > CRONTAB_${timestamp}.bkp
 
 for FILE in *.sh; do
 	tmpfile="${FILE}.tmp"
