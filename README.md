@@ -116,7 +116,7 @@ In bellow command change HOST_NAME to the name of the host (ex: epts-niassa.fgh.
 
  <br>**13.** After making the necessary settings, start the services following the sequence.
 
->Start mysql-openmrs-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml up -d --build mysql-openmrs-central"
+>Start mysql-openmrs-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build mysql-openmrs-central"
 Restore the central database<br>
 
 3. If necessary, create the database access users (container mysql-central) that were defined in the configuration files in point 10 of the previous section.
@@ -130,8 +130,8 @@ Make the necessary changes on file: /home/eip/shared/conf/os/automated_bkp_env.s
 > Hit "docker exec -i mysql-openmrs-central /usr/bin/mysql -e "CREATE DATABASE  IF NOT EXISTS $OPENMRS_DB_NAME /*!40100 DEFAULT CHARACTER SET utf8 */;" -u $OPENMRS_DB_USER --password=$OPENMRS_DB_PASSWORD
 > Hit "cat /home/eip/shared/conf/openmrs/central/db/openmrs. | docker exec -i $DB_CONTAINER /usr/bin/mysql -u root --password=root $DB_NAME"
 
->Start "artemis-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml up -d --build artemis-central"
->Start "openmrs-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml up -d --build openmrs-central"
->Start "mysql-dbsync-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml up -d --build mysql-dbsync-central"
->Start "dbsync-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml up -d --build dbsync-central"
+>Start "artemis-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build artemis-central"
+>Start "openmrs-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build openmrs-central"
+>Start "mysql-dbsync-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build mysql-dbsync-central"
+>Start "dbsync-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build dbsync-central"
  
