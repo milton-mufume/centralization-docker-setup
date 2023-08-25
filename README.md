@@ -110,9 +110,9 @@ Change directory to /home/eip/shared/conf/artemis/certificates/server
 
 In bellow command change HOST_NAME to the name of the host (ex: epts-niassa.fgh.org.mz) and then run the 3 commands bellow one-by-one
 
-openssl req -nodes -new -x509 -days 3560 -keyout broker_key.pem -out broker_crt.pem -subj "/CN=HOST_NAME"
-openssl pkcs12 -export -in broker_crt.pem -inkey broker_key.pem -out broker.p12
-keytool -importkeystore -srckeystore broker.p12 -srcstoretype pkcs12 -destkeystore broker.ks
+>**openssl req -nodes -new -x509 -days 3560 -keyout broker_key.pem -out broker_crt.pem -subj "/CN=HOST_NAME"**<br>
+>**openssl pkcs12 -export -in broker_crt.pem -inkey broker_key.pem -out broker.p12**<br>
+>**keytool -importkeystore -srckeystore broker.p12 -srcstoretype pkcs12 -destkeystore broker.ks**<br>
 
  <br>**13.** After making the necessary settings, start the services following the sequence.
 
