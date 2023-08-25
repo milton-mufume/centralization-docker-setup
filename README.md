@@ -106,6 +106,9 @@ Then run:
 >**docker volume create dbSyncCentralDbData**<br>
 >**docker volume create artemisData**
 
+<br>**10.** Configure the ssl key for artemis hiting bellow commands<br>
+Change directory to /home/eip/shared/conf
+
  <br>**12.** After making the necessary settings, run the command below to start all services.
 >**docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml up -d**
 
