@@ -168,9 +168,10 @@ The table below lists all docker volumes where important container information i
  
  | **Volume**   |**Description**| **what is saved**  |
 | ------------- |:-------------:| -----:|
-| centralizationdockersetup_artemisData      |ArtemisMQ data| /var/lib/artemis|
-|centralizationdockersetup_esData    | opencr elastic search data      |   /usr/share/elasticsearch/data |
+| artemisData      |ArtemisMQ data| /var/lib/artemis|
+|esData    | opencr elastic search data      |   /usr/share/elasticsearch/data |
 | openmrsDbData| openmrs database and receiver mgt database    |    /var/lib/mysql |
 |opencrDbData|Opencr database|/var/lib/mysql|
+|dbsyncDbData|Dbsync database|/var/lib/mysql|
 
 
