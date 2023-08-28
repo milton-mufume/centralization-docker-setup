@@ -1,12 +1,11 @@
-# Centralization Project -  Implementation Plan
+# Centralization Project
 ## Introduction
 
 This document intends the important notes to be observed by the BD SYNC implementer. Here  are presented the steps that are supposed to be followed to carry out the installation.
 The implementation of centralization is fundamentally divided into two stages: (1) configuration and initialization of central server services (2) configuration of remote sites and their inclusion in the central site. The inclusion of remote sites will be done one by one.
 In this document we'll cover the setup of the central servers (stage (1)).
 
-# Execution of synchronization and creation of sede backup
-Synchronization and backup should be done following the usual procedures.
+# Central Server Setup
 
 ### Creation of user eip on the Server
 
@@ -97,7 +96,6 @@ Then run:
 
 >**source /etc/profile.d/centralization.sh**
 
-
 <br>**10.** Make the necessary changes to the files contained in the newly copied **'conf'** directory to **/home/eip/shared**.<br>
 
 <br>**11.** Create the volumes below:
@@ -107,43 +105,19 @@ Then run:
 >**docker volume create dbSyncCentralDbData**<br>
 >**docker volume create artemisData**
 
- <br>**12.** After making the necessary settings, run the command below to start all services.
->**docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml up -d**
+<br>**12.** Configure the ssl key for artemis<br>
+Change directory to /home/eip/shared/conf/artemis/certificates/server
 
-This command creates 9 containers described below:<br>
-    • dbsync-central: this container provides eip services for the receiver.<br>
-    • opencr: this container provides the opencr service<br>
-    • openmrs-central: this container provides the openmrs application service<br>
-    • artemis: this container provides the ArtemisMQ service<br>
-    • mysql-openmrs-central: this container provides the openmrs DBMS<br>
-    • mysql-dbsync-central: this container provides the dbsync DBMS<br>
-    • es: this container provides the elastic search service for opencr<br>
-    • hapi-fhir: this container provides hapi-fhir services to opencr<br>
-    • mysql-opencr: this container makes the DBMS available to opencr<br>
-    
- Alternatively, containers can be created individually using the command below:<br>
- >**docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml up -d --build CONTAINER-NAME**<br>
- 
- Where **CONTAINER-NAME** is the identifier of the container to be created.<br>
- 
- The alternative of installing individual containers is indicated in those situations in which it is not intended to install all containers on the central server.<br>
- 
- ### Replacement of the first database on the Central site
- 
- To restore the backup of the 'Sede' database on the central site, you must first ensure that the mysql-central container is on top and then: 
+In bellow command change HOST_NAME to the name of the host (ex: epts-niassa.fgh.org.mz) and then run the 3 commands bellow one-by-one
 
-1. Upload the database reset file to /home/eip/shared/bkps. Note that this is the database dump chosen to initialize the switch database.
+>**openssl req -nodes -new -x509 -days 3560 -keyout broker_key.pem -out broker_crt.pem -subj "/CN=HOST_NAME"**<br>
+>**openssl pkcs12 -export -in broker_crt.pem -inkey broker_key.pem -out broker.p12**<br>
+>**keytool -importkeystore -srckeystore broker.p12 -srcstoretype pkcs12 -destkeystore broker.ks**<br>
 
-2. Import using the command below:
+ <br>**13.** After making the necessary settings, start the services following the sequence.
 
->**docker exec -i mysql-openmrs-central /usr/bin/mysql -e "CREATE DATABASE IF NOT EXISTS DB_NAME CHARACTER SET utf8;" -u root --password=DB_PASSWORD**
-
->**cat /home/eip/shared/bkps/DB_SCRIPT | docker exec -i mysql-openmrs-central /usr/bin/mysql -u root --password=DB_PASSWORD DB_NAME**
-
-Where:<br> 
-**DB_SCRIPT:** is the file containing the database backup<br>
-**DB_PASSWORD:** is mysql root password<br>
-**DB_NAME:** is the name of the database<br>
+>Start mysql-openmrs-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build mysql-openmrs-central"
+Restore the central database<br>
 
 3. If necessary, create the database access users (container mysql-central) that were defined in the configuration files in point 10 of the previous section.
 E.g:
@@ -151,27 +125,13 @@ E.g:
 >**GRANT ALL PRIVILEGES ON DB_NAME.\* TO 'USER'@'%';**<br>
 >**FLUSH PRIVILEGES;**
 
-   a. Test access to the MySQL console using the users created above, and if you get an error, check if there are registered anonymous users:
-   >**docker exec -i mysql-central /usr/bin/mysql -e "SELECT COUNT(*) ANONYMOUS_USERS FROM mysql.user WHERE User='';" -u root -p**
-   
-   b. If the above query returned a value other than 0 (zero), proceed with the elimination of anonymous users:
-   >**docker exec -i mysql-central /usr/bin/mysql -e "DELETE FROM mysql.user WHERE User=''; FLUSH PRIVILEGES;" -u root -p**
-   
-   c. Retest access with previously created users.
+Make the necessary changes on file: /home/eip/shared/conf/os/automated_bkp_env.sh.sh
+>Run **source /home/eip/shared/conf/os/automated_bkp_env.sh.sh**
+> Hit "docker exec -i mysql-openmrs-central /usr/bin/mysql -e "CREATE DATABASE  IF NOT EXISTS $OPENMRS_DB_NAME /*!40100 DEFAULT CHARACTER SET utf8 */;" -u $OPENMRS_DB_USER --password=$OPENMRS_DB_PASSWORD
+> Hit "cat /home/eip/shared/conf/openmrs/central/db/openmrs. | docker exec -i $DB_CONTAINER /usr/bin/mysql -u root --password=root $DB_NAME"
 
-4. Restart all services using the command<br>
->**docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.yml restart**
-
-
-### Volumes defined on the Server
-
-The table below lists all docker volumes where important container information is persisted. Ensure these volumes are instantly backed up.
+>Start "artemis-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build artemis-central"
+>Start "openmrs-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build openmrs-central"
+>Start "mysql-dbsync-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build mysql-dbsync-central"
+>Start "dbsync-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build dbsync-central"
  
- | **Volume**   |**Description**| **what is saved**  |
-| ------------- |:-------------:| -----:|
-| centralizationdockersetup_artemisData      |ArtemisMQ data| /var/lib/artemis|
-|centralizationdockersetup_esData    | opencr elastic search data      |   /usr/share/elasticsearch/data |
-| openmrsDbData| openmrs database and receiver mgt database    |    /var/lib/mysql |
-|opencrDbData|Opencr database|/var/lib/mysql|
-
-

@@ -1,0 +1,115 @@
+version: "3.3"
+
+services:
+  mysql-openmrs-central:
+    image: mysql:5.6
+    container_name: mysql-openmrs-central
+    env_file:
+      - $docker_containers_shared_dir/conf/openmrs/central/db.env
+    ports:
+      - "$port_mysql_openmrs_central:3306"
+    volumes:
+      - ./mysql-openmrs-central/prod.my.cnf:/etc/mysql/my.cnf
+      - $docker_containers_shared_dir/conf/openmrs/central/db/certificates/server/:/home/ssl/     
+      - openmrsDbData:/var/lib/mysql
+      - /etc/localtime:/etc/localtime
+    restart: unless-stopped
+  mysql-dbsync-central:
+    image: mysql:5.6
+    container_name: mysql-dbsync-central
+    env_file:
+      - $docker_containers_shared_dir/conf/eip/mgt-db.env
+    ports:
+      - "$port_mysql_dbsync_central:3306"
+    volumes:
+      - ./mysql-dbsync-central/prod.my.cnf:/etc/mysql/my.cnf
+      - dbSyncCentralDbData:/var/lib/mysql
+      - /etc/localtime:/etc/localtime
+    restart: unless-stopped
+
+  artemis:
+    image: cnocorch/activemq-artemis
+    container_name: artemis
+    ports:
+      - "$port_artemis_brocker:61616"
+      - "$port_artemis_brocker_ssl:61617"
+      - "$port_artemis_console:8161"
+      - "$port_artemis_jmx_prometheus:9080"
+    volumes:
+      - $docker_containers_shared_dir/conf/artemis/artemis-roles.properties:/var/lib/artemis/etc/artemis-roles.properties
+      - $docker_containers_shared_dir/conf/artemis/artemis-users.properties:/var/lib/artemis/etc/artemis-users.properties
+      - $docker_containers_shared_dir/conf/artemis/broker.xml:/var/lib/artemis/etc/broker.xml
+      - $docker_containers_shared_dir/conf/artemis/certificates:/var/lib/artemis/etc/ssl
+      - ./artemis/monitoring/jmx_prometheus_config.yml:/var/lib/artemis/etc/jmx_prometheus_config.yml
+      - ./artemis/monitoring/jmx_prometheus_javaagent-0.17.2.jar:/var/lib/artemis/etc/jmx_prometheus_javaagent.jar
+      - ./artemis/artemis:/var/lib/artemis/bin/artemis
+      - artemisData:/var/lib/artemis/data/
+      - /etc/localtime:/etc/localtime
+    restart: unless-stopped
+    
+  openmrs-central:
+    image: tomcat:8.5.87-jdk8
+    container_name: openmrs-central
+    depends_on:
+      - mysql-openmrs-central
+      - artemis
+    volumes:
+      - ./openmrs-central/setenv.sh:/usr/local/tomcat/bin/setenv.sh
+      - ./openmrs-central/scripts/:/usr/local/tomcat/scripts/
+      - /etc/localtime:/etc/localtime
+      - $docker_containers_shared_dir/conf/openmrs/central/openmrs-runtime.properties:/usr/local/tomcat/openmrs-runtime.properties
+      - $docker_containers_shared_dir/conf/openmrs/central/openmrs.p12:/usr/local/tomcat/.OpenMRS/mpi/config/openmrs.p12
+      - $docker_containers_shared_dir/openmrs/tomcat/webapps:/usr/local/tomcat/webapps/  
+      - $docker_containers_shared_dir/openmrs/data:/usr/local/tomcat/.OpenMRS
+      - $docker_containers_shared_dir/openmrs/data/hl7:/usr/local/tomcat/.OpenMRS/hl7
+      - ./openmrs-common/modules/legacyui-1.8.2.omod:/usr/local/tomcat/.OpenMRS/modules/legacyui.omod
+      - ./openmrs-common/modules/owa-1.12.0.omod:/usr/local/tomcat/.OpenMRS/modules/owa.omod
+      - ./openmrs-common/modules/webservices.rest-2.36.0.omod:/usr/local/tomcat/.OpenMRS/modules/webservices.rest.omod
+      - ./openmrs-common/modules/eptsreports-1.16.0.omod:/usr/local/tomcat/.OpenMRS/modules/eptsreports.omod
+      - ./openmrs-common/modules/serialization.xstream-0.2.14.omod:/usr/local/tomcat/.OpenMRS/modules/serialization.xstream.omod
+      - ./openmrs-common/modules/calculation-1.2.1.omod:/usr/local/tomcat/.OpenMRS/modules/calculation.omod
+      - ./openmrs-common/modules/htmlwidgets-1.10.0.omod:/usr/local/tomcat/.OpenMRS/modules/htmlwidgets.omod
+      - ./openmrs-common/modules/reporting-1.21.0.omod:/usr/local/tomcat/.OpenMRS/modules/reporting.omod       
+      - ./openmrs-central/modules/debezium-1.0.0-SNAPSHOT.omod:/usr/local/tomcat/.OpenMRS/modules/debezium.omod
+      - ./openmrs-central/modules/mpi-1.0.0-SNAPSHOT.omod:/usr/local/tomcat/.OpenMRS/modules/mpi.omod
+      - ./openmrs-central/modules/formdataexport-1.0.0.omod:/usr/local/tomcat/.OpenMRS/modules/formdataexport.omod
+      - ./openmrs-central/modules/htmlformentry-3.13.1.omod:/usr/local/tomcat/.OpenMRS/modules/htmlformentry.omod
+    ports:
+      - "$port_openmrs_central:8080"
+    entrypoint: [ "sh", "/usr/local/tomcat/scripts/run.sh" ]
+    restart: unless-stopped
+
+  dbsync-central:
+    image: adoptopenjdk/openjdk8:alpine-slim
+    container_name: dbsync-central
+    env_file:
+      - $docker_containers_shared_dir/conf/eip/dbsync.env   
+    environment:
+      - home_dir=/home/eip
+      - shared_dir=/home/eip/shared
+    depends_on:
+      - mysql-dbsync-central
+      - openmrs-central
+      - artemis
+    ports:
+      - "$port_dbsync_console:8081"
+    volumes:
+      - $docker_containers_shared_dir/conf/eip/dbsync-users.properties:/home/eip/dbsync-users.properties
+      - $docker_containers_shared_dir:/home/eip/shared
+      - ./dbsync-central/run.prod.sh:/home/eip/run.sh
+      - ./dbsync-central/init.prod.sh:/home/eip/init.sh
+      - ./:/home/centralization-docker-setup/:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    working_dir: /home/eip
+    entrypoint: [ "sh", "run.sh" ]
+    restart: unless-stopped
+
+
+volumes:
+  openmrsDbData:
+    external: true 
+  dbSyncCentralDbData: 
+    external: true
+  artemisData:
+    external: true

@@ -94,9 +94,6 @@ function appRoutes() {
     if (req.path.startsWith('/ocrux')) {
       return next();
     }
-    if(authorized) {
-      return next();
-    }
     const cert = req.connection.getPeerCertificate();
     if (req.client.authorized) {
       if (!cert.subject.CN) {

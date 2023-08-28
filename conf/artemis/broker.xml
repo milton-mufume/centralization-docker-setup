@@ -88,6 +88,7 @@ under the License.
             <global-max-size>100Mb</global-max-size>
 
       -->
+    <global-max-size>2048Mb</global-max-size>
     <acceptors>
       <!-- useEpoll means: it will use Netty epoll if you are on a system (Linux) that supports it -->
       <!-- amqpCredits: The number of credits sent to AMQP producers -->
@@ -97,6 +98,7 @@ under the License.
                     See https://issues.apache.org/jira/browse/ARTEMIS-1644 for more information. -->
       <!-- Acceptor for every supported protocol -->
       <acceptor name="artemis">tcp://0.0.0.0:61616?handshake-timeout=0;tcpSendBufferSize=1048576;tcpReceiveBufferSize=1048576;protocols=CORE,AMQP,STOMP,HORNETQ,MQTT,OPENWIRE;useEpoll=true;amqpCredits=1000;amqpLowCredits=300</acceptor>
+      <acceptor name="netty-ssl-acceptor">tcp://0.0.0.0:61617?sslEnabled=true;keyStorePath=${data.dir}/../etc/ssl/server/broker.ks;keyStorePassword=changeit;needClientAuth=false</acceptor>
       <!-- AMQP Acceptor.  Listens on default AMQP port for AMQP traffic.-->
       <acceptor name="amqp">tcp://0.0.0.0:5672?tcpSendBufferSize=1048576;tcpReceiveBufferSize=1048576;protocols=AMQP;useEpoll=true;amqpCredits=1000;amqpLowCredits=300</acceptor>
       <!-- STOMP Acceptor. -->
@@ -149,6 +151,7 @@ under the License.
         <auto-create-addresses>true</auto-create-addresses>
         <auto-create-jms-queues>true</auto-create-jms-queues>
         <auto-create-jms-topics>true</auto-create-jms-topics>
+	<max-delivery-attempts>-1</max-delivery-attempts>
       </address-setting>
     </address-settings>
     <addresses>
