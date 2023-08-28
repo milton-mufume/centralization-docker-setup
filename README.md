@@ -78,7 +78,11 @@ Follow the steps below to configure the central server:
 >**cd /home/eip/prg/docker**
 
 >**git clone https://github.com/FriendsInGlobalHealth/centralization-docker-setup.git**
-<br>**NOTE:** After cloning the above project we need to swicth to the branch **"production"** in order to continue with this process
+
+<br>**NOTE:** After cloning the above project we need to swicth to the branch **"production"** in order to continue with this process, and that can be achieved using the following commands:
+
+>**cd /home/eip/prg/docker/centralization-docker-setup**<br>
+>**git checkout production**
 
 
 
@@ -119,19 +123,28 @@ In bellow command change HOST_NAME to the name of the host (ex: epts-niassa.fgh.
 >Start mysql-openmrs-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build mysql-openmrs-central"
 Restore the central database<br>
 
-3. If necessary, create the database access users (container mysql-central) that were defined in the configuration files in point 10 of the previous section.
+ If necessary, create the database access users (container mysql-central) that were defined in the configuration files in point 10 of the previous section.
 E.g:
 >**CREATE USER 'USER'@'%' IDENTIFIED BY 'DB_PASSWORD';**<br>
 >**GRANT ALL PRIVILEGES ON DB_NAME.\* TO 'USER'@'%';**<br>
 >**FLUSH PRIVILEGES;**
 
-Make the necessary changes on file: /home/eip/shared/conf/os/automated_bkp_env.sh.sh
->Run **source /home/eip/shared/conf/os/automated_bkp_env.sh.sh**
-> Hit "docker exec -i mysql-openmrs-central /usr/bin/mysql -e "CREATE DATABASE  IF NOT EXISTS $OPENMRS_DB_NAME /*!40100 DEFAULT CHARACTER SET utf8 */;" -u $OPENMRS_DB_USER --password=$OPENMRS_DB_PASSWORD
-> Hit "cat /home/eip/shared/conf/openmrs/central/db/openmrs. | docker exec -i $DB_CONTAINER /usr/bin/mysql -u root --password=root $DB_NAME"
+**14.** In order to install the jobs that are responsible to create the backups for the databases, make the necessary changes on file /home/eip/shared/conf/os/automated_bkp_env.sh.sh and the run:_**
+>**source /home/eip/shared/conf/os/automated_bkp_env.sh.sh<br>
 
->Start "artemis-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build artemis-central"
->Start "openmrs-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build openmrs-central"
->Start "mysql-dbsync-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build mysql-dbsync-central"
->Start "dbsync-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build dbsync-central"
+**15.** The commands bellow creates the openmrs database and restore the database with a dump to populate the database with the first data:
+
+> Hit "docker exec -i mysql-openmrs-central /usr/bin/mysql -e "CREATE DATABASE  IF NOT EXISTS $OPENMRS_DB_NAME /*!40100 DEFAULT CHARACTER SET utf8 */;" -u $OPENMRS_DB_USER --password=$OPENMRS_DB_PASSWORD<br>
+
+> Hit "cat /home/eip/shared/conf/openmrs/central/db/openmrs. | docker exec -i $DB_CONTAINER /usr/bin/mysql -u root --password=root $DB_NAME"<br>
+
+**16.** The commands bellow creates the docker containers for artemis, for openmrs and dbsync applications: 
+
+>Start "artemis-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build artemis"<br>
+
+>Start "openmrs-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build openmrs-central"<br>
+
+>Start "mysql-dbsync-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build mysql-dbsync-central"<br>
+
+>Start "dbsync-central container: "docker-compose -f /home/eip/prg/docker/centralization-docker-setup/docker-compose.prod.minimal.yml up -d --build dbsync-central"<br>
  
