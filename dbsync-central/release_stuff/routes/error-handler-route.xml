@@ -7,8 +7,16 @@
 
         <choice>
             <when>
-                <method beanType="org.openmrs.eip.app.AppUtils" method="isAppContextStopping()" />
-                <log message="Ignoring the error because the application context is stopping" />
+                <method beanType="org.openmrs.eip.app.AppUtils" method="isShuttingDown()" />
+                <log message="Ignoring the error because the application is shutting down" />
+            </when>
+            <when>
+                <simple>${exchangeProperty[org.openmrs.eip.app.receiver.isConflictSync]}</simple>
+                <log loggingLevel="DEBUG" message="An error was encountered while syncing a conflict item" />
+
+                <setProperty name="org.openmrs.eip.exception">
+                    <simple>${exception}</simple>
+                </setProperty>
             </when>
             <otherwise>
                 <when>
@@ -69,7 +77,7 @@
                         <log message="Adding new item to retry queue" />
                         <setBody>
                             <spel>
-                                #{new org.openmrs.eip.app.management.entity.ReceiverRetryQueueItem()}
+                                #{new org.openmrs.eip.app.management.entity.receiver.ReceiverRetryQueueItem()}
                             </spel>
                         </setBody>
                         <script>
