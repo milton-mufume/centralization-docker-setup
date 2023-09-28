@@ -1,0 +1,212 @@
+<Bundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://santedb.org/model">
+   <resource xsi:type="AssigningAuthority">
+      <id>8d793bee-c2cc-11de-8d13-0010c6dffd0f</id>
+      <name>OPENMRS-NUM</name>
+      <domainName>OPENMRS_NUM</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.3</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/openmrs-num</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource>
+
+  <resource xsi:type="AssigningAuthority">
+      <id>E8275680-5129-4832-9668-131F76E8DFB8</id>
+      <name>OPENMRS SYSTEM URI</name>
+      <domainName>PATIENT_UUID</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.4</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-uuid</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+      
+    <resource xsi:type="AssigningAuthority">
+      <id>e2b96ad6-1d5f-11e0-b929-000c29ad1d07</id>
+      <name>CDG PTV PRE NATAL</name>
+      <domainName>CDG_PTV_PRE_NATAL</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.7</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/cdg-ptv-pre-natal</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+  
+    <resource xsi:type="AssigningAuthority">
+      <id>e2b96c16-1d5f-11e0-b929-000c29ad1d07</id>
+      <name>CDG ITS</name>
+      <domainName>CDG_ITS</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.8</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/cdg-its</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+ 
+   <resource xsi:type="AssigningAuthority">
+      <id>e2b96d56-1d5f-11e0-b929-000c29ad1d07</id>
+      <name>CDG PTC MATERNIDADE</name>
+      <domainName>CDG_PTC_MATERNIDADE</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.9</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/cdg-ptc-maternidade</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+  
+    <resource xsi:type="AssigningAuthority">
+      <id>e2b97b70-1d5f-11e0-b929-000c29ad1d07</id>
+      <name>NID CCR</name>
+      <domainName>NID_CCR</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.10</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nid-ccr</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+  
+    <resource xsi:type="AssigningAuthority">
+      <id>e2b97cec-1d5f-11e0-b929-000c29ad1d07</id>
+      <name>PCR NUM REG</name>
+      <domainName>pcr_num_reg</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.11</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/pcr-num-reg</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+  
+  <resource xsi:type="AssigningAuthority">
+      <id>e2b97e40-1d5f-11e0-b929-000c29ad1d07</id>
+      <name>NID TB</name>
+      <domainName>NID_TB</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.12</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nit-tb</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+  
+  <resource xsi:type="AssigningAuthority">
+      <id>e2b97f8a-1d5f-11e0-b929-000c29ad1d07</id>
+      <name>NUM CANCRO CERVICAL</name>
+      <domainName>NUM_CANCRO_CERVICAL</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.13</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/num-cancro-cervical</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+    <resource xsi:type="AssigningAuthority">
+      <id>e89c8925-35cc-4a29-9002-6b36bf3fd47f</id>
+      <name>NUIC</name>
+      <domainName>NUIC</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.14</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nuic</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+   <resource xsi:type="AssigningAuthority">
+      <id>79ad599a-50df-48f8-865c-0095ec9a9d01</id>
+      <name>NID DISA</name>
+      <domainName>NID_DISA</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.15</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nid-disa</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource>  
+  <resource xsi:type="AssigningAuthority">
+      <id>1c72703d-fb55-439e-af4f-ef39a1049e19</id>
+      <name>CRAM ID</name>
+      <domainName>CRAM_ID</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.16</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/cram-id</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+  <resource xsi:type="AssigningAuthority">
+      <id>bce7c891-27e9-42ec-abb0-aec3a641175e</id>
+      <name>NID PREP</name>
+      <domainName>NID_PREP</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.17</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nid-prep</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+  <resource xsi:type="AssigningAuthority">
+      <id>a5d38e09-efcb-4d91-a526-50ce1ba5011a</id>
+      <name>OPENEMPI ID</name>
+      <domainName>OPENEMPI_ID</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.18</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/openempi-id</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource>   
+   <resource xsi:type="AssigningAuthority">
+      <id>05a29f94-c0ed-11e2-94be-8c13b969e336</id>
+      <name>PATIENT IDENTIFIERS</name>
+      <domainName>PATIENT_IDENTIFIERS</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.20</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource>  
+   <resource xsi:type="AssigningAuthority">
+      <id>05a29f94-c0ed-11e2-94be-8c13b969e337</id>
+      <name>HEALTH CENTER</name>
+      <domainName>HEALTH_CENTER</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.21</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/health-center</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource>    
+   <resource xsi:type="AssigningAuthority">
+      <id>05a29f94-c0ed-11e2-94be-8c13b969e338</id>
+      <name>PERSON UUID</name>
+      <domainName>PERSON_UUID</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.22</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/person-uuid</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource>      
+   <resource xsi:type="AssigningAuthority">
+      <id>05a29f94-c0ed-11e2-94be-8c13b969e339</id>
+      <name>RELATIONSHIP TYPES</name>
+      <domainName>RELATIONSHIP_TYPES</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.23</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/relationship-types</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource>  
+ 
+ <resource xsi:type="AssigningAuthority">
+      <id>e2b966d0-1d5f-11e0-b929-000c29ad1d07</id>
+      <name>NID TARV</name>
+      <domainName>NID_TARV</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.24</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/nid-tarv</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+  
+  <resource xsi:type="AssigningAuthority">
+      <id>e2b9682e-1d5f-11e0-b929-000c29ad1d07</id>
+      <name>NATIONAL ID</name>
+      <domainName>NATIONAL_ID</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.25</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/bi</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+  
+  <resource xsi:type="AssigningAuthority">
+      <id>e2b9698c-1d5f-11e0-b929-000c29ad1d07</id>
+      <name>ATS CODE</name>
+      <domainName>CDG_ATS</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.26</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/patient-identifiers/cdg-ats</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource> 
+  
+   <resource xsi:type="AssigningAuthority">
+      <id>05a29f94-c0ed-11e2-94be-8c13b969e340</id>
+      <name>CHILD</name>
+      <domainName>CHILD</domainName>
+      <oid>2.16.840.1.113883.3.72.5.9.27</oid>
+      <url>http://metadata.epts.e-saude.net/dictionary/relationship-types#CHILD</url>
+      <isUnique>false</isUnique>
+      <assigningApplication>{{security_id}}</assigningApplication>
+  </resource>        
+</Bundle>
