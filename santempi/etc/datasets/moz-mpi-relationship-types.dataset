@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Moz MPI Relationship Types Definition DataSet" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://santedb.org/data">  <update insertIfNotExists="true" skipIfError="false">
+    <ConceptSet xmlns="http://santedb.org/model">
+      <id>8d13f3ce-044e-11ee-9e33-0242c0a84002</id>
+      <name>Relationship Types</name>
+      <mnemonic>Moz-Relationship-Type</mnemonic>
+      <oid>2.16.840.1.113883.1.11.23959</oid>
+      <url>http://terminology.hl7.org/CodeSystem/v3-RoleCode</url>
+    </ConceptSet>
+  </update>
+    <update insertIfNotExists="true">
+    <ReferenceTerm xmlns="http://santedb.org/model">
+      <id>e69c3ea8-0451-11ee-8229-0242c0a84002</id>
+      <mnemonic>DTR</mnemonic>
+      <codeSystem>53536038-8f4e-476a-b14c-11203c9f9bbf</codeSystem>
+      <name>
+        <language>en</language>
+        <value>Doctor</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </ReferenceTerm>
+  </update>
+  <update insertIfNotExists="true" skipIfError="false"> 
+    <Concept xmlns="http://santedb.org/model" skipIfError="false">
+      <id>e69c3ed0-0451-11ee-8229-0242c0a84002</id>
+      <previousVersion xsi:nil="true" />
+      <version xsi:nil="true" />
+      <sequence xsi:nil="true" />
+      <isReadonly>false</isReadonly>
+      <mnemonic>DTR</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+	  <conceptSet>8d13f3ce-044e-11ee-9e33-0242c0a84002</conceptSet>
+      <referenceTerm>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <term>e69c3ea8-0451-11ee-8229-0242c0a84002</term>
+        <relationshipType>2c4dafc2-566a-41ae-9ebc-3097d7d22f4a</relationshipType>
+      </referenceTerm>
+      <name>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <language>en</language>
+        <value>Doctor</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true">
+    <ReferenceTerm xmlns="http://santedb.org/model">
+      <id>e69c6b44-0451-11ee-8229-0242c0a84002</id>
+      <mnemonic>SPVR</mnemonic>
+      <codeSystem>53536038-8f4e-476a-b14c-11203c9f9bbf</codeSystem>
+      <name>
+        <language>en</language>
+        <value>Sponse</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </ReferenceTerm>
+  </update>
+  <update insertIfNotExists="true" skipIfError="false"> 
+    <Concept xmlns="http://santedb.org/model" skipIfError="false">
+      <id>e69c6b62-0451-11ee-8229-0242c0a84002</id>
+      <previousVersion xsi:nil="true" />
+      <version xsi:nil="true" />
+      <sequence xsi:nil="true" />
+      <isReadonly>false</isReadonly>
+      <mnemonic>SPVR</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+	  <conceptSet>8d13f3ce-044e-11ee-9e33-0242c0a84002</conceptSet>
+      <referenceTerm>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <term>e69c6b44-0451-11ee-8229-0242c0a84002</term>
+        <relationshipType>2c4dafc2-566a-41ae-9ebc-3097d7d22f4a</relationshipType>
+      </referenceTerm>
+      <name>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <language>en</language>
+        <value>Sponse</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true">
+    <ReferenceTerm xmlns="http://santedb.org/model">
+      <id>e69c6d10-0451-11ee-8229-0242c0a84002</id>
+      <mnemonic>HDNEIHBHD</mnemonic>
+      <codeSystem>53536038-8f4e-476a-b14c-11203c9f9bbf</codeSystem>
+      <name>
+        <language>en</language>
+        <value>Chefe de Bairro</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </ReferenceTerm>
+  </update>
+  <update insertIfNotExists="true" skipIfError="false"> 
+    <Concept xmlns="http://santedb.org/model" skipIfError="false">
+      <id>e69c6d38-0451-11ee-8229-0242c0a84002</id>
+      <previousVersion xsi:nil="true" />
+      <version xsi:nil="true" />
+      <sequence xsi:nil="true" />
+      <isReadonly>false</isReadonly>
+      <mnemonic>HDNEIHBHD</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+	  <conceptSet>8d13f3ce-044e-11ee-9e33-0242c0a84002</conceptSet>
+      <referenceTerm>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <term>e69c6d10-0451-11ee-8229-0242c0a84002</term>
+        <relationshipType>2c4dafc2-566a-41ae-9ebc-3097d7d22f4a</relationshipType>
+      </referenceTerm>
+      <name>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <language>en</language>
+        <value>Chefe de Bairro</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true">
+    <ReferenceTerm xmlns="http://santedb.org/model">
+      <id>e69c6db0-0451-11ee-8229-0242c0a84002</id>
+      <mnemonic>WKR</mnemonic>
+      <codeSystem>53536038-8f4e-476a-b14c-11203c9f9bbf</codeSystem>
+      <name>
+        <language>en</language>
+        <value>Worker</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </ReferenceTerm>
+  </update>
+  <update insertIfNotExists="true" skipIfError="false"> 
+    <Concept xmlns="http://santedb.org/model" skipIfError="false">
+      <id>e69c6dce-0451-11ee-8229-0242c0a84002</id>
+      <previousVersion xsi:nil="true" />
+      <version xsi:nil="true" />
+      <sequence xsi:nil="true" />
+      <isReadonly>false</isReadonly>
+      <mnemonic>WKR</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+	  <conceptSet>8d13f3ce-044e-11ee-9e33-0242c0a84002</conceptSet>
+      <referenceTerm>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <term>e69c6db0-0451-11ee-8229-0242c0a84002</term>
+        <relationshipType>2c4dafc2-566a-41ae-9ebc-3097d7d22f4a</relationshipType>
+      </referenceTerm>
+      <name>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <language>en</language>
+        <value>Worker</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true">
+    <ReferenceTerm xmlns="http://santedb.org/model">
+      <id>e69c6e46-0451-11ee-8229-0242c0a84002</id>
+      <mnemonic>OTHER</mnemonic>
+      <codeSystem>53536038-8f4e-476a-b14c-11203c9f9bbf</codeSystem>
+      <name>
+        <language>en</language>
+        <value>Other</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </ReferenceTerm>
+  </update>
+  <update insertIfNotExists="true" skipIfError="false"> 
+    <Concept xmlns="http://santedb.org/model" skipIfError="false">
+      <id>e69c6e6e-0451-11ee-8229-0242c0a84002</id>
+      <previousVersion xsi:nil="true" />
+      <version xsi:nil="true" />
+      <sequence xsi:nil="true" />
+      <isReadonly>false</isReadonly>
+      <mnemonic>OTHER</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+	  <conceptSet>8d13f3ce-044e-11ee-9e33-0242c0a84002</conceptSet>
+      <referenceTerm>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <term>e69c6e46-0451-11ee-8229-0242c0a84002</term>
+        <relationshipType>2c4dafc2-566a-41ae-9ebc-3097d7d22f4a</relationshipType>
+      </referenceTerm>
+      <name>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <language>en</language>
+        <value>Other</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true">
+    <ReferenceTerm xmlns="http://santedb.org/model">
+      <id>e69c6ee6-0451-11ee-8229-0242c0a84002</id>
+      <mnemonic>DPOWATT</mnemonic>
+      <codeSystem>53536038-8f4e-476a-b14c-11203c9f9bbf</codeSystem>
+      <name>
+        <language>en</language>
+        <value>Chefe de Familia</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </ReferenceTerm>
+  </update>
+  <update insertIfNotExists="true" skipIfError="false"> 
+    <Concept xmlns="http://santedb.org/model" skipIfError="false">
+      <id>e69c6f0e-0451-11ee-8229-0242c0a84002</id>
+      <previousVersion xsi:nil="true" />
+      <version xsi:nil="true" />
+      <sequence xsi:nil="true" />
+      <isReadonly>false</isReadonly>
+      <mnemonic>DPOWATT</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+	  <conceptSet>8d13f3ce-044e-11ee-9e33-0242c0a84002</conceptSet>
+      <referenceTerm>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <term>e69c6ee6-0451-11ee-8229-0242c0a84002</term>
+        <relationshipType>2c4dafc2-566a-41ae-9ebc-3097d7d22f4a</relationshipType>
+      </referenceTerm>
+      <name>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <language>en</language>
+        <value>Chefe de Familia</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true">
+    <ReferenceTerm xmlns="http://santedb.org/model">
+      <id>e69c6fc2-0451-11ee-8229-0242c0a84002</id>
+      <mnemonic>FRND</mnemonic>
+      <codeSystem>53536038-8f4e-476a-b14c-11203c9f9bbf</codeSystem>
+      <name>
+        <language>en</language>
+        <value>Friend</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </ReferenceTerm>
+  </update>
+  <update insertIfNotExists="true" skipIfError="false"> 
+    <Concept xmlns="http://santedb.org/model" skipIfError="false">
+      <id>e69c6fe0-0451-11ee-8229-0242c0a84002</id>
+      <previousVersion xsi:nil="true" />
+      <version xsi:nil="true" />
+      <sequence xsi:nil="true" />
+      <isReadonly>false</isReadonly>
+      <mnemonic>FRND</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+	  <conceptSet>8d13f3ce-044e-11ee-9e33-0242c0a84002</conceptSet>
+      <referenceTerm>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <term>e69c6fc2-0451-11ee-8229-0242c0a84002</term>
+        <relationshipType>2c4dafc2-566a-41ae-9ebc-3097d7d22f4a</relationshipType>
+      </referenceTerm>
+      <name>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <language>en</language>
+        <value>Friend</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true">
+    <ReferenceTerm xmlns="http://santedb.org/model">
+      <id>e69c7058-0451-11ee-8229-0242c0a84002</id>
+      <mnemonic>EMPLY</mnemonic>
+      <codeSystem>53536038-8f4e-476a-b14c-11203c9f9bbf</codeSystem>
+      <name>
+        <language>en</language>
+        <value>Employer</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </ReferenceTerm>
+  </update>
+  <update insertIfNotExists="true" skipIfError="false"> 
+    <Concept xmlns="http://santedb.org/model" skipIfError="false">
+      <id>e69c7076-0451-11ee-8229-0242c0a84002</id>
+      <previousVersion xsi:nil="true" />
+      <version xsi:nil="true" />
+      <sequence xsi:nil="true" />
+      <isReadonly>false</isReadonly>
+      <mnemonic>EMPLY</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+	  <conceptSet>8d13f3ce-044e-11ee-9e33-0242c0a84002</conceptSet>
+      <referenceTerm>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <term>e69c7058-0451-11ee-8229-0242c0a84002</term>
+        <relationshipType>2c4dafc2-566a-41ae-9ebc-3097d7d22f4a</relationshipType>
+      </referenceTerm>
+      <name>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <language>en</language>
+        <value>Employer</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true">
+    <ReferenceTerm xmlns="http://santedb.org/model">
+      <id>e69c70e4-0451-11ee-8229-0242c0a84002</id>
+      <mnemonic>PTNT</mnemonic>
+      <codeSystem>53536038-8f4e-476a-b14c-11203c9f9bbf</codeSystem>
+      <name>
+        <language>en</language>
+        <value>Patient</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </ReferenceTerm>
+  </update>
+  <update insertIfNotExists="true" skipIfError="false"> 
+    <Concept xmlns="http://santedb.org/model" skipIfError="false">
+      <id>e69c7120-0451-11ee-8229-0242c0a84002</id>
+      <previousVersion xsi:nil="true" />
+      <version xsi:nil="true" />
+      <sequence xsi:nil="true" />
+      <isReadonly>false</isReadonly>
+      <mnemonic>PTNT</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+	  <conceptSet>8d13f3ce-044e-11ee-9e33-0242c0a84002</conceptSet>
+      <referenceTerm>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <term>e69c70e4-0451-11ee-8229-0242c0a84002</term>
+        <relationshipType>2c4dafc2-566a-41ae-9ebc-3097d7d22f4a</relationshipType>
+      </referenceTerm>
+      <name>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <language>en</language>
+        <value>Patient</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true">
+    <ReferenceTerm xmlns="http://santedb.org/model">
+      <id>e69c718e-0451-11ee-8229-0242c0a84002</id>
+      <mnemonic>FAMDEP</mnemonic>
+      <codeSystem>53536038-8f4e-476a-b14c-11203c9f9bbf</codeSystem>
+      <name>
+        <language>en</language>
+        <value>Dependente</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </ReferenceTerm>
+  </update>
+  <update insertIfNotExists="true" skipIfError="false"> 
+    <Concept xmlns="http://santedb.org/model" skipIfError="false">
+      <id>e69c71b6-0451-11ee-8229-0242c0a84002</id>
+      <previousVersion xsi:nil="true" />
+      <version xsi:nil="true" />
+      <sequence xsi:nil="true" />
+      <isReadonly>false</isReadonly>
+      <mnemonic>FAMDEP</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+	  <conceptSet>8d13f3ce-044e-11ee-9e33-0242c0a84002</conceptSet>
+      <referenceTerm>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <term>e69c718e-0451-11ee-8229-0242c0a84002</term>
+        <relationshipType>2c4dafc2-566a-41ae-9ebc-3097d7d22f4a</relationshipType>
+      </referenceTerm>
+      <name>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <language>en</language>
+        <value>Dependente</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true">
+    <ReferenceTerm xmlns="http://santedb.org/model">
+      <id>e69c7238-0451-11ee-8229-0242c0a84002</id>
+      <mnemonic>RSIDT</mnemonic>
+      <codeSystem>53536038-8f4e-476a-b14c-11203c9f9bbf</codeSystem>
+      <name>
+        <language>en</language>
+        <value>Residente</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </ReferenceTerm>
+  </update>
+  <update insertIfNotExists="true" skipIfError="false"> 
+    <Concept xmlns="http://santedb.org/model" skipIfError="false">
+      <id>e69c7260-0451-11ee-8229-0242c0a84002</id>
+      <previousVersion xsi:nil="true" />
+      <version xsi:nil="true" />
+      <sequence xsi:nil="true" />
+      <isReadonly>false</isReadonly>
+      <mnemonic>RSIDT</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+	  <conceptSet>8d13f3ce-044e-11ee-9e33-0242c0a84002</conceptSet>
+      <referenceTerm>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <term>e69c7238-0451-11ee-8229-0242c0a84002</term>
+        <relationshipType>2c4dafc2-566a-41ae-9ebc-3097d7d22f4a</relationshipType>
+      </referenceTerm>
+      <name>
+        <source xsi:nil="true" />
+        <effectiveVersionSequence xsi:nil="true" />
+        <obsoleteVersionSequence xsi:nil="true" />
+        <language>en</language>
+        <value>Residente</value>
+        <phoneticAlgorithm xsi:nil="true" />
+      </name>
+    </Concept>
+  </update>
+</dataset>

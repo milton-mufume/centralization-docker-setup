@@ -2,8 +2,8 @@ version: "3.3"
 
 services:
   db:
-    image: postgres
-    container_name: sdb-postgres
+    image: postgres@sha256:b7662e5572febc3380fd5773fa600824f0433b82935e7e5b4c180e9541b2b3d7
+    container_name: santempi-db 
     ports:
       - "${SANTE_SDB_POSTGRES_PORT}:5432"
     environment:
