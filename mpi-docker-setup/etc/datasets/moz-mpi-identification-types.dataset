@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Moz MPI Identifier Types Definition DataSet" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://santedb.org/data">
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a51328-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>OpenMRS_PATIENT_UUID</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>OpenMRS Patient UUID</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a51f3a-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>OpenMRS_ID_NUM</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>OpenMRS ID Num</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a52084-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>NID_TARV</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>NID TARV</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a52142-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>BI</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>BILHETE DE IDENTIDADE</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a521ec-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>CDG_ATS</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>CDG ATS</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a5230e-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>CDG_PTV_PRE_NATAL</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>CODIGO PTV PRE NATAL</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a523cc-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>CDG_ITS</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>CDG ITS</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a52480-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>CDG_PTV_MATERNIDADE</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>CDG PTV MATERNIDADE</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a5252a-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>NID_CCR</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>NID CCR</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a525d4-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>PCR_NUM_REG</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>PCR NUM REG</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a52688-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>NIT_TB</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>NIT TB</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a5273c-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>NUM_CANCRO_CERVICAL</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>NUM CANCRO CERVICAL</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a5280e-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>NUIC</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>NUIC</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a52930-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>NID_DISA</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>NID DISA</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a52a0c-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>CRAM_ID</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>CRAM ID</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a52ab6-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>NID_PREP</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>NID PREP</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a52b6a-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>OpenEMPI_ID</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>OpenEMPI ID</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+  <update insertIfNotExists="true" skipIfError="true">
+    <Concept xmlns="http://santedb.org/model">
+      <id>10a52c14-0448-11ee-8229-0242c0a84002</id>
+      <isReadonly>false</isReadonly>
+      <mnemonic>OpenMRS_ID</mnemonic>
+      <statusConcept>c8064cbd-fa06-4530-b430-1a52f1530c27</statusConcept>
+      <conceptClass>0d6b3439-c9be-4480-af39-eeb457c052d0</conceptClass>
+      <name>
+        <language>en</language>
+        <value>OpenMRS ID</value>
+      </name>
+      <conceptSet>cb6e4f28-5a78-408e-9b5e-a41018057fb1</conceptSet>
+    </Concept>
+  </update>
+</dataset>
