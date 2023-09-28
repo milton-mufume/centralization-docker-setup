@@ -60,5 +60,18 @@ Follow these steps to set up and use the MPI Docker container:
                 </li>
         </ul>
         <br>
+        <ul>
+                Create entity Domanin
+                <li>    
+                        <pre>First install dependencies as root required to create a entity domain</pre>
+                        <code>sudo ./install_dependencies.sh</code>
+                </li>
+                <li>
+                        <pre>Generate the necessary information to run a script that create entity domain {"client_id, security_id , client_secret"}</pre>
+                        <code>./scripts/assign_authority.sh "client_id" "security_id" "client_secret"</code>
+                </li>
+                </li>
+        </ul>
+        <br>
 
 </ol>
