@@ -1,7 +1,8 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
 
     <route id="receiver-request-processor" errorHandlerRef="shutdownErrorHandler">
-        <from uri="direct:receiver-request-processor" />
+        <!-- TODO Make the delay configurable -->
+        <from uri="scheduler:retry?initialDelay=15000&amp;delay=1800000" />
 
         <log message="Fetching next 1000 sync requests" loggingLevel="DEBUG" />
 
