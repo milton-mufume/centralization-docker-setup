@@ -15,7 +15,7 @@
       <domainName>PATIENT_UUID</domainName>
       <oid>2.16.840.1.113883.3.72.5.9.4</oid>
       <url>http://metadata.epts.e-saude.net/dictionary/patient-uuid</url>
-      <isUnique>false</isUnique>
+      <isUnique>true</isUnique>
       <assigningApplication>{{security_id}}</assigningApplication>
   </resource> 
       
