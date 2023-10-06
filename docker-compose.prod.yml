@@ -133,7 +133,7 @@ services:
       - ./openmrs-common/modules/legacyui-1.8.2.omod:/usr/local/tomcat/.OpenMRS/modules/legacyui.omod
       - ./openmrs-common/modules/owa-1.12.0.omod:/usr/local/tomcat/.OpenMRS/modules/owa.omod
       - ./openmrs-common/modules/webservices.rest-2.36.0.omod:/usr/local/tomcat/.OpenMRS/modules/webservices.rest.omod
-      - ./openmrs-common/modules/eptsreports-1.16.0.omod:/usr/local/tomcat/.OpenMRS/modules/eptsreports.omod
+      - ./openmrs-common/modules/eptsreports.omod:/usr/local/tomcat/.OpenMRS/modules/eptsreports.omod
       - ./openmrs-common/modules/serialization.xstream-0.2.14.omod:/usr/local/tomcat/.OpenMRS/modules/serialization.xstream.omod
       - ./openmrs-common/modules/calculation-1.2.1.omod:/usr/local/tomcat/.OpenMRS/modules/calculation.omod
       - ./openmrs-common/modules/htmlwidgets-1.10.0.omod:/usr/local/tomcat/.OpenMRS/modules/htmlwidgets.omod

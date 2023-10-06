@@ -1,0 +1,58 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres@sha256:b7662e5572febc3380fd5773fa600824f0433b82935e7e5b4c180e9541b2b3d7
+    container_name: santempi-db 
+    ports:
+      - "${SANTE_SDB_POSTGRES_PORT}:5432"
+    environment:
+      POSTGRES_USER: ${SANTE_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${SANTE_POSTGRES_PASSWORD}
+    volumes:
+      - santedb-data:/var/lib/postgresql/data
+
+    restart: unless-stopped
+
+  santedb:
+    image: santesuite/santedb-mpi@sha256:608484de046a932ec2f92e9991a32507fc8ec89d53d7639cbab886a63dbf6207
+    container_name: santedb-mpi
+    environment:
+      - SDB_FEATURE=LOG;DATA_POLICY;AUDIT_REPO;ADO;PUBSUB_ADO;RAMCACHE;SEC;SWAGGER;OPENID;FHIR;HL7;HDSI;AMI;BIS;MDM;MATCHING;IHE_PIXM;IHE_PMIR;IHE_PIX;IHE_PDQ;ADO_FTS
+      - SDB_HL7_AUTHENTICATION=Msh8
+      - SDB_LOG_LEVEL=LogAlways
+      - SDB_MATCHING_MODE=WEIGHTED
+      - SDB_MDM_RESOURCE=Patient=org.santedb.matching.patient.default
+      - SDB_MDM_AUTO_MERGE=false
+      - SDB_DB_MAIN=server=sdb-postgres;port=${SANTE_SDB_POSTGRES_PORT}; database=santedb; user id=${SANTE_POSTGRES_USER}; password=${SANTE_POSTGRES_PASSWORD}; pooling=true; MinPoolSize=5; MaxPoolSize=90; Timeout=60;
+      - SDB_DB_AUDIT=server=sdb-postgres;port=${SANTE_SDB_POSTGRES_PORT}; database=auditdb; user id=santedb; password=${SANTE_POSTGRES_PASSWORD}; pooling=true; MinPoolSize=5; MaxPoolSize=10; Timeout=60;
+      - SDB_DB_MAIN_PROVIDER=Npgsql
+      - SDB_DB_AUDIT_PROVIDER=Npgsql
+      - SDB_REDIS_SERVER=sdb-redis:6379
+      - SDB_DATA_POLICY_ACTION=HIDE
+      - SDB_DELAY_START=5000
+      - MONO_THREADS_PER_CPU=10
+      - SDB_FHIR_STRICT=true
+      - SDB_FHIR_ELEMENTID=true
+    volumes:
+      - ./rules/moz.matching.algorithm.name.blocking.xml:/santedb/match/moz.matching.algorithm.name.blocking.xml
+      - ./rules/moz.matching.algorithm.nid.blocking.xml:/santedb/match/moz.matching.algorithm.nid.blocking.xml
+    ports:
+      - "${SANTE_DB_MPI_MAIN_PORT}:8080"
+      - "${SANTE_DB_MPI_AUX_PORT}:2100"
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  www:
+    image: santesuite/santedb-www@sha256:a35ac54821ad047457bd2d0081386e8f913e4fe3be580d3635dfc390446cb9d3
+    container_name: santedb-www
+    ports:
+      - "${SANTE_DB_WWW_PORT}:9200"
+    depends_on:
+      - santedb
+    restart: unless-stopped
+
+volumes:
+  santedb-data:
+    external: true

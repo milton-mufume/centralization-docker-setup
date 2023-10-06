@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<MatchConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="moz.matching.algorithm.name.blocking" evaluationMode="strength" nonmatchThreshold="0.52" matchThreshold="1" uuid="cbe6deb6-a56a-4231-86b0-8d91973e2ce7" xmlns="http://santedb.org/matcher">
+  <meta>
+    <createdBy>Administrator</createdBy>
+    <creationTime>2023-08-17T09:30:09.193Z</creationTime>
+    <status>Inactive</status>
+    <version>79</version>
+    <tags>
+      <add key="$mdm.auto-link">false</add>
+    </tags>
+    <updatedTime>2023-08-23T08:35:06.486366+00:00</updatedTime>
+    <updatedBy>Administrator</updatedBy>
+    <isReadonly>false</isReadonly>
+  </meta>
+  <target resource="Patient" />
+  <blocking useLowerLayer="false" op="and" maxResults="10">
+    <filter when="name?.component[Given].value">name.component[Given].value=:(similarity|$input.name?.component[Given].value)&gt;0.44</filter>
+    <filter when="name?.component[Family].value">name.component[Family].value=:(similarity|$input.name?.component[Family].value)&gt;0.44</filter>
+  </blocking>
+  <scoring>
+    <attribute m="0.844" u="0.5" property="name" whenNull="disqualify" required="false">
+      <when />
+      <assert op="and" value="0.85">
+        <assert op="gte" value="0.85">
+          <transform name="namepart_extract">
+            <args>
+              <string>Given</string>
+            </args>
+          </transform>
+          <transform name="jaro_winkler">
+            <args />
+          </transform>
+        </assert>
+        <assert op="gte" value="0.8">
+          <transform name="namepart_extract">
+            <args>
+              <string>Family</string>
+            </args>
+          </transform>
+          <transform name="jaro_winkler">
+            <args />
+          </transform>
+        </assert>
+      </assert>
+    </attribute>
+    <attribute m="0.565" u="0.5" property="genderConcept" whenNull="zero" required="false">
+      <when />
+      <assert op="eq" />
+    </attribute>
+    <attribute m="0.534" u="0.5" property="dateOfBirth" whenNull="zero" required="false">
+      <when />
+      <assert op="eq" />
+    </attribute>
+  </scoring>
+</MatchConfiguration>
