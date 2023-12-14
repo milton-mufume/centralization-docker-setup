@@ -4,7 +4,7 @@ echo Starting DB sync Receiver...
 
 echo "Starting notification manager appy"
 
-nohup java -jar -Dspring.profiles.active=consumer -Duser.timezone="Africa/Maputo" notifications-manager.jar 2>&1 &
+nohup java -jar -Dspring.profiles.active=central -Dlogging.config=file:"logback-spring-c-features.xml" centralization-features-manager.jar 2>&1 &
 
 echo -n "NOTIFICATIONS MANAGER STARTED IN BACKGROUND"
 
