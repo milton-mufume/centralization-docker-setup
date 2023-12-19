@@ -39,7 +39,7 @@ wget -O "$HOME_DIR/openmrs-eip-app.jar" $OPENMRS_EIP_APP_RELEASE_URL
 echo "PERFORMING INSTALLATION OF NOTIFICATIONS MANAGER"
 
 echo "Downloading $CENTRALIZATION_FEATURES_MANAGER_RELEASE_URL to $HOME_DIR/centralization-features-manager-1.0.jar"
-wget -O "$HOME_DIR/centralization-features-manager-1.0.jar" $CENTRALIZATION_FEATURES_MANAGER_RELEASE_URL
+wget -O "$HOME_DIR/centralization-features-manager.jar" $CENTRALIZATION_FEATURES_MANAGER_RELEASE_URL
 
 echo "ALL FILES WERE COPIED"
 
