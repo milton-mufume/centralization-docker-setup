@@ -49,7 +49,7 @@ else
 	cp $DOWNLOADED_EIP_JAR_FILE $HOME_DIR/
 fi
 
-if test ! -f "$DOWNLOADED_EIP_JAR_FILE"; then
+if test ! -f "$DOWNLOADED_C_FEATURES_JAR_FILE"; then
 	echo "PERFORMING INSTALLATION OF NOTIFICATIONS MANAGER"
 
 	echo "Downloading $CENTRALIZATION_FEATURES_MANAGER_RELEASE_URL to $HOME_DIR/centralization-features-manager-1.0.jar"
