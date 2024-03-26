@@ -80,7 +80,7 @@ services:
     restart: unless-stopped
 
   dbsync-central:
-    image: adoptopenjdk/openjdk8:alpine-slim
+    image: openjdk:17-alpine
     container_name: dbsync-central
     env_file:
       - $docker_containers_shared_dir/conf/eip/dbsync.env   
