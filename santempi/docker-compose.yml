@@ -25,8 +25,8 @@ services:
       - SDB_MATCHING_MODE=WEIGHTED
       - SDB_MDM_RESOURCE=Patient=org.santedb.matching.patient.default
       - SDB_MDM_AUTO_MERGE=false
-      - SDB_DB_MAIN=server=santempi-db;port=${SANTE_SDB_POSTGRES_PORT}; database=santedb; user id=${SANTE_POSTGRES_USER}; password=${SANTE_POSTGRES_PASSWORD}; pooling=true; MinPoolSize=5; MaxPoolSize=90; Timeout=60;
-      - SDB_DB_AUDIT=server=santempi-db;port=${SANTE_SDB_POSTGRES_PORT}; database=auditdb; user id=santedb; password=${SANTE_POSTGRES_PASSWORD}; pooling=true; MinPoolSize=5; MaxPoolSize=10; Timeout=60;
+      - SDB_DB_MAIN=server=santempi-db;port=${SANTE_SDB_POSTGRES_PORT}; database=santedb; user id=${SANTE_POSTGRES_USER}; password=${SANTE_POSTGRES_PASSWORD}; pooling=true; MinPoolSize=5; MaxPoolSize=90; CommandTimeout=3600;
+      - SDB_DB_AUDIT=server=santempi-db;port=${SANTE_SDB_POSTGRES_PORT}; database=auditdb; user id=santedb; password=${SANTE_POSTGRES_PASSWORD}; pooling=true; MinPoolSize=5; MaxPoolSize=10; CommandTimeout=3600;
       - SDB_DB_MAIN_PROVIDER=Npgsql
       - SDB_DB_AUDIT_PROVIDER=Npgsql
       - SDB_REDIS_SERVER=sdb-redis:6379
