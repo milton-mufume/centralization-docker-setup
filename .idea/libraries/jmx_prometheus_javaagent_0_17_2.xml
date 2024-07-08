@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="jmx_prometheus_javaagent-0.17.2">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/artemis/monitoring/jmx_prometheus_javaagent-0.17.2.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
